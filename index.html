@@ -472,6 +472,84 @@
 
 
   
+    <article id="post-开源项目Tinyhttpd第四篇 详解start_up函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  大周六的无聊的很，不如来继续看这一大段开源代码，这一次我们按照Github上面那位大佬推荐的步骤来看推荐的步骤来看，先看start_up函数。<br><br>说多无益，先上该段代码：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">int startup(u_short *port)</span><br><span class="line">&#123;</span><br><span class="line">    int httpd &#x3D; 0;</span><br><span class="line">    int on &#x3D; 1;</span><br><span class="line">    struct sockaddr_in name;</span><br><span class="line"></span><br><span class="line">    httpd &#x3D; socket(PF_INET, SOCK_STREAM, 0);</span><br><span class="line">    if (httpd &#x3D;&#x3D; -1)</span><br><span class="line">        error_die(&quot;socket&quot;);</span><br><span class="line">    memset(&amp;name, 0, sizeof(name));</span><br><span class="line">    name.sin_family &#x3D; AF_INET;</span><br><span class="line">    name.sin_port &#x3D; htons(*port);</span><br><span class="line">    name.sin_addr.s_addr &#x3D; htonl(INADDR_ANY);</span><br><span class="line">    if ((setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0)  </span><br><span class="line">    &#123;  </span><br><span class="line">        error_die(&quot;setsockopt failed&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (bind(httpd, (struct sockaddr *)&amp;name, sizeof(name)) &lt; 0)</span><br><span class="line">        error_die(&quot;bind&quot;);</span><br><span class="line">    if (*port &#x3D;&#x3D; 0)  &#x2F;* if dynamically allocating a port *&#x2F;</span><br><span class="line">    &#123;</span><br><span class="line">        socklen_t namelen &#x3D; sizeof(name);</span><br><span class="line">        if (getsockname(httpd, (struct sockaddr *)&amp;name, &amp;namelen) &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;getsockname&quot;);</span><br><span class="line">        *port &#x3D; ntohs(name.sin_port);</span><br><span class="line">    &#125;</span><br><span class="line">    if (listen(httpd, 5) &lt; 0)</span><br><span class="line">        error_die(&quot;listen&quot;);</span><br><span class="line">    return(httpd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数的注释。。。。其实我也看不懂，建议谷歌翻译一下。大概意思是说哈，开启一个线程在参数中的端口不为0的情况下监听一个端口，如果端口为0的话，那么就随机分配一个接口来使用。<br><br>接下来就是socket函数，这个函数是在sys/types.h头文件中定义的一个函数，这个函数的参数如下：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int socket(int domain, int type, int protocol);</span><br></pre></td></tr></table></figure>
+<p>这个函数的作用是用来建立一个协议族为domain，协议类型为type，协议编号为protocol的套接字描述符，如果函数调用成功的话，会返回标示这个套接字的文件描述符，如果失败就会返回-1.<br><br>domain这个参数是用来设置网路通信的域，socket函数根据这个参数来选择通信协议的族，通信协议在头文件sys/socket.h中定义。<br><br>type用于设置套接字通信的类型，主要有SOCKET_STREAM(流式套接字)，SOCK_DGRAM(数据包套接字)等。<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM&#x2F;&#x2F;tcp连接，提供序列化的可靠的双向连接的字节流</span><br><span class="line">SOCK_DGRAM&#x2F;&#x2F;支持udp连接</span><br><span class="line">SOCK_SEQPACKET&#x2F;&#x2F;序列化包，提供一个序列化的，可靠的，双向的基本连接的数据连接通道，数据长度定常。</span><br><span class="line">SOCK_RAW&#x2F;&#x2F;提供原始网络协议访问</span><br><span class="line">SOCK-RDM&#x2F;&#x2F;提供可靠的数据报文，不过可能数据会有乱序</span><br><span class="line">SOCK_PACKET&#x2F;&#x2F;这是一个专有类型，不过能够在通用程序中使用</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目Tinyhttpd第二篇 详解sizeof关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -536,84 +614,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目Tinyhttpd第四篇 详解start_up函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  大周六的无聊的很，不如来继续看这一大段开源代码，这一次我们按照Github上面那位大佬推荐的步骤来看推荐的步骤来看，先看start_up函数。<br><br>说多无益，先上该段代码：<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">int startup(u_short *port)</span><br><span class="line">&#123;</span><br><span class="line">    int httpd &#x3D; 0;</span><br><span class="line">    int on &#x3D; 1;</span><br><span class="line">    struct sockaddr_in name;</span><br><span class="line"></span><br><span class="line">    httpd &#x3D; socket(PF_INET, SOCK_STREAM, 0);</span><br><span class="line">    if (httpd &#x3D;&#x3D; -1)</span><br><span class="line">        error_die(&quot;socket&quot;);</span><br><span class="line">    memset(&amp;name, 0, sizeof(name));</span><br><span class="line">    name.sin_family &#x3D; AF_INET;</span><br><span class="line">    name.sin_port &#x3D; htons(*port);</span><br><span class="line">    name.sin_addr.s_addr &#x3D; htonl(INADDR_ANY);</span><br><span class="line">    if ((setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0)  </span><br><span class="line">    &#123;  </span><br><span class="line">        error_die(&quot;setsockopt failed&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (bind(httpd, (struct sockaddr *)&amp;name, sizeof(name)) &lt; 0)</span><br><span class="line">        error_die(&quot;bind&quot;);</span><br><span class="line">    if (*port &#x3D;&#x3D; 0)  &#x2F;* if dynamically allocating a port *&#x2F;</span><br><span class="line">    &#123;</span><br><span class="line">        socklen_t namelen &#x3D; sizeof(name);</span><br><span class="line">        if (getsockname(httpd, (struct sockaddr *)&amp;name, &amp;namelen) &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;getsockname&quot;);</span><br><span class="line">        *port &#x3D; ntohs(name.sin_port);</span><br><span class="line">    &#125;</span><br><span class="line">    if (listen(httpd, 5) &lt; 0)</span><br><span class="line">        error_die(&quot;listen&quot;);</span><br><span class="line">    return(httpd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个函数的注释。。。。其实我也看不懂，建议谷歌翻译一下。大概意思是说哈，开启一个线程在参数中的端口不为0的情况下监听一个端口，如果端口为0的话，那么就随机分配一个接口来使用。<br><br>接下来就是socket函数，这个函数是在sys/types.h头文件中定义的一个函数，这个函数的参数如下：<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int socket(int domain, int type, int protocol);</span><br></pre></td></tr></table></figure>
-<p>这个函数的作用是用来建立一个协议族为domain，协议类型为type，协议编号为protocol的套接字描述符，如果函数调用成功的话，会返回标示这个套接字的文件描述符，如果失败就会返回-1.<br><br>domain这个参数是用来设置网路通信的域，socket函数根据这个参数来选择通信协议的族，通信协议在头文件sys/socket.h中定义。<br><br>type用于设置套接字通信的类型，主要有SOCKET_STREAM(流式套接字)，SOCK_DGRAM(数据包套接字)等。<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM&#x2F;&#x2F;tcp连接，提供序列化的可靠的双向连接的字节流</span><br><span class="line">SOCK_DGRAM&#x2F;&#x2F;支持udp连接</span><br><span class="line">SOCK_SEQPACKET&#x2F;&#x2F;序列化包，提供一个序列化的，可靠的，双向的基本连接的数据连接通道，数据长度定常。</span><br><span class="line">SOCK_RAW&#x2F;&#x2F;提供原始网络协议访问</span><br><span class="line">SOCK-RDM&#x2F;&#x2F;提供可靠的数据报文，不过可能数据会有乱序</span><br><span class="line">SOCK_PACKET&#x2F;&#x2F;这是一个专有类型，不过能够在通用程序中使用</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">展开全文 >></a>
         </p>
       
 
@@ -941,6 +941,25 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
       	</div>
     </div>
   </div>
+  <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/12/2019 18:30:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "网站已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
 </footer>
     </div>
     <script>
