@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>Archives | 李军硕的个人博客</title>
+  <title>开源项目Tinyhttpd第二篇 详解sizeof关键字 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="李军硕的个人博客">
-<meta property="og:url" content="http://www.junshuoli.cn/archives/index.html">
+  <meta name="description" content="Tinyhttpd接上一篇文章，接下来我们要注意的关键字是sizeof。sizeof在我的印象里都是一个用来返回某个数据类型所占的内存，然而前段时间被人家问到了基本用法，都忘了。。。。所以写出来整理一下。1.普通用法  sizeof(type)&#x2F;sizeof var_namesizeof是以字节形式给出了所操作数据的大小。前一种的格式都喜闻乐见，而后一种对我来说很少见，当用这种格式时主要是用来操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源项目Tinyhttpd第二篇 详解sizeof关键字">
+<meta property="og:url" content="http://www.junshuoli.cn/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
+<meta property="og:description" content="Tinyhttpd接上一篇文章，接下来我们要注意的关键字是sizeof。sizeof在我的印象里都是一个用来返回某个数据类型所占的内存，然而前段时间被人家问到了基本用法，都忘了。。。。所以写出来整理一下。1.普通用法  sizeof(type)&#x2F;sizeof var_namesizeof是以字节形式给出了所操作数据的大小。前一种的格式都喜闻乐见，而后一种对我来说很少见，当用这种格式时主要是用来操作">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-12T14:29:23.020Z">
 <meta property="article:author" content="JunshuoLi">
+<meta property="article:tag" content="C语言开源项目">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -150,374 +155,176 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-开源项目Tinyhttpd第二篇 详解sizeof关键字" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      开源项目Tinyhttpd第二篇 详解sizeof关键字
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+
+        
+        <a href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
   	<time datetime="2020-05-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">开源项目Tinyhttpd第二篇 详解sizeof关键字</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" class="archive-article-date">
-  	<time datetime="2020-03-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/" class="archive-article-date">
-  	<time datetime="2020-02-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">桨声灯影里的秦淮河</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-02-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" class="archive-article-date">
-  	<time datetime="2020-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <p><a href="https://github.com/ezlippi/tinyhttpd" target="_blank" rel="noopener">Tinyhttpd</a><br>接上一篇文章，接下来我们要注意的关键字是sizeof。sizeof在我的印象里都是一个用来返回某个数据类型所占的内存，然而前段时间被人家问到了基本用法，都忘了。。。。所以写出来整理一下。<br><br>1.普通用法</p>
+<ul>
+<li>sizeof(type)/sizeof var_name<br><br>sizeof是以字节形式给出了所操作数据的大小。前一种的格式都喜闻乐见，而后一种对我来说很少见，当用这种格式时主要是用来操作变量和对象，但是如果是操作一个类型必须要添加括号。但是由这里也可以看出来sizeof并不是函数！！！！因为一个正常的函数是需要加括号的。 而且sizeof也不是一种操作符！！！！，为什么这么说呢，可以看下面的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a&#x3D;0;</span><br><span class="line">cout&lt;&lt;sizeof(a&#x3D;4)&lt;&lt;endl;</span><br><span class="line">cout&lt;&lt;a&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+这段程序的输出结果为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+在当初在其他大佬的博客上看到这段程序时，我发现这个东西真的好迷，因为我认为答案是4和3，后来把sizeof看作是一种编译预处理就想的过去了，因为显然在sizeof处理阶段显然括号内并没有编译，而是被替换成类型int。<br></li>
+<li>sizeof不能用来操作未知存储大小的数据类型，未知内容的结构和联合类型,void类型。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sizeof(max);&#x2F;&#x2F;int max()</span><br><span class="line">sizeof(char_v);&#x2F;&#x2F;char char_v[MAX]，MAX未赋值</span><br><span class="line">sizeof(void);</span><br></pre></td></tr></table></figure>
+以上用法全都是错误的！！！<br><br>以上用法全都是错误的！！！<br><br>以上用法全都是错误的！！！<br></li>
+<li>sizeof的基本用法<br><br>上面的这些7788的东西，说出来没有什么依据，下面通过一些常用的用法来认识sizeof的用法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sizeof(char);&#x2F;sizeof(signed char)&#x2F;sizeof(unsigned char)</span><br><span class="line">sizeof(p);&#x2F;&#x2F;int *p或者string *p或者char*********</span><br><span class="line">sizeof(a);&#x2F;&#x2F;int a[10]</span><br><span class="line">sizeof(b);&#x2F;&#x2F;char b[]&#x3D;&quot;hello&quot;;</span><br></pre></td></tr></table></figure>
+1和2的结果都是1,不管是什么类型，sizeof后的结果都是取决于操作系统的，在32位操作系统上面就是4，在64位上就是8,sizeof(a)在这里等价于数组长度乘以sizeof(int),换句话说：sizeof(a)=10*sizeof(int)。sizeof(b)等于6，原因是因为字符串后面一般都会有个”\0”，这个。。。预编译符会算进去的！！！！！<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int b[20]&#x3D;&#123;3,4&#125;;</span><br><span class="line">char c[2][3]&#x3D;&#123;&quot;aa&quot;,&quot;bb&quot;&#125;;</span><br><span class="line">sizeof(b);\\20*4</span><br><span class="line">sizeof(c);\\6</span><br></pre></td></tr></table></figure>
+以上的例子可以看的出来sizeof的值并不取决于赋值的情况，数组的大小取决于它在编译时被分配的空间，也就是各维度乘以数组元素的大小。</li>
+<li>函数的sizeof使用方法<br><br>sizeof并不能测量整个函数占用的内存大小！！！！而是测量数组返回值类型的大小。但是要在这期间注意不能对返回值类型为空或者仅仅对一个函数名求值，在函数有参数时，必须加上参数表！！！</li>
+</ul>
+<ol start="2">
+<li>进阶用法 诡异的函数对齐问题<br><br>众所周知，C语言中存在这两种类型：struct和union，而在C++中区别于c语言存在更复杂的class类型，而对这三种数据类型操作时，代码如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct sample</span><br><span class="line">&#123;</span><br><span class="line">    double a;</span><br><span class="line">    char b;</span><br><span class="line">    int c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+对于刚开始入门的兄弟来说，sizeof(sample)=sizeof(double)+sizeof(char)+sizeof(int)。。。然而并不是这样子的，编译器对一些变量的起始地址做了“对齐”处理。在默认情况下，编译器规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。在32位系统中，具体偏移方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Char  &#x2F;&#x2F;偏移量必须为sizeof(char)即1的倍数  </span><br><span class="line">int  &#x2F;&#x2F;偏移量必须为sizeof(int)即4的倍数  </span><br><span class="line">float  &#x2F;&#x2F;偏移量必须为sizeof(float)即4的倍数  </span><br><span class="line">double  &#x2F;&#x2F;偏移量必须为sizeof(double)即8的倍数  </span><br><span class="line">Short  &#x2F;&#x2F;偏移量必须为sizeof(short)即2的倍数</span><br></pre></td></tr></table></figure>
+结构体中的变量在申请空间时，是按照顺序来申请空间，并且按照上面所示的对齐方式来调整位置，并且按照上述要求填充空字节。这样子说跟没说一样，所以说个例子吧：<br></li>
+</ol>
+<ul>
+<li>当为上面的sample结构体分配空间时，肯定是先为double类型变量分配内存，他的起始地址和结构体的起始地址相同，偏移量0（正好为sizeof（double）的倍数），它占的内存为8字节这个就不用说了；然后为第二个char类型变量分配内存，可以为它分配的地址相对于结构的偏移地址为8，满足对齐方式可以分配，它占的内存为1个字节，完美！！！！；然后为第三个int类型变量分配内存，下一个可以分配的地址对于结构的偏移量为9，不是sizeof（int）的倍数，为了满足上述对偏移量balabala的诡异约束问题，编译器会填充三个空字节。。。使得下一个可分配地址对于结构原始地址偏移为12，满足要求，分配内存，完美！！！！！所以占用的空间大小为：8+1+3+4=16字节。（这个东西我记得在19年12月份我考浙江大学的计算机系时。。。408考试里考过，当时真的搞不懂，现在终于搞懂了，开心！！！！！！）</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" class="archive-article-date">
-  	<time datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">论药水哥的直播艺术</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/" class="archive-article-date">
-  	<time datetime="2019-10-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-02</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">对羊哥博客搭建教程的补充</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://www.junshuoli.cn/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/", 
+    sourceId: "开源项目Tinyhttpd第二篇 详解sizeof关键字",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">详解算法 最长连续子序列系列问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-06-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">详解Excel读取方式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -559,8 +366,8 @@ setInterval("createtime()",250);
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

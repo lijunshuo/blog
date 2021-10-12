@@ -152,404 +152,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-详解算法 最长连续子序列系列问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/07/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">详解算法 最长连续子序列系列问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/07/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-06-07T13:37:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>常规最长连续子序列问题<br>通常这个算法的问题主要形式主要是给定一个无序的整数数组，然后找出最长连续子序列的长度,以下代码全部基于C++语言进行演示</li>
-</ol>
-<ul>
-<li>常规解法<br>这种解法是正常人刚开始看到这个问题时，头脑中冒出的第一种解法，这个解法认为这个数组开始的每个数字都是一个连续数组的开头，然后从这个起点开始遍历知道剩下的数字有没有相对上一个数字连续的数字，一直迭代到不存在的某个数字，顺便记录最大的连续子序列长度。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isContain</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> arrLength,<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arrLength;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]==num)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> arrLenth=arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> num:arr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> currentNum=num;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span>(isContain(arr,arrLength,currentNum))</span><br><span class="line">   &#123;</span><br><span class="line">       currentNum+=<span class="number">1</span>;</span><br><span class="line">       currentStreak+=<span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这种算法的话时间复杂度是非常糟糕的（因为一般来说刚开始解决问题时的头一个方法永远是一个最复杂的方法。。。最简单的一般都是最复杂的），因为他的时间复杂度大概为O(n^3)。所以我们现在考虑如何优化这个算法，首先因为我们要找的是个连续序列，所以可以先进行排序和去重，这样子可以省掉n个时间复杂度的查找时间；然后我们必须考虑程序中提供的数组是不是为空，如果为空或者为null的话我们应该考虑以下如何处理这种错误情况；最后我们发现我们在遍历过程中出现了大量的重复过程比如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,2,7,3,4,5</span><br></pre></td></tr></table></figure>
-比如上面这个数组的最长连续子序列肯定是5，然后我们根据上面那个算法可以发现，当for循环中的num为1时，能够查到的最长序列为5，当num为2时，我们发现我们的现在查到的以前已经查过了，想办法不查这一部分可以大大优化整个算法的时间复杂度：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> []arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr==null||arr.length==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Array.sort(arr);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">if</span>(i+<span class="number">1</span>&lt;arr.length&amp;&amp;arr[i]+<span class="number">1</span>==arr[i+<span class="number">1</span>])</span><br><span class="line">       currentStreak++;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">       &#123;</span><br><span class="line">           longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">           currentStreak=<span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-以上代码解决了以上的问题，但是时间复杂度最优为nlogn, 最差为n^2,其实我们完全可以用c++一些提供的特定结构来进一步简化整体算法的时间复杂度。比如我们可以使用C++中的set，自动去重且查询为O(1)<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;numSet=<span class="keyword">new</span> <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:arr)numSet.add(num);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:numSet)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!numSet.contains(num<span class="number">-1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> currentNum=num;</span><br><span class="line">            <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(numSet.contains(currentNum+<span class="number">1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                currentNum+=<span class="number">1</span>;</span><br><span class="line">                currentStreak+=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-2.最长连续公共子序列<br>先占个坑，未完待续。。。。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/07/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-对羊哥博客搭建教程的补充" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">对羊哥博客搭建教程的补充</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/31/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/" class="archive-article-date">
-  	<time datetime="2020-05-31T13:30:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>链接：<a href="https://www.bilibili.com/video/av44544186?from=search&seid=8260304926588486728/" target="_blank" rel="noopener">羊哥博客搭建教程</a><br><br>实话说，在羊哥搭建博客教学视频中，他的教程已经很详细的了，在mac下都能按照他的情况搭建出来，但是有一个部分值得注意，就是有关于头像图片和其他图片无法显示的问题。我为了解决这个问题，查阅了百度上的很多资料，踩了很多坑，总结出一个方法仅供参考。<br><br>在我的理解中，博客网页上所有的图片等资源都存在source文件夹内，其中source/_posts在创建时就存在，主要是存储md格式的博客文字。所以我们可以在source文件中新建一个文件夹来存储图片，我在这里将其命名为img，在其中添加两个图片，Alipay（支付宝二维码）和Head（头像），接下来在_config.yml文件中配置这两个图片（注意在这里的_config.yml是themes主题中的某个主题的配置文件，而不是hexo框架的配置文件）<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 支付宝二维码图片地址，跟你设置头像的方式一样。比如：&#x2F;assets&#x2F;img&#x2F;alipay.jpg</span><br><span class="line">alipay: &#x2F;img&#x2F;Alipay.jpeg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#你的头像url</span><br><span class="line">avatar: &#x2F;img&#x2F;Head.JPG</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-# 桨声灯影里的秦淮河" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/#%20%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">桨声灯影里的秦淮河</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/31/#%20%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/" class="archive-article-date">
-  	<time datetime="2020-05-31T11:07:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="朱自清"><a href="#朱自清" class="headerlink" title="朱自清"></a>朱自清</h2><h2 id="强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！"><a href="#强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！" class="headerlink" title="强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！"></a>强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！</h2><p>链接 ：<a href="https://music.163.com/#/dj?id=2060494861&userid=260088210/" target="_blank" rel="noopener">桨声灯影里的秦淮河</a><br><br>一九二三年八月的一晚，我和平伯同游秦淮河，平伯是初泛，我是重来了。我们雇了一只“七板子”，在夕阳已去，皎月方来的时候，便下了船。于是桨声汩——汩，我们开始领略那晃荡着蔷薇色的历史的秦淮河的滋味了。 秦淮河里的船，比北京万生园，颐和园的船好，比西湖的船好，比扬州瘦西湖的船也好。这几处的船不是觉着笨，就是觉着简陋，局促；都不能引起乘客们的情韵，如秦淮河的船一样。秦淮河的船约略可分为两种：一是大船；一是小船，就是所谓“七板子”。大船舱口阔大，可容二三十人。里面陈设着字画和光洁的红木家具，桌上一律嵌着冰凉的大理石面。窗格雕镂颇细，使人起柔腻之感。窗格里映着红色蓝色的玻璃；玻璃上有精致的花纹，也颇悦人目。“七板子”规模虽不及大船，但那淡蓝色的栏杆，空敝3的舱，也足系人情思。而最出色处却在它的舱前。舱前是甲板上的一部，上面有弧形的顶，西边用疏疏的栏杆支着。里面通常放着两张藤的躺椅。躺下，可以谈天，可以望远，可以顾盼两岸的河房。大船上也有这个，但在小船上更觉清隽罢了。舱前的顶下，一律悬着灯彩；灯的多少，明暗，彩苏的精粗，艳晦，是不一的，但好歹总还你一个灯彩。这灯彩实在是最能勾人的东西。夜幕垂垂地下来时，大小船上都点起灯火。从两重玻璃里映出那辐射着的黄黄的散光，反晕出一片朦胧的烟霭；透过这烟霭，在黯黯的水波里，又逗起缕缕的明漪。在这薄霭和微漪里，听着那悠然的间歇的桨声，谁能不被引入他的美梦去呢？只愁梦太多了，这些大小船儿如何载得起呀？我们这时模模糊糊的谈着明末的秦淮河的艳迹，如《桃花扇》及《板桥杂记》里所载的。我们真神往了。我们仿佛亲见那时华灯映水，画舫凌波的光景了。于是我们的船便成了历史的重载了。我们终于恍然秦淮河的船所以雅丽过于他处，而又有奇异的吸引力的，实在是许多历史的影象使然了。<br><br>秦淮河的水是碧阴阴的；看起来厚而不腻，或者是六朝金粉所凝么？我们初上船的时候，天色还未断黑，那漾漾的柔波是这样恬静，委婉，使我们一面有水阔天空之想，一面又憧憬着纸醉金迷之境了。等到灯火明时，阴阴的变为沈沈了：黯淡的水光，像梦一般；那偶然闪烁着的光芒，就是梦的眼睛了。我们坐在舱前，因了那隆起的顶棚，仿佛总是昂着首向前走着似的；于是飘飘然如御风而行的我们，看着那些自在的湾泊着的船，船里走马灯般的人物，便像是下界一般，迢迢的远了，又像在雾里看花，尽朦朦胧胧的。这时我们已过了利涉桥，望见东关头了。沿路听见断续的歌声：有从沿河的妓楼飘来的，有从河上船里度来的。我们明知那些歌声，只是些因袭的言词，从生涩的歌喉里机械的发出来的；但它们经了夏夜的微风的吹漾和水波的摇拂，袅娜着到我们耳边的时候，已经不单是她们的歌声，而混着微风和河水的密语了。于是我们不得不被牵惹着，震撼着，相与浮沉于这歌声里了。从东关头转湾，不久就到大中桥。大中桥共有三个桥拱，都很阔大，俨然是三座门儿；使我们觉得我们的船和船里的我们，在桥下过去时，真是太无颜色了。桥砖是深褐色，表明它的历史的长久；但都完好无缺，令人太息于古昔工程的坚美。桥上两旁都是木壁的房子，中间应该有街路？这些房子都破旧了，多年烟熏的迹，遮没了当年的美丽。我想像秦淮河的极盛时，在这样宏阔的桥上，特地盖了房子，必然是髹漆得富富丽丽的；晚间必然是灯火通明的，现在却只剩下一片黑沉沉！但是桥上造着房子，毕竟使我们多少可以想见往日的繁华；这也慰情聊胜无了。过了大中桥，便到了灯月交辉，笙歌彻夜的秦淮河，这才是秦淮河的真面目哩。<br><br>大中桥外，顿然空阔，和桥内两岸排着密密的人家的景象大异了。一眼望去，疏疏的林，淡淡的月，衬着蔚蓝的天，颇像荒江野渡光景；那边呢，郁丛丛的，阴森森的，又似乎藏着无边的黑暗：令人几乎不信那是繁华的秦淮河了。但是河中眩晕着的灯光，纵横着的画舫，悠扬着的笛韵，夹着那吱吱的胡琴声，终于使我们认识绿如茵陈酒的秦淮水了。此地天裸露着的多些，故觉夜来的独迟些；从清清的水影里，我们感到的只是薄薄的夜——这正是秦淮河的夜。大中桥外，本来还有一座复成桥，是船夫口中的我们的游踪尽处，或也是秦淮河繁华的尽处了。我的脚曾踏过复成桥的脊，在十三四岁的时候。但是两次游秦准河，却都不曾见着复成桥的面；明知总在前途的，却常觉得有些虚无缥缈似的。我想，不见倒也好。这时正是盛夏。我们下船后，藉着9新生的晚凉和河上的微风，暑气已渐渐消散；到了此地，豁然开朗，身子顿然轻了——习习的清风荏苒在面上，手上，衣上，这便又感到了一缕新凉了。南京的日光，大概没有杭州猛烈；西湖的夏夜老是热蓬蓬的，水像沸着一般，秦淮河的水却尽是这样冷冷地绿着。任你人影的憧憧，歌声的扰扰，总像隔着一层薄薄的绿纱面幂似的；它尽是这样静静的，冷冷的绿着。我们出了大中桥，走不上半里路，船夫便将船划到一旁，停了桨由它宕着。他以为那里正是繁华的极点，再过去就是荒凉了；所以让我们多多赏鉴一会儿。他自己却静静的蹲着。他是看惯这光景的了，大约只是一个无可无不可。这无可无不可，无论是升的沉的，总之，都比我们高了。<br><br>那时河里热闹极了；船大半泊着，小半在水上穿梭似的来往。停泊着的都在近市的那一边，我们的船自然也夹在其中。因为这边略略的挤，便觉得那边十分的疏了。在每一只船从那边过去时，我们能画出它的轻轻的影和曲曲的波，在我们的心上；这显着是空，且显着是静了。那时处处都是歌声和凄厉的胡琴声，圆润的喉咙，确乎是很少的。但那生涩的，尖脆的调子能使人有少年的，粗率不拘的感觉。也正可快我们的意。况且多少隔开些儿听着。因为想像与渴慕的做美，总觉更有滋味；而竞发的喧嚣，抑扬的不齐，远近的杂沓，和乐器的嘈嘈切切，合成另一意味的谐音，也使我们无所适从，如随着大风而走。这实在因为我们的心枯涩久了，变为脆弱；故偶然润泽一下，便疯狂似的不能自主了。但秦淮河确也腻人。即如船里的人面，无论是和我们一堆儿泊着的，无论是从我们眼前过去的，总是模模糊糊的，甚至渺渺茫茫的；任你张圆了眼睛，揩净了眦垢，也是枉然。这真够人想呢。在我们停泊的地方，灯光原是纷然的；不过这些灯光都是黄而有晕的。黄已经不能明了，再加上了晕，便更不成了。灯愈多，晕就愈甚；在繁星般的黄的交错里，秦淮河仿佛笼上了一团光雾。光芒与雾气腾腾的晕着，什么都只剩了轮廓了；所以人面的详细的曲线，便消失于我们的眼底了。但灯光究竟夺不了那边的月色；灯光是浑的，月色是清的。在浑沌的灯光里，渗入一派清辉，却真是奇迹！那晚月儿已瘦削了两三分，她晚妆才罢，盈盈的上了柳梢头。天是蓝得可爱，仿佛一汪水似的；月儿便更出落得精神了。岸上原有三株两株的垂杨树，淡淡的影子，在水里摇曳着。它们那柔细的枝条浴着月光，就像一支支美人的臂膊，交互的缠着，挽着；又像是月儿披着的发。而月儿偶尔也从它们的交叉处偷偷窥看我们，大有小姑娘怕羞的样子。岸上另有几株不知名的老树，光光的立着；在月光里照起来，却又俨然是精神矍铄11的老人。远处——快到天际线了，才有一两片白云，亮得现出异彩，像是美丽的贝壳一般。白云下便是黑黑的一带轮廓；是一条随意画的不规则的曲线。这一段光景，和河中的风味大异了。但灯与月竟能并存着，交融着，使月成了缠绵的月，灯射着渺渺的灵辉，这正是天之所以厚秦淮河，也正是天之所以厚我们了。<br><br>这时却遇着了难解的纠纷。秦淮河上原有一种歌妓，是以歌为业的。从前都在茶舫上，唱些大曲之类。每日午后一时起；什么时候止，却忘记了。晚上照样也有一回，也在黄晕的灯光里。我从前过南京时，曾随着朋友去听过两次。因为茶舫里的人脸太多了，觉得不大适意，终于听不出所以然。前年听说歌妓被取缔了，不知怎的，颇涉想了几次——却想不出什么。这次到南京，先到茶舫上去看看。觉得颇是寂寥，令我无端的怅怅了。不料她们却仍在秦淮河里挣扎着，不料她们竟会纠缠到我们，我于是很张皇了，她们也乘着“七板子”，她们总是坐在舱前的。舱前点着石油汽灯光亮，眩人眼目：坐在下面的，自然是纤毫毕见了——引诱客人们的力量，也便在此了。舱里躲着乐工等人，映着汽灯的余辉蠕动着；他们是永远不被注意的。每船的歌妓大约都是二人；天色一黑，她们的船就在大中桥外往来不息的兜生意。无论行着的船，泊着的船，都要来兜揽的。这都是我后来推想出来的。那晚不知怎样，忽然轮着我们的船了。我们的船好好的停着，一只歌舫划向我们来了；渐渐和我们的船并着了。烁烁的灯光逼得我们皱起了眉头；我们的风尘色全给它托出来了，这使我不安了，那时一个伙计跨过船来，拿着摊开的歌折，就近塞向我的手里，说：“点几出吧！”他跨过来的时候，我们船上似乎有许多眼光跟着。同时相近的别的船上也似乎有许多眼睛炯炯的向我们船上看着。我真窘了！我也装出大方的样子，向歌妓们瞥了一眼，但究竟是不成的！我勉强将那歌折翻了一翻，却不曾看清了几字；便赶紧递还那伙计，一面不好意思地说：“不要，我们……不要。”他便塞给平伯，平伯掉转头去，摇手说：“不要！”那人还腻着不走。平伯又回过脸来，摇着头道：“不要！”于是那人重到我处，我窘着再拒绝了他。他这才有所不屑似的走了。我的心立刻放下，如释了重负一般。我们就开始自白了。<br><br>我说我受了道德律的压迫，拒绝了她们；心里似乎很抱歉的。这所谓抱歉，一面对于她们，一面对于我自己。她们于我们虽然没有很奢的希望；但总有些希望的。我们拒绝了她们，无论理由如何充足，却使她们的希望受了伤；这总有几分不做美了。这是我觉得很怅怅的。至于我自己，更有一种不足之感。我这时被四面的歌声诱惑了，降伏了；但是远远的，远远的歌声总仿佛隔着重衣搔痒似的，越搔越搔不着痒处。我于是憧憬着贴耳的妙音了。在歌舫划来时，我的憧憬，变为盼望；我固执的盼望着，有如饥渴。虽然从浅薄的经验里，也能够推知，那贴耳的歌声，将剥去了一切的美妙；但一个平常的人像我的，谁愿凭了理性之力去丑化未来呢？我宁愿自己骗着了。不过我的社会感性是很敏锐的；我的思力能拆穿道德律的西洋镜，而我的感情却终于被它压服着。我于是有所顾忌了，尤其是在众目昭彰的时候。道德律的力，本来是民众赋予的；在民众的面前，自然更显出它的威严了。我这时一面盼望，一面却感到了两重的禁制：一，在通俗的意义上，接近妓者总算一种不正当的行为；二，妓是一种不健全的职业，我们对于她们，应有哀矜勿喜之心，不应赏玩的去听她们的歌。在众目睽睽之下，这两种思想在我心里最为旺盛。她们暂时压倒了我的听歌的盼望，这便成就了我的灰色的拒绝。那时的心实在异常状态中，觉得颇是昏乱。歌舫去了，暂时宁静之后，我的思绪又如潮涌了。两个相反的意思在我心头往复：卖歌和卖淫不同，听歌和狎妓不同，又干道德甚事？——但是，但是，她们既被逼的以歌为业，她们的歌必无艺术味的；况她们的身世，我们究竟该同情的。所以拒绝倒也是正办。但这此意思终于不曾撇开我的听歌的盼望。它力量异常坚强；它总想将别的思绪踏在脚下。从这重重的争斗里，我感到了浓厚的不足之感。这不足之感使我的心盘旋不安，起坐都不安宁了。唉！我承认我是一个自私的人！<br><br>平伯呢，却与我不同。他引周启明先生的诗，“因为我有妻子，所以我爱一切的女人；因为我有子女，所以我爱一切的孩子。”他的意思可以见了。他因为推及的同情，爱着那些歌妓，并且尊重着她们，所以拒绝了她们。在这种情形下，他自然以为听是对于她们的一种侮辱。但他也是想听歌的，虽然不和我一样。所以在他的心中，当然也有一番小小的争斗；争斗的结果，是同情胜了。至于道德律，在他是没有什么的；因为他很有蔑视一切的倾向，民众的力量在他是不大觉着的。这时他的心意的活动比较简单，又比较松弱，故事后还怡然自若；我却不能了。这里平伯又比我高了。<br><br>在我们谈话中间，又来了两只歌舫。伙计照前一样的请我们点戏，我们照前一样的拒绝了。我受了三次窘，心里的不安更甚了。清艳的夜景也为之减色。船夫大约因为要赶第二趟生意，催着我们回去；我们无可无不可的答应了。我们渐渐和那些晕黄的灯光远了，只有些月色冷清清的随着我们的归舟。我们的船竟没个伴儿，秦淮河的夜正长哩！到大中桥近处，才遇着一只来船。这是一只载妓的板船，黑漆漆的没有一点光。船头上坐着一个妓女；暗里看出，白地小花的衫子，黑的下衣。她手里拉着胡琴，口里唱着青衫的调子。她唱得响亮而圆转；当她的船箭一般驶过去时，余音还袅袅的在我们耳际，使我们倾听而向往。想不到在弩末的游踪里，还能领略到这样的清歌！这时船过大中桥了，森森的水影，如黑暗张着巨口，要将我们的船吞了下去。我们回顾那渺渺的黄光，不胜依恋之情；我们感到了寂寞了！这一段地方夜色甚浓，又有两头的灯火招邀着；桥外的灯火不用说了，过了桥另有东关头疏疏的灯火。我们忽然仰头看见依人的素月，不觉深悔归来之早了！走过东关头，有一两只大船湾泊着，又有几只船向我们来着。嚣嚣的一阵歌声人语，仿佛笑我们无伴的孤舟哩。东关头转湾，河上的夜色更浓了；临水的妓楼上，时时从帘缝里射出一线一线的灯光；仿佛黑暗从酣睡里眨了一眨眼。我们默然的对着，静听那汩——汩的桨声，几乎要入睡了；朦胧里却温寻着适才的繁华的余味。我那不安的心在静里愈显活跃了！这时我们都有了不足之感，而我的更其浓厚。我们却又不愿回去，于是只能由懊悔而怅惘了。船里便满载着怅惘了。直到利涉桥下，微微嘈杂的人声，才使我豁然一惊；那光景却又不同。右岸的河房里，都大开了窗户，里面亮着晃晃的电灯，电灯的光射到水上，蜿蜒曲折，闪闪不息，正如跳舞着的仙女的臂膊。我们的船已在她的臂膊里了；如睡在摇篮里一样，倦了的我们便又入梦了。那电灯下的人物，只觉得像蚂蚁一般，更不去萦念。这是最后的梦，可惜是最短的梦！黑暗重复落在我们面前，我们看见傍岸的空船上一星两星的，枯燥无力又摇摇不定的灯光。我们的梦醒了，我们知道就要上岸了；我们心里充满了幻灭的情思。<br><br>1923年10月11日作完，于温州。<br></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/#%20%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>指针和数组，恕我直言，我从17年第一次接触C++语言开始，我就认识这俩玩意儿了。。。。但是我提到指针，就跟见了鬼一样，我记得逼乎上谁说的。。C语言最有特色的部分就是指针了，指针的好处就是灵活。。然而坏处就是太TM灵活了！！用这个东西容易搞出很多莫名其妙的bug和令人非常难懂的语句段来，所以很多高级语言比如C#和Java和前端三大语言虽然都源自于C语言，但是不约而同的没有继承指针这一特性。好的废话不多说，让我们来解析这俩玩意儿吧～～～～<p></p>
-<ol>
-<li>指针 <br><br>指针是用来表示或者存储一个存储器地址，这个地址的值直接指向存在该地址的对象的值。指针所占内存单元的大小（即其内容）是跟操作系统的地址位数有关，在32位系统中，指针所占的内存单元就是4个字节，在64位系统中，指针所占的内存单元就是8个字节，在16位系统中，指针所占的内存单元就是2个字节。但是指针所占的内存单元的大小与变量类型无关。</li>
-</ol>
-<ul>
-<li>首先事先说明”*”由三个用途，具体如下：<br>1） 表示乘法（喜闻乐见）；<br><br>2） 表示定义一个指针变量，用这个符号和普通变量分开；<br><br>3） 表示获取指针指向的数据，是一种间接的操作。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int a&#x3D;10;</span><br><span class="line">int *p&#x3D;&amp;a;</span><br><span class="line">++*p;&#x2F;&#x2F;将p所指向的内容加上1后赋值给y，这个语段等价于++(*p)</span><br><span class="line">*p++;&#x2F;&#x2F;和楼上的方法是一样的，等价于(*p)++,也就是说++和*的优先级一样的</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">int a&#x3D;0;</span><br><span class="line">int *pa&#x3D;a;</span><br><span class="line">*&amp;a;&#x2F;&#x2F;等价于*(&amp;a)表示先取a的地址，然后再取这个地址上的数据，说白了还是a。。。。</span><br><span class="line">&amp;*pa;&#x2F;&#x2F;等价于&amp;(*pa)表示先取pa指向的数据，也就是a的值嘛，然后再取该数据的地址，说白了还是pa。。。。重要的是分析的过程不是结果哈。。。</span><br></pre></td></tr></table></figure></li>
-<li>关于指针的解析问题(基于32位操作系统)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num&#x3D;97;</span><br><span class="line">int *p1&#x3D;&amp;num;</span><br></pre></td></tr></table></figure>
-假设num的地址为0028FF40，换句话说，p1和p2的值就是0028FF40，都不重要哈，但是指针的类型决定了这个指针指向的内存的字节数并且如何解释这些信息，听起来有点绕口，让我们用这个例子来说吧：<br><br>num的地址如上述所述是0028FF40,所以p1和p2的解析思路如下：<br></li>
-<li>p1:从地址0028FF40开始,p1是int类型的指针，int在上一节说过占四个字节，因此从前往后数上四个字节，将这四个字节的二进制数解析，结果是97；</li>
-<li>p2:从地址0028FF40开始，p2是char类型的指针，char占一个字节，然后解析这一个字节的二进制数。。结果是a；<br><br>从上述可以知道，同样的地址，如果解析的方式不同，得到的数据可是天壤之别，因为就有了一个奇葩的指针：void类型的指针<br><br>void指针只是保存了指针的值，没有类型信息，也就是说，你只知道它的地址，但是你并不知道它的解析方式，换句话说你不知道它指向的数据是什么类型的，所以在使用该指针时严禁解引用！！！！！！！，如果非要用它的话必须要将这种指针进行类型转换才能使用！！！！！<br></li>
-</ul>
-<ol>
-<li>指针和数组（以下叙述基于32位系统）<br><br>数组的定义喜闻乐见，就是一个连续占有一段内存单元的变量集合，它的数组名可以看作是一个指针，代表数组的首地址。例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a[10];</span><br><span class="line">int *p&#x3D;a;&#x2F;&#x2F;和int *p&#x3D;&amp;a[0]等价,p&#x3D;p[0]&#x3D;a[0]&#x3D;*a,p+i&#x3D;p[i]&#x3D;a[i]&#x3D;*(a+i)</span><br><span class="line">p[n]&#x3D;&#x3D;*(p+n);</span><br><span class="line">p[n][m]&#x3D;*(*(p+n)+m);</span><br><span class="line">&#x2F;&#x2F;sizeof(p)在32位系统中为四个字节。</span><br><span class="line">&#x2F;&#x2F;sizeof(a)的值为40个字节。在这里数组名a被看作整个数组的代表。</span><br><span class="line">&#x2F;&#x2F;在上面的p+1并不是指向下一个地址，而是指向下一个元素，在这里要注意哟，这里是有区别的，比如p指向的是int类型的数组首个元素，而p+1大家都知道是指向的是第二个元素，”下一个地址“就是p往后挪了一个字节，“下一个元素”就是p往后挪了四个字节（如果数组是int类型的）或者往后挪了一个字节（如果数组是char类型的）。综上所述，*p是第一个元素的内容，*(p+1)是第二个元素的内容，p+1是第二个元素的地址。</span><br></pre></td></tr></table></figure></li>
-<li>令人恶心的数组指针和指针数组<br>这个东西还是很难记住的。。。。还是多看多记吧。。。贼难受呀～～～～<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nt *p[10];&#x2F;&#x2F;指针数组，数组里有十个元素，每个元素都是int型的指针</span><br><span class="line">&#x2F;&#x2F;[]的优先级比*要搞，p先与[]结合，是一个数组，然后int*修饰数组的内容，所以这是10个指向int类型的指针。</span><br><span class="line">int (*p)[10];&#x2F;&#x2F;数组指针，()的优先级比[]高，*和p构成一个指针的定义，int修饰的是数组的内容，即是每个元素，数组在这里没有名字，是一个匿名数组，所以p是一个指针，指向了一个匿名的包含int类型的数组。可以理解为int(*)[10]p</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目Tinyhttpd第四篇 详解start_up函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  大周六的无聊的很，不如来继续看这一大段开源代码，这一次我们按照Github上面那位大佬推荐的步骤来看推荐的步骤来看，先看start_up函数。<br><br>说多无益，先上该段代码：<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">int startup(u_short *port)</span><br><span class="line">&#123;</span><br><span class="line">    int httpd &#x3D; 0;</span><br><span class="line">    int on &#x3D; 1;</span><br><span class="line">    struct sockaddr_in name;</span><br><span class="line"></span><br><span class="line">    httpd &#x3D; socket(PF_INET, SOCK_STREAM, 0);</span><br><span class="line">    if (httpd &#x3D;&#x3D; -1)</span><br><span class="line">        error_die(&quot;socket&quot;);</span><br><span class="line">    memset(&amp;name, 0, sizeof(name));</span><br><span class="line">    name.sin_family &#x3D; AF_INET;</span><br><span class="line">    name.sin_port &#x3D; htons(*port);</span><br><span class="line">    name.sin_addr.s_addr &#x3D; htonl(INADDR_ANY);</span><br><span class="line">    if ((setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0)  </span><br><span class="line">    &#123;  </span><br><span class="line">        error_die(&quot;setsockopt failed&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (bind(httpd, (struct sockaddr *)&amp;name, sizeof(name)) &lt; 0)</span><br><span class="line">        error_die(&quot;bind&quot;);</span><br><span class="line">    if (*port &#x3D;&#x3D; 0)  &#x2F;* if dynamically allocating a port *&#x2F;</span><br><span class="line">    &#123;</span><br><span class="line">        socklen_t namelen &#x3D; sizeof(name);</span><br><span class="line">        if (getsockname(httpd, (struct sockaddr *)&amp;name, &amp;namelen) &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;getsockname&quot;);</span><br><span class="line">        *port &#x3D; ntohs(name.sin_port);</span><br><span class="line">    &#125;</span><br><span class="line">    if (listen(httpd, 5) &lt; 0)</span><br><span class="line">        error_die(&quot;listen&quot;);</span><br><span class="line">    return(httpd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个函数的注释。。。。其实我也看不懂，建议谷歌翻译一下。大概意思是说哈，开启一个线程在参数中的端口不为0的情况下监听一个端口，如果端口为0的话，那么就随机分配一个接口来使用。<br><br>接下来就是socket函数，这个函数是在sys/types.h头文件中定义的一个函数，这个函数的参数如下：<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int socket(int domain, int type, int protocol);</span><br></pre></td></tr></table></figure>
-<p>这个函数的作用是用来建立一个协议族为domain，协议类型为type，协议编号为protocol的套接字描述符，如果函数调用成功的话，会返回标示这个套接字的文件描述符，如果失败就会返回-1.<br><br>domain这个参数是用来设置网路通信的域，socket函数根据这个参数来选择通信协议的族，通信协议在头文件sys/socket.h中定义。<br><br>type用于设置套接字通信的类型，主要有SOCKET_STREAM(流式套接字)，SOCK_DGRAM(数据包套接字)等。<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM&#x2F;&#x2F;tcp连接，提供序列化的可靠的双向连接的字节流</span><br><span class="line">SOCK_DGRAM&#x2F;&#x2F;支持udp连接</span><br><span class="line">SOCK_SEQPACKET&#x2F;&#x2F;序列化包，提供一个序列化的，可靠的，双向的基本连接的数据连接通道，数据长度定常。</span><br><span class="line">SOCK_RAW&#x2F;&#x2F;提供原始网络协议访问</span><br><span class="line">SOCK-RDM&#x2F;&#x2F;提供可靠的数据报文，不过可能数据会有乱序</span><br><span class="line">SOCK_PACKET&#x2F;&#x2F;这是一个专有类型，不过能够在通用程序中使用</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-开源项目Tinyhttpd第二篇 详解sizeof关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -557,13 +159,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">开源项目Tinyhttpd第二篇 详解sizeof关键字</a>
+      <a class="article-title" href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">开源项目Tinyhttpd第二篇 详解sizeof关键字</a>
     </h1>
   
 
         
-        <a href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+        <a href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2020-05-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-19</time>
 </a>
         
       </header>
@@ -613,7 +215,247 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" class="archive-article-date">
+  	<time datetime="2020-03-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>指针和数组，恕我直言，我从17年第一次接触C++语言开始，我就认识这俩玩意儿了。。。。但是我提到指针，就跟见了鬼一样，我记得逼乎上谁说的。。C语言最有特色的部分就是指针了，指针的好处就是灵活。。然而坏处就是太TM灵活了！！用这个东西容易搞出很多莫名其妙的bug和令人非常难懂的语句段来，所以很多高级语言比如C#和Java和前端三大语言虽然都源自于C语言，但是不约而同的没有继承指针这一特性。好的废话不多说，让我们来解析这俩玩意儿吧～～～～<p></p>
+<ol>
+<li>指针 <br><br>指针是用来表示或者存储一个存储器地址，这个地址的值直接指向存在该地址的对象的值。指针所占内存单元的大小（即其内容）是跟操作系统的地址位数有关，在32位系统中，指针所占的内存单元就是4个字节，在64位系统中，指针所占的内存单元就是8个字节，在16位系统中，指针所占的内存单元就是2个字节。但是指针所占的内存单元的大小与变量类型无关。</li>
+</ol>
+<ul>
+<li>首先事先说明”*”由三个用途，具体如下：<br>1） 表示乘法（喜闻乐见）；<br><br>2） 表示定义一个指针变量，用这个符号和普通变量分开；<br><br>3） 表示获取指针指向的数据，是一种间接的操作。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int a&#x3D;10;</span><br><span class="line">int *p&#x3D;&amp;a;</span><br><span class="line">++*p;&#x2F;&#x2F;将p所指向的内容加上1后赋值给y，这个语段等价于++(*p)</span><br><span class="line">*p++;&#x2F;&#x2F;和楼上的方法是一样的，等价于(*p)++,也就是说++和*的优先级一样的</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">int a&#x3D;0;</span><br><span class="line">int *pa&#x3D;a;</span><br><span class="line">*&amp;a;&#x2F;&#x2F;等价于*(&amp;a)表示先取a的地址，然后再取这个地址上的数据，说白了还是a。。。。</span><br><span class="line">&amp;*pa;&#x2F;&#x2F;等价于&amp;(*pa)表示先取pa指向的数据，也就是a的值嘛，然后再取该数据的地址，说白了还是pa。。。。重要的是分析的过程不是结果哈。。。</span><br></pre></td></tr></table></figure></li>
+<li>关于指针的解析问题(基于32位操作系统)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num&#x3D;97;</span><br><span class="line">int *p1&#x3D;&amp;num;</span><br></pre></td></tr></table></figure>
+假设num的地址为0028FF40，换句话说，p1和p2的值就是0028FF40，都不重要哈，但是指针的类型决定了这个指针指向的内存的字节数并且如何解释这些信息，听起来有点绕口，让我们用这个例子来说吧：<br><br>num的地址如上述所述是0028FF40,所以p1和p2的解析思路如下：<br></li>
+<li>p1:从地址0028FF40开始,p1是int类型的指针，int在上一节说过占四个字节，因此从前往后数上四个字节，将这四个字节的二进制数解析，结果是97；</li>
+<li>p2:从地址0028FF40开始，p2是char类型的指针，char占一个字节，然后解析这一个字节的二进制数。。结果是a；<br><br>从上述可以知道，同样的地址，如果解析的方式不同，得到的数据可是天壤之别，因为就有了一个奇葩的指针：void类型的指针<br><br>void指针只是保存了指针的值，没有类型信息，也就是说，你只知道它的地址，但是你并不知道它的解析方式，换句话说你不知道它指向的数据是什么类型的，所以在使用该指针时严禁解引用！！！！！！！，如果非要用它的话必须要将这种指针进行类型转换才能使用！！！！！<br></li>
+</ul>
+<ol>
+<li>指针和数组（以下叙述基于32位系统）<br><br>数组的定义喜闻乐见，就是一个连续占有一段内存单元的变量集合，它的数组名可以看作是一个指针，代表数组的首地址。例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a[10];</span><br><span class="line">int *p&#x3D;a;&#x2F;&#x2F;和int *p&#x3D;&amp;a[0]等价,p&#x3D;p[0]&#x3D;a[0]&#x3D;*a,p+i&#x3D;p[i]&#x3D;a[i]&#x3D;*(a+i)</span><br><span class="line">p[n]&#x3D;&#x3D;*(p+n);</span><br><span class="line">p[n][m]&#x3D;*(*(p+n)+m);</span><br><span class="line">&#x2F;&#x2F;sizeof(p)在32位系统中为四个字节。</span><br><span class="line">&#x2F;&#x2F;sizeof(a)的值为40个字节。在这里数组名a被看作整个数组的代表。</span><br><span class="line">&#x2F;&#x2F;在上面的p+1并不是指向下一个地址，而是指向下一个元素，在这里要注意哟，这里是有区别的，比如p指向的是int类型的数组首个元素，而p+1大家都知道是指向的是第二个元素，”下一个地址“就是p往后挪了一个字节，“下一个元素”就是p往后挪了四个字节（如果数组是int类型的）或者往后挪了一个字节（如果数组是char类型的）。综上所述，*p是第一个元素的内容，*(p+1)是第二个元素的内容，p+1是第二个元素的地址。</span><br></pre></td></tr></table></figure></li>
+<li>令人恶心的数组指针和指针数组<br>这个东西还是很难记住的。。。。还是多看多记吧。。。贼难受呀～～～～<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nt *p[10];&#x2F;&#x2F;指针数组，数组里有十个元素，每个元素都是int型的指针</span><br><span class="line">&#x2F;&#x2F;[]的优先级比*要搞，p先与[]结合，是一个数组，然后int*修饰数组的内容，所以这是10个指向int类型的指针。</span><br><span class="line">int (*p)[10];&#x2F;&#x2F;数组指针，()的优先级比[]高，*和p构成一个指针的定义，int修饰的是数组的内容，即是每个元素，数组在这里没有名字，是一个匿名数组，所以p是一个指针，指向了一个匿名的包含int类型的数组。可以理解为int(*)[10]p</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-桨声灯影里的秦淮河" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">桨声灯影里的秦淮河</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/" class="archive-article-date">
+  	<time datetime="2020-02-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="朱自清"><a href="#朱自清" class="headerlink" title="朱自清"></a>朱自清</h2><h2 id="强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！"><a href="#强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！" class="headerlink" title="强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！"></a>强烈建议与网易云音乐的清华大学广播台文学组的播音：朱自清《桨声灯影里的秦淮河》一同食用！！！！！</h2><p>链接 ：<a href="https://music.163.com/#/dj?id=2060494861&userid=260088210/" target="_blank" rel="noopener">桨声灯影里的秦淮河</a><br><br>一九二三年八月的一晚，我和平伯同游秦淮河，平伯是初泛，我是重来了。我们雇了一只“七板子”，在夕阳已去，皎月方来的时候，便下了船。于是桨声汩——汩，我们开始领略那晃荡着蔷薇色的历史的秦淮河的滋味了。 秦淮河里的船，比北京万生园，颐和园的船好，比西湖的船好，比扬州瘦西湖的船也好。这几处的船不是觉着笨，就是觉着简陋，局促；都不能引起乘客们的情韵，如秦淮河的船一样。秦淮河的船约略可分为两种：一是大船；一是小船，就是所谓“七板子”。大船舱口阔大，可容二三十人。里面陈设着字画和光洁的红木家具，桌上一律嵌着冰凉的大理石面。窗格雕镂颇细，使人起柔腻之感。窗格里映着红色蓝色的玻璃；玻璃上有精致的花纹，也颇悦人目。“七板子”规模虽不及大船，但那淡蓝色的栏杆，空敝3的舱，也足系人情思。而最出色处却在它的舱前。舱前是甲板上的一部，上面有弧形的顶，西边用疏疏的栏杆支着。里面通常放着两张藤的躺椅。躺下，可以谈天，可以望远，可以顾盼两岸的河房。大船上也有这个，但在小船上更觉清隽罢了。舱前的顶下，一律悬着灯彩；灯的多少，明暗，彩苏的精粗，艳晦，是不一的，但好歹总还你一个灯彩。这灯彩实在是最能勾人的东西。夜幕垂垂地下来时，大小船上都点起灯火。从两重玻璃里映出那辐射着的黄黄的散光，反晕出一片朦胧的烟霭；透过这烟霭，在黯黯的水波里，又逗起缕缕的明漪。在这薄霭和微漪里，听着那悠然的间歇的桨声，谁能不被引入他的美梦去呢？只愁梦太多了，这些大小船儿如何载得起呀？我们这时模模糊糊的谈着明末的秦淮河的艳迹，如《桃花扇》及《板桥杂记》里所载的。我们真神往了。我们仿佛亲见那时华灯映水，画舫凌波的光景了。于是我们的船便成了历史的重载了。我们终于恍然秦淮河的船所以雅丽过于他处，而又有奇异的吸引力的，实在是许多历史的影象使然了。<br><br>秦淮河的水是碧阴阴的；看起来厚而不腻，或者是六朝金粉所凝么？我们初上船的时候，天色还未断黑，那漾漾的柔波是这样恬静，委婉，使我们一面有水阔天空之想，一面又憧憬着纸醉金迷之境了。等到灯火明时，阴阴的变为沈沈了：黯淡的水光，像梦一般；那偶然闪烁着的光芒，就是梦的眼睛了。我们坐在舱前，因了那隆起的顶棚，仿佛总是昂着首向前走着似的；于是飘飘然如御风而行的我们，看着那些自在的湾泊着的船，船里走马灯般的人物，便像是下界一般，迢迢的远了，又像在雾里看花，尽朦朦胧胧的。这时我们已过了利涉桥，望见东关头了。沿路听见断续的歌声：有从沿河的妓楼飘来的，有从河上船里度来的。我们明知那些歌声，只是些因袭的言词，从生涩的歌喉里机械的发出来的；但它们经了夏夜的微风的吹漾和水波的摇拂，袅娜着到我们耳边的时候，已经不单是她们的歌声，而混着微风和河水的密语了。于是我们不得不被牵惹着，震撼着，相与浮沉于这歌声里了。从东关头转湾，不久就到大中桥。大中桥共有三个桥拱，都很阔大，俨然是三座门儿；使我们觉得我们的船和船里的我们，在桥下过去时，真是太无颜色了。桥砖是深褐色，表明它的历史的长久；但都完好无缺，令人太息于古昔工程的坚美。桥上两旁都是木壁的房子，中间应该有街路？这些房子都破旧了，多年烟熏的迹，遮没了当年的美丽。我想像秦淮河的极盛时，在这样宏阔的桥上，特地盖了房子，必然是髹漆得富富丽丽的；晚间必然是灯火通明的，现在却只剩下一片黑沉沉！但是桥上造着房子，毕竟使我们多少可以想见往日的繁华；这也慰情聊胜无了。过了大中桥，便到了灯月交辉，笙歌彻夜的秦淮河，这才是秦淮河的真面目哩。<br><br>大中桥外，顿然空阔，和桥内两岸排着密密的人家的景象大异了。一眼望去，疏疏的林，淡淡的月，衬着蔚蓝的天，颇像荒江野渡光景；那边呢，郁丛丛的，阴森森的，又似乎藏着无边的黑暗：令人几乎不信那是繁华的秦淮河了。但是河中眩晕着的灯光，纵横着的画舫，悠扬着的笛韵，夹着那吱吱的胡琴声，终于使我们认识绿如茵陈酒的秦淮水了。此地天裸露着的多些，故觉夜来的独迟些；从清清的水影里，我们感到的只是薄薄的夜——这正是秦淮河的夜。大中桥外，本来还有一座复成桥，是船夫口中的我们的游踪尽处，或也是秦淮河繁华的尽处了。我的脚曾踏过复成桥的脊，在十三四岁的时候。但是两次游秦准河，却都不曾见着复成桥的面；明知总在前途的，却常觉得有些虚无缥缈似的。我想，不见倒也好。这时正是盛夏。我们下船后，藉着9新生的晚凉和河上的微风，暑气已渐渐消散；到了此地，豁然开朗，身子顿然轻了——习习的清风荏苒在面上，手上，衣上，这便又感到了一缕新凉了。南京的日光，大概没有杭州猛烈；西湖的夏夜老是热蓬蓬的，水像沸着一般，秦淮河的水却尽是这样冷冷地绿着。任你人影的憧憧，歌声的扰扰，总像隔着一层薄薄的绿纱面幂似的；它尽是这样静静的，冷冷的绿着。我们出了大中桥，走不上半里路，船夫便将船划到一旁，停了桨由它宕着。他以为那里正是繁华的极点，再过去就是荒凉了；所以让我们多多赏鉴一会儿。他自己却静静的蹲着。他是看惯这光景的了，大约只是一个无可无不可。这无可无不可，无论是升的沉的，总之，都比我们高了。<br><br>那时河里热闹极了；船大半泊着，小半在水上穿梭似的来往。停泊着的都在近市的那一边，我们的船自然也夹在其中。因为这边略略的挤，便觉得那边十分的疏了。在每一只船从那边过去时，我们能画出它的轻轻的影和曲曲的波，在我们的心上；这显着是空，且显着是静了。那时处处都是歌声和凄厉的胡琴声，圆润的喉咙，确乎是很少的。但那生涩的，尖脆的调子能使人有少年的，粗率不拘的感觉。也正可快我们的意。况且多少隔开些儿听着。因为想像与渴慕的做美，总觉更有滋味；而竞发的喧嚣，抑扬的不齐，远近的杂沓，和乐器的嘈嘈切切，合成另一意味的谐音，也使我们无所适从，如随着大风而走。这实在因为我们的心枯涩久了，变为脆弱；故偶然润泽一下，便疯狂似的不能自主了。但秦淮河确也腻人。即如船里的人面，无论是和我们一堆儿泊着的，无论是从我们眼前过去的，总是模模糊糊的，甚至渺渺茫茫的；任你张圆了眼睛，揩净了眦垢，也是枉然。这真够人想呢。在我们停泊的地方，灯光原是纷然的；不过这些灯光都是黄而有晕的。黄已经不能明了，再加上了晕，便更不成了。灯愈多，晕就愈甚；在繁星般的黄的交错里，秦淮河仿佛笼上了一团光雾。光芒与雾气腾腾的晕着，什么都只剩了轮廓了；所以人面的详细的曲线，便消失于我们的眼底了。但灯光究竟夺不了那边的月色；灯光是浑的，月色是清的。在浑沌的灯光里，渗入一派清辉，却真是奇迹！那晚月儿已瘦削了两三分，她晚妆才罢，盈盈的上了柳梢头。天是蓝得可爱，仿佛一汪水似的；月儿便更出落得精神了。岸上原有三株两株的垂杨树，淡淡的影子，在水里摇曳着。它们那柔细的枝条浴着月光，就像一支支美人的臂膊，交互的缠着，挽着；又像是月儿披着的发。而月儿偶尔也从它们的交叉处偷偷窥看我们，大有小姑娘怕羞的样子。岸上另有几株不知名的老树，光光的立着；在月光里照起来，却又俨然是精神矍铄11的老人。远处——快到天际线了，才有一两片白云，亮得现出异彩，像是美丽的贝壳一般。白云下便是黑黑的一带轮廓；是一条随意画的不规则的曲线。这一段光景，和河中的风味大异了。但灯与月竟能并存着，交融着，使月成了缠绵的月，灯射着渺渺的灵辉，这正是天之所以厚秦淮河，也正是天之所以厚我们了。<br><br>这时却遇着了难解的纠纷。秦淮河上原有一种歌妓，是以歌为业的。从前都在茶舫上，唱些大曲之类。每日午后一时起；什么时候止，却忘记了。晚上照样也有一回，也在黄晕的灯光里。我从前过南京时，曾随着朋友去听过两次。因为茶舫里的人脸太多了，觉得不大适意，终于听不出所以然。前年听说歌妓被取缔了，不知怎的，颇涉想了几次——却想不出什么。这次到南京，先到茶舫上去看看。觉得颇是寂寥，令我无端的怅怅了。不料她们却仍在秦淮河里挣扎着，不料她们竟会纠缠到我们，我于是很张皇了，她们也乘着“七板子”，她们总是坐在舱前的。舱前点着石油汽灯光亮，眩人眼目：坐在下面的，自然是纤毫毕见了——引诱客人们的力量，也便在此了。舱里躲着乐工等人，映着汽灯的余辉蠕动着；他们是永远不被注意的。每船的歌妓大约都是二人；天色一黑，她们的船就在大中桥外往来不息的兜生意。无论行着的船，泊着的船，都要来兜揽的。这都是我后来推想出来的。那晚不知怎样，忽然轮着我们的船了。我们的船好好的停着，一只歌舫划向我们来了；渐渐和我们的船并着了。烁烁的灯光逼得我们皱起了眉头；我们的风尘色全给它托出来了，这使我不安了，那时一个伙计跨过船来，拿着摊开的歌折，就近塞向我的手里，说：“点几出吧！”他跨过来的时候，我们船上似乎有许多眼光跟着。同时相近的别的船上也似乎有许多眼睛炯炯的向我们船上看着。我真窘了！我也装出大方的样子，向歌妓们瞥了一眼，但究竟是不成的！我勉强将那歌折翻了一翻，却不曾看清了几字；便赶紧递还那伙计，一面不好意思地说：“不要，我们……不要。”他便塞给平伯，平伯掉转头去，摇手说：“不要！”那人还腻着不走。平伯又回过脸来，摇着头道：“不要！”于是那人重到我处，我窘着再拒绝了他。他这才有所不屑似的走了。我的心立刻放下，如释了重负一般。我们就开始自白了。<br><br>我说我受了道德律的压迫，拒绝了她们；心里似乎很抱歉的。这所谓抱歉，一面对于她们，一面对于我自己。她们于我们虽然没有很奢的希望；但总有些希望的。我们拒绝了她们，无论理由如何充足，却使她们的希望受了伤；这总有几分不做美了。这是我觉得很怅怅的。至于我自己，更有一种不足之感。我这时被四面的歌声诱惑了，降伏了；但是远远的，远远的歌声总仿佛隔着重衣搔痒似的，越搔越搔不着痒处。我于是憧憬着贴耳的妙音了。在歌舫划来时，我的憧憬，变为盼望；我固执的盼望着，有如饥渴。虽然从浅薄的经验里，也能够推知，那贴耳的歌声，将剥去了一切的美妙；但一个平常的人像我的，谁愿凭了理性之力去丑化未来呢？我宁愿自己骗着了。不过我的社会感性是很敏锐的；我的思力能拆穿道德律的西洋镜，而我的感情却终于被它压服着。我于是有所顾忌了，尤其是在众目昭彰的时候。道德律的力，本来是民众赋予的；在民众的面前，自然更显出它的威严了。我这时一面盼望，一面却感到了两重的禁制：一，在通俗的意义上，接近妓者总算一种不正当的行为；二，妓是一种不健全的职业，我们对于她们，应有哀矜勿喜之心，不应赏玩的去听她们的歌。在众目睽睽之下，这两种思想在我心里最为旺盛。她们暂时压倒了我的听歌的盼望，这便成就了我的灰色的拒绝。那时的心实在异常状态中，觉得颇是昏乱。歌舫去了，暂时宁静之后，我的思绪又如潮涌了。两个相反的意思在我心头往复：卖歌和卖淫不同，听歌和狎妓不同，又干道德甚事？——但是，但是，她们既被逼的以歌为业，她们的歌必无艺术味的；况她们的身世，我们究竟该同情的。所以拒绝倒也是正办。但这此意思终于不曾撇开我的听歌的盼望。它力量异常坚强；它总想将别的思绪踏在脚下。从这重重的争斗里，我感到了浓厚的不足之感。这不足之感使我的心盘旋不安，起坐都不安宁了。唉！我承认我是一个自私的人！<br><br>平伯呢，却与我不同。他引周启明先生的诗，“因为我有妻子，所以我爱一切的女人；因为我有子女，所以我爱一切的孩子。”他的意思可以见了。他因为推及的同情，爱着那些歌妓，并且尊重着她们，所以拒绝了她们。在这种情形下，他自然以为听是对于她们的一种侮辱。但他也是想听歌的，虽然不和我一样。所以在他的心中，当然也有一番小小的争斗；争斗的结果，是同情胜了。至于道德律，在他是没有什么的；因为他很有蔑视一切的倾向，民众的力量在他是不大觉着的。这时他的心意的活动比较简单，又比较松弱，故事后还怡然自若；我却不能了。这里平伯又比我高了。<br><br>在我们谈话中间，又来了两只歌舫。伙计照前一样的请我们点戏，我们照前一样的拒绝了。我受了三次窘，心里的不安更甚了。清艳的夜景也为之减色。船夫大约因为要赶第二趟生意，催着我们回去；我们无可无不可的答应了。我们渐渐和那些晕黄的灯光远了，只有些月色冷清清的随着我们的归舟。我们的船竟没个伴儿，秦淮河的夜正长哩！到大中桥近处，才遇着一只来船。这是一只载妓的板船，黑漆漆的没有一点光。船头上坐着一个妓女；暗里看出，白地小花的衫子，黑的下衣。她手里拉着胡琴，口里唱着青衫的调子。她唱得响亮而圆转；当她的船箭一般驶过去时，余音还袅袅的在我们耳际，使我们倾听而向往。想不到在弩末的游踪里，还能领略到这样的清歌！这时船过大中桥了，森森的水影，如黑暗张着巨口，要将我们的船吞了下去。我们回顾那渺渺的黄光，不胜依恋之情；我们感到了寂寞了！这一段地方夜色甚浓，又有两头的灯火招邀着；桥外的灯火不用说了，过了桥另有东关头疏疏的灯火。我们忽然仰头看见依人的素月，不觉深悔归来之早了！走过东关头，有一两只大船湾泊着，又有几只船向我们来着。嚣嚣的一阵歌声人语，仿佛笑我们无伴的孤舟哩。东关头转湾，河上的夜色更浓了；临水的妓楼上，时时从帘缝里射出一线一线的灯光；仿佛黑暗从酣睡里眨了一眨眼。我们默然的对着，静听那汩——汩的桨声，几乎要入睡了；朦胧里却温寻着适才的繁华的余味。我那不安的心在静里愈显活跃了！这时我们都有了不足之感，而我的更其浓厚。我们却又不愿回去，于是只能由懊悔而怅惘了。船里便满载着怅惘了。直到利涉桥下，微微嘈杂的人声，才使我豁然一惊；那光景却又不同。右岸的河房里，都大开了窗户，里面亮着晃晃的电灯，电灯的光射到水上，蜿蜒曲折，闪闪不息，正如跳舞着的仙女的臂膊。我们的船已在她的臂膊里了；如睡在摇篮里一样，倦了的我们便又入梦了。那电灯下的人物，只觉得像蚂蚁一般，更不去萦念。这是最后的梦，可惜是最短的梦！黑暗重复落在我们面前，我们看见傍岸的空船上一星两星的，枯燥无力又摇摇不定的灯光。我们的梦醒了，我们知道就要上岸了；我们心里充满了幻灭的情思。<br><br>1923年10月11日作完，于温州。<br></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-开源项目Tinyhttpd第四篇 详解start_up函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-02-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  大周六的无聊的很，不如来继续看这一大段开源代码，这一次我们按照Github上面那位大佬推荐的步骤来看推荐的步骤来看，先看start_up函数。<br><br>说多无益，先上该段代码：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">int startup(u_short *port)</span><br><span class="line">&#123;</span><br><span class="line">    int httpd &#x3D; 0;</span><br><span class="line">    int on &#x3D; 1;</span><br><span class="line">    struct sockaddr_in name;</span><br><span class="line"></span><br><span class="line">    httpd &#x3D; socket(PF_INET, SOCK_STREAM, 0);</span><br><span class="line">    if (httpd &#x3D;&#x3D; -1)</span><br><span class="line">        error_die(&quot;socket&quot;);</span><br><span class="line">    memset(&amp;name, 0, sizeof(name));</span><br><span class="line">    name.sin_family &#x3D; AF_INET;</span><br><span class="line">    name.sin_port &#x3D; htons(*port);</span><br><span class="line">    name.sin_addr.s_addr &#x3D; htonl(INADDR_ANY);</span><br><span class="line">    if ((setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0)  </span><br><span class="line">    &#123;  </span><br><span class="line">        error_die(&quot;setsockopt failed&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (bind(httpd, (struct sockaddr *)&amp;name, sizeof(name)) &lt; 0)</span><br><span class="line">        error_die(&quot;bind&quot;);</span><br><span class="line">    if (*port &#x3D;&#x3D; 0)  &#x2F;* if dynamically allocating a port *&#x2F;</span><br><span class="line">    &#123;</span><br><span class="line">        socklen_t namelen &#x3D; sizeof(name);</span><br><span class="line">        if (getsockname(httpd, (struct sockaddr *)&amp;name, &amp;namelen) &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;getsockname&quot;);</span><br><span class="line">        *port &#x3D; ntohs(name.sin_port);</span><br><span class="line">    &#125;</span><br><span class="line">    if (listen(httpd, 5) &lt; 0)</span><br><span class="line">        error_die(&quot;listen&quot;);</span><br><span class="line">    return(httpd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数的注释。。。。其实我也看不懂，建议谷歌翻译一下。大概意思是说哈，开启一个线程在参数中的端口不为0的情况下监听一个端口，如果端口为0的话，那么就随机分配一个接口来使用。<br><br>接下来就是socket函数，这个函数是在sys/types.h头文件中定义的一个函数，这个函数的参数如下：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int socket(int domain, int type, int protocol);</span><br></pre></td></tr></table></figure>
+<p>这个函数的作用是用来建立一个协议族为domain，协议类型为type，协议编号为protocol的套接字描述符，如果函数调用成功的话，会返回标示这个套接字的文件描述符，如果失败就会返回-1.<br><br>domain这个参数是用来设置网路通信的域，socket函数根据这个参数来选择通信协议的族，通信协议在头文件sys/socket.h中定义。<br><br>type用于设置套接字通信的类型，主要有SOCKET_STREAM(流式套接字)，SOCK_DGRAM(数据包套接字)等。<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM&#x2F;&#x2F;tcp连接，提供序列化的可靠的双向连接的字节流</span><br><span class="line">SOCK_DGRAM&#x2F;&#x2F;支持udp连接</span><br><span class="line">SOCK_SEQPACKET&#x2F;&#x2F;序列化包，提供一个序列化的，可靠的，双向的基本连接的数据连接通道，数据长度定常。</span><br><span class="line">SOCK_RAW&#x2F;&#x2F;提供原始网络协议访问</span><br><span class="line">SOCK-RDM&#x2F;&#x2F;提供可靠的数据报文，不过可能数据会有乱序</span><br><span class="line">SOCK_PACKET&#x2F;&#x2F;这是一个专有类型，不过能够在通用程序中使用</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">展开全文 >></a>
         </p>
       
 
@@ -650,13 +492,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t</a>
+      <a class="article-title" href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t</a>
     </h1>
   
 
         
-        <a href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+        <a href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" class="archive-article-date">
+  	<time datetime="2020-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
 </a>
         
       </header>
@@ -708,7 +550,7 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">展开全文 >></a>
         </p>
       
 
@@ -745,13 +587,13 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">论药水哥的直播艺术</a>
+      <a class="article-title" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">论药水哥的直播艺术</a>
     </h1>
   
 
         
-        <a href="/2020/05/31/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+        <a href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" class="archive-article-date">
+  	<time datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
 </a>
         
       </header>
@@ -806,7 +648,165 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-对羊哥博客搭建教程的补充" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">对羊哥博客搭建教程的补充</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/" class="archive-article-date">
+  	<time datetime="2019-10-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>链接：<a href="https://www.bilibili.com/video/av44544186?from=search&seid=8260304926588486728/" target="_blank" rel="noopener">羊哥博客搭建教程</a><br><br>实话说，在羊哥搭建博客教学视频中，他的教程已经很详细的了，在mac下都能按照他的情况搭建出来，但是有一个部分值得注意，就是有关于头像图片和其他图片无法显示的问题。我为了解决这个问题，查阅了百度上的很多资料，踩了很多坑，总结出一个方法仅供参考。<br><br>在我的理解中，博客网页上所有的图片等资源都存在source文件夹内，其中source/_posts在创建时就存在，主要是存储md格式的博客文字。所以我们可以在source文件中新建一个文件夹来存储图片，我在这里将其命名为img，在其中添加两个图片，Alipay（支付宝二维码）和Head（头像），接下来在_config.yml文件中配置这两个图片（注意在这里的_config.yml是themes主题中的某个主题的配置文件，而不是hexo框架的配置文件）<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 支付宝二维码图片地址，跟你设置头像的方式一样。比如：&#x2F;assets&#x2F;img&#x2F;alipay.jpg</span><br><span class="line">alipay: &#x2F;img&#x2F;Alipay.jpeg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#你的头像url</span><br><span class="line">avatar: &#x2F;img&#x2F;Head.JPG</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-详解算法 最长连续子序列系列问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">详解算法 最长连续子序列系列问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>常规最长连续子序列问题<br>通常这个算法的问题主要形式主要是给定一个无序的整数数组，然后找出最长连续子序列的长度,以下代码全部基于C++语言进行演示</li>
+</ol>
+<ul>
+<li>常规解法<br>这种解法是正常人刚开始看到这个问题时，头脑中冒出的第一种解法，这个解法认为这个数组开始的每个数字都是一个连续数组的开头，然后从这个起点开始遍历知道剩下的数字有没有相对上一个数字连续的数字，一直迭代到不存在的某个数字，顺便记录最大的连续子序列长度。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isContain</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> arrLength,<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arrLength;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]==num)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> arrLenth=arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> num:arr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> currentNum=num;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span>(isContain(arr,arrLength,currentNum))</span><br><span class="line">   &#123;</span><br><span class="line">       currentNum+=<span class="number">1</span>;</span><br><span class="line">       currentStreak+=<span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这种算法的话时间复杂度是非常糟糕的（因为一般来说刚开始解决问题时的头一个方法永远是一个最复杂的方法。。。最简单的一般都是最复杂的），因为他的时间复杂度大概为O(n^3)。所以我们现在考虑如何优化这个算法，首先因为我们要找的是个连续序列，所以可以先进行排序和去重，这样子可以省掉n个时间复杂度的查找时间；然后我们必须考虑程序中提供的数组是不是为空，如果为空或者为null的话我们应该考虑以下如何处理这种错误情况；最后我们发现我们在遍历过程中出现了大量的重复过程比如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,2,7,3,4,5</span><br></pre></td></tr></table></figure>
+比如上面这个数组的最长连续子序列肯定是5，然后我们根据上面那个算法可以发现，当for循环中的num为1时，能够查到的最长序列为5，当num为2时，我们发现我们的现在查到的以前已经查过了，想办法不查这一部分可以大大优化整个算法的时间复杂度：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> []arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr==null||arr.length==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Array.sort(arr);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">if</span>(i+<span class="number">1</span>&lt;arr.length&amp;&amp;arr[i]+<span class="number">1</span>==arr[i+<span class="number">1</span>])</span><br><span class="line">       currentStreak++;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">       &#123;</span><br><span class="line">           longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">           currentStreak=<span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+以上代码解决了以上的问题，但是时间复杂度最优为nlogn, 最差为n^2,其实我们完全可以用c++一些提供的特定结构来进一步简化整体算法的时间复杂度。比如我们可以使用C++中的set，自动去重且查询为O(1)<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;numSet=<span class="keyword">new</span> <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:arr)numSet.add(num);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:numSet)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!numSet.contains(num<span class="number">-1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> currentNum=num;</span><br><span class="line">            <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(numSet.contains(currentNum+<span class="number">1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                currentNum+=<span class="number">1</span>;</span><br><span class="line">                currentStreak+=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+2.最长连续公共子序列<br>先占个坑，未完待续。。。。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">展开全文 >></a>
         </p>
       
 
@@ -843,13 +843,13 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">详解Excel读取方式</a>
+      <a class="article-title" href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">详解Excel读取方式</a>
     </h1>
   
 
         
-        <a href="/2020/05/31/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-05-31T10:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+        <a href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2019-06-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
 </a>
         
       </header>
@@ -894,7 +894,7 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">展开全文 >></a>
         </p>
       
 
@@ -1036,15 +1036,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言开源项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">

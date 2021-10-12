@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>Archives | 李军硕的个人博客</title>
+  <title>开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="李军硕的个人博客">
-<meta property="og:url" content="http://www.junshuoli.cn/archives/index.html">
+  <meta name="description" content="[Tinyhttpd](https:&#x2F;&#x2F;github.com&#x2F;ezlippi&#x2F;tinyhttpd) 这个项目是我最近在论坛发现的写的很优秀的一个学习C和Linux方面知识的一个开源代码，大概只有五百多行，但是麻雀虽小,五脏俱全嘛～通过这个程序可以了解服务器程序的本质，何乐不为呢！！！！！ 首先要说明socket是个什么东西呀（主要是担心有些兄弟看不懂。。比如我哈哈哈哈） socket，在中国翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t">
+<meta property="og:url" content="http://www.junshuoli.cn/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
+<meta property="og:description" content="[Tinyhttpd](https:&#x2F;&#x2F;github.com&#x2F;ezlippi&#x2F;tinyhttpd) 这个项目是我最近在论坛发现的写的很优秀的一个学习C和Linux方面知识的一个开源代码，大概只有五百多行，但是麻雀虽小,五脏俱全嘛～通过这个程序可以了解服务器程序的本质，何乐不为呢！！！！！ 首先要说明socket是个什么东西呀（主要是担心有些兄弟看不懂。。比如我哈哈哈哈） socket，在中国翻译">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-12T14:28:28.507Z">
 <meta property="article:author" content="JunshuoLi">
+<meta property="article:tag" content="C语言开源项目">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -150,188 +155,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2020-05-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/">开源项目Tinyhttpd第二篇 详解sizeof关键字</a>
+    <h1 class="article-title" itemprop="name">
+      开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" class="archive-article-date">
-  	<time datetime="2020-03-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/" class="archive-article-date">
-  	<time datetime="2020-02-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">桨声灯影里的秦淮河</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-02-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" class="archive-article-date">
+        
+        <a href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" class="archive-article-date">
   	<time datetime="2020-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+[Tinyhttpd](https://github.com/ezlippi/tinyhttpd)<br>
+这个项目是我最近在论坛发现的写的很优秀的一个学习C和Linux方面知识的一个开源代码，大概只有五百多行，但是麻雀虽小,五脏俱全嘛～通过这个程序可以了解服务器程序的本质，何乐不为呢！！！！！<br>
+首先要说明socket是个什么东西呀（主要是担心有些兄弟看不懂。。比如我哈哈哈哈）<br>
+socket，在中国翻译过来叫做套接字，主要是用来进行应用程序间通信的一个数据结构，当初是Unix传承下来的一种重要的信息传递方式，在服务方和客户方进行通信的之前，双方必须知道ip地址和端口号，服务方收到客户方发来的连接请求，故首先向系统申请一个socket，然后服务方以一种emmmmmm类似死循环的方式等待客户方的连接，当客户方在发出连接请求并且服务方收到以后，服务方会选择接受连接或者拒绝连接，如果接受连接，服务方就会自动申请一个新的socket与客户端进行连接，而服务方原来的socket继续在那里死循环（这个意思并不准确呀～心里大概懂那个意思就好啦！！）。<br>
+用我当年追小学姐的事情来举例，我（客户方）知道小学姐的地址和宿舍号，我（客户方）就去西华香馨园宿管大妈那里（申请一个连接请求）进行emmmmmmm亲切友好的交流。。。。，然后宿管大妈（服务方）找到小学姐（申请一个新的socket），我和小学姐一起去恰饭～～～（连接成功）。<br>
+废话不多说，看C程序就要先看main函数啦，具体代码如下：<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    int server_sock &#x3D; -1;</span><br><span class="line">    u_short port &#x3D; 4000;</span><br><span class="line">    int client_sock &#x3D; -1;</span><br><span class="line">    struct sockaddr_in client_name;</span><br><span class="line">    socklen_t  client_name_len &#x3D; sizeof(client_name);</span><br><span class="line">    pthread_t newthread;</span><br><span class="line"></span><br><span class="line">    server_sock &#x3D; startup(&amp;port);</span><br><span class="line">    printf(&quot;httpd running on port %d\n&quot;, port);</span><br><span class="line"></span><br><span class="line">    while (1)</span><br><span class="line">    &#123;</span><br><span class="line">        client_sock &#x3D; accept(server_sock,</span><br><span class="line">                (struct sockaddr *)&amp;client_name,</span><br><span class="line">                &amp;client_name_len);</span><br><span class="line">        if (client_sock &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;accept&quot;);</span><br><span class="line">        &#x2F;* accept_request(&amp;client_sock); *&#x2F;</span><br><span class="line">        if (pthread_create(&amp;newthread , NULL, (void *)accept_request, (void *)(intptr_t)client_sock) !&#x3D; 0)</span><br><span class="line">            perror(&quot;pthread_create&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    close(server_sock);</span><br><span class="line"></span><br><span class="line">    return(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这里面有很多个函数和字段很不常见，具体如下：<br>
+1.sockaddr_in
+这个结构体是用来用来处理网路通信的地址，它主要是在头文件<netinet/in.h>或<arpa/inet.h>定义的，这个结构体的内部数据结构主要如下:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct sockaddr_in</span><br><span class="line">&#123;</span><br><span class="line">    sa_family sin_family;</span><br><span class="line">    uint16_t sin_port;</span><br><span class="line">    struct in_addr sin_addr;</span><br><span class="line">    char sin_zero[8];</span><br><span class="line">&#125;</span><br><span class="line">struct in_addr</span><br><span class="line">&#123;</span><br><span class="line">    In_addr_t s_addr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+* in_family: 地址家族，可以理解为一系列相似的通信协议的族群，占用2字节，一般它的值主要为AF_INET，AF_INET6和AF_UNSPE。其中AF_INET不能返回任何任何IPV6相关的地址信息，AF_INET6不能返回任何IPV4地址信息，AF_UNSPEC则意味着函数返回的是适用于指定主机名和服务名且适合任何协议族的地址。
+* sin_port: 端口号
+* sin_addr：IPv4／IPv6地址
+* sin_zero[8]:这个奇怪的东西。。。。。我们其实是不用管的，但是说到这个东西必须提到下面这个sockaddr结构，下面这个结构是程序员无法编辑的，即在操作系统中使用的一种socket数据结构，sa_family和上面的定义是一样的，而sa_data则包括上面的端口号和ip地址。sockaddr_in的用处本来是便于程序员进行端口和ip地址的编辑，在系统中会被强行转换成sockaddr，他们两个都是占有16个字节，所以。。。sin_zero[8]就是为了让他们两个保持大小相同而保留的空字节。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct sockaddr</span><br><span class="line">&#123;</span><br><span class="line">    unsigned short sa_family;</span><br><span class="line">    char sa_data[14];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+1. socklen_t <br>
+这个数据结构在网络上资料很乱，总的来说是哈指的是现在socket数据结构的长度，在当初的时候它并不叫这个名字，而是叫做size_t，而size_t类型在64位的系统上并不能和BSD套接字接口所要求的保持一致，故他们改了个名字叫做socklen_t，然而不管怎么变，他们都是int数据类型的马甲罢了。。。。。。。<br>
+2.pthread_t <br>
+用来声明Linux中的线程ID，数据结构为：unsigned long int。。。。。
 
-        <div class="article-info info-on-right">
-          
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -343,181 +216,126 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" class="archive-article-date">
-  	<time datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">论药水哥的直播艺术</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/" class="archive-article-date">
-  	<time datetime="2019-10-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-02</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/02/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          开源项目Tinyhttpd第四篇 详解start_up函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论药水哥的直播艺术</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">对羊哥博客搭建教程的补充</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://www.junshuoli.cn/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/", 
+    sourceId: "开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">详解算法 最长连续子序列系列问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-06-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">详解Excel读取方式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -559,8 +377,8 @@ setInterval("createtime()",250);
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
