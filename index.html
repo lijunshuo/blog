@@ -188,7 +188,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(str,1,5)</span><br></pre></td></tr></table></figure>
 <p>这样子就是”00000“，但是有意思的是，如果给其他数据类型的数组进行赋值时，比如我想通过给int类型，长度为5的数组进行赋值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(num,1,sizeof(int)*5)</span><br></pre></td></tr></table></figure>
-<p>按照常理来说，我们认为num数组每个元素的值都是0x1,但是实际上来说每个元素的值其实是0x000000001,000000001,000000001,000000001,说白了就是每个字节都赋值了0x1这个值，这里要千万注意，要不然会出现奇怪的bug，毕竟解决bug耗费的时间还是很巨大的。</p>
+<p>按照常理来说，我们认为num数组每个元素的值都是0x1,但是实际上来说每个元素的值其实是0x000000001,000000001,000000001,000000001,说白了就是每个字节都赋值了0x1这个值，这里要千万注意，要不然会出现奇怪的bug，毕竟解决bug耗费的时间还是很巨大的。<br>不过看到这里我突然想起了一个很容易出错的点，也是我曾经在哪本书，好像是计算机组成原理上讲的一个点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct&#123;</span><br><span class="line">    char a;</span><br><span class="line">    int b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果给他套上一个sizeof，会return一个什么值呢?<br><br>其实这个问题的等效问题就是有多种数据类型的结构体在分配内存时，是分配多少，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct A&#123;</span><br><span class="line">	char a;</span><br><span class="line">	int b;</span><br><span class="line">	short c;</span><br><span class="line">&#125;;</span><br><span class="line">struct B&#123;</span><br><span class="line">	char a;</span><br><span class="line">	short b;</span><br><span class="line">	int c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这两个结构体的内存占用到底一样不一样；<br><br>在结构体中有两个规则<br><br>1.每个结构体成员的起始地址为该成员大小的整数倍，即int型成员的起始地址只能为0、4、8等;<br><br>2.结构体的大小为其中最大成员大小的整数倍;<br><br>所以我们可以分析一下结构体A，在32位系统中，char类型占用1个字节，下一个就是int类型(4个字节)，根据规则1，int类型的起始地址只能为4<em>n(n=0,1,2,…),所以需要在char类型和int类型之间填充3个字节，这就是8个字节，然后接下来是short（占用2个字节），这个时候就需要考虑规则2，所以结构体A需要占用12个字节，一共空了5个字节；<br><br>接下来分析结构体B，同样在32位系统中，char类型占用1个字节，这没什么好说的，下一个short的话，根据规则1，short类型的起始地址只能为2</em>n(n=0,1,2,…)，这个时候就需要在short和char之间填充1个字节，现在算下来就是4个字节，然后接下来是int，4个字节，这样子算下来B占用8个字节；<br><br>这只是默认情况下的结构体占用情况，如果想节省内存的话，可以使用宏来紧凑数据。</p>
 
       
 
@@ -1048,11 +1052,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
