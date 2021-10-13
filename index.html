@@ -178,6 +178,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int socket(int domain, int type, int protocol);</span><br></pre></td></tr></table></figure>
 <p>这个函数的作用是用来建立一个协议族为domain，协议类型为type，协议编号为protocol的套接字描述符，如果函数调用成功的话，会返回标示这个套接字的文件描述符，如果失败就会返回-1.<br><br>domain这个参数是用来设置网路通信的域，socket函数根据这个参数来选择通信协议的族，通信协议在头文件sys/socket.h中定义。<br><br>type用于设置套接字通信的类型，主要有SOCKET_STREAM(流式套接字)，SOCK_DGRAM(数据包套接字)等。<br></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM&#x2F;&#x2F;tcp连接，提供序列化的可靠的双向连接的字节流</span><br><span class="line">SOCK_DGRAM&#x2F;&#x2F;支持udp连接</span><br><span class="line">SOCK_SEQPACKET&#x2F;&#x2F;序列化包，提供一个序列化的，可靠的，双向的基本连接的数据连接通道，数据长度定常。</span><br><span class="line">SOCK_RAW&#x2F;&#x2F;提供原始网络协议访问</span><br><span class="line">SOCK-RDM&#x2F;&#x2F;提供可靠的数据报文，不过可能数据会有乱序</span><br><span class="line">SOCK_PACKET&#x2F;&#x2F;这是一个专有类型，不过能够在通用程序中使用</span><br></pre></td></tr></table></figure>
+<p>接下来的一句就是通过httpd的值来判断，如果是-1的话那就认为是套接字建立不成功，然后程序接下来没得玩了，这个还真没有什么好说的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**********************************************************************&#x2F;</span><br><span class="line">&#x2F;* Print out an error message with perror() (for system errors; based</span><br><span class="line"> * on value of errno, which indicates system call errors) and exit the</span><br><span class="line"> * program indicating an error. *&#x2F;</span><br><span class="line">&#x2F;**********************************************************************&#x2F;</span><br><span class="line">void error_die(const char *sc)</span><br><span class="line">&#123;</span><br><span class="line">    perror(sc);</span><br><span class="line">    exit(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来就是memset函数,这个函数定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 将s中的n个字节的内容全部挨个替换成ch，返回s</span><br><span class="line">void *memset(void *s, int ch, size_t n);</span><br></pre></td></tr></table></figure>
+<p>我用过一个带s版本和不带s的版本，这两个版本的函数平时都是用来将动态分配的内存进行清空操作和分配操作的，但是这个函数有意思的一点时，它赋值是逐字节逐字节进行赋值的，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char str[5];</span><br></pre></td></tr></table></figure>
+<p>我们想给这个数组全部赋值为1，那么就可以这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(str,1,5)</span><br></pre></td></tr></table></figure>
+<p>这样子就是”00000“，但是有意思的是，如果给其他数据类型的数组进行赋值时，比如我想通过给int类型，长度为5的数组进行赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(num,1,sizeof(int)*5)</span><br></pre></td></tr></table></figure>
+<p>按照常理来说，我们认为num数组每个元素的值都是0x1,但是实际上来说每个元素的值其实是0x000000001,000000001,000000001,000000001,说白了就是每个字节都赋值了0x1这个值，这里要千万注意，要不然会出现奇怪的bug，毕竟解决bug耗费的时间还是很巨大的。</p>
+
       
 
       
@@ -1036,11 +1048,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
