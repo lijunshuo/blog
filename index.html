@@ -152,6 +152,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开源项目Ruoyi学习记录一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoyi%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">开源项目RuoYi-Vue 学习笔记一</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoyi%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/" class="archive-article-date">
+  	<time datetime="2021-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来搞it，还能做出自己的前端框架，简直牛逼！！！<br></p>
+<ol>
+<li><p>虚拟DOM<br><br>按照我的理解，浏览器是先分析html节点，然后构建成，一个DOM树，然后解析CSS文件和html节点上我们写的样式信息，生成一个样式表，最后将DOM树和样式表关联起来构建成一个Render树，每个DOM都有attach方法，接受样式信息，返回一个render对象，根据这些对象构建成一个Render树，然后浏览器根据Render树绘制出页面出来。但是这不是严格的，这三种是一种异步交叉的关系。这个就是整个一个正常流程。<br><br>在很老的开发中，在每次操作DOM树时，每操作一次就会走一遍上一段的流程，如果操作十次就会更新十次，所以这个是很难受的，所以虚拟DOM就是为了解决这个问题而设计出来的，如果在虚拟dom中操作十次，他不会更新十次，而是会将10次的更新保存到一个本地js对象中，然后再一次更新到（attach）到DOM树上。故而页面的更新都会记录在本地的js对象中，操作内存中的js对象明显比更新十次要快得多，更新快结束时直接映射成真实DOM然后再由浏览器绘制</p>
+</li>
+<li><p>export default作用<br></p>
+</li>
+<li><p>钩子函数</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java语言开源项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoyi%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目Tinyhttpd第四篇 详解start_up函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1060,15 +1142,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Java语言开源项目</a>
               </li>
             
             <div class="clearfix"></div>
