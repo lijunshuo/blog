@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>Tag: 算法 | 李军硕的个人博客</title>
+  <title>后段学习笔记二 理解IOC | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="李军硕的个人博客">
-<meta property="og:url" content="http://www.junshuoli.cn/tags/%E7%AE%97%E6%B3%95/index.html">
+  <meta name="description" content="Ruoyi-Vue首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！IOC中文又被称为控制反转(依赖注入)，用文邹邹的话来说就是组件之间的依赖关系在运行期确定，或者说容器动态的将依赖关系注入到组件之中，总的来说比如很早之前声明对象的时候，我们想要创建一个类的对象都是手写new一个，而使用IOC之后我们可以通过IOC，然后IOC会给我们一个对象，不用自己来声明。从底层来说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后段学习笔记二 理解IOC">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuo%20Yi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C%E7%9A%84/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
+<meta property="og:description" content="Ruoyi-Vue首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！IOC中文又被称为控制反转(依赖注入)，用文邹邹的话来说就是组件之间的依赖关系在运行期确定，或者说容器动态的将依赖关系注入到组件之中，总的来说比如很早之前声明对象的时候，我们想要创建一个类的对象都是手写new一个，而使用IOC之后我们可以通过IOC，然后IOC会给我们一个对象，不用自己来声明。从底层来说">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-17T05:50:59.360Z">
 <meta property="article:author" content="JunshuoLi">
+<meta property="article:tag" content="开源项目RuoYi-Vue学习笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -150,60 +155,157 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-开源项目Ruo Yi后端学习记录二的" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">详解算法 最长连续子序列系列问题</a>
+    <h1 class="article-title" itemprop="name">
+      后段学习笔记二 理解IOC
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuo%20Yi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C%E7%9A%84/" class="archive-article-date">
+  	<time datetime="2021-01-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！<br><br>IOC中文又被称为控制反转(依赖注入)，用文邹邹的话来说就是组件之间的依赖关系在运行期确定，或者说容器动态的将依赖关系注入到组件之中，总的来说比如很早之前声明对象的时候，我们想要创建一个类的对象都是手写new一个，而使用IOC之后我们可以通过IOC，然后IOC会给我们一个对象，不用自己来声明。<br><br>从底层来说的话，如果通过IOC的方式来创建对象，就可以进入容器IOC的bean缓存池，从而降低程序的创建开销，等到以后再用时直接从bean缓存池中拿，比创建的方式要快得多。<br><br>所以来控制反转的控制就是说，原有的每次程序员控制创建对象的方式交给IOC容器来控制，反转就是以前是我们主动创建对象，现在是IOC容器创建后被动注入到被注入的对象中。动作人不一样了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuo%20Yi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C%E7%9A%84/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/01/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuo%20Yi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">后段学习笔记一 注解学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://www.junshuoli.cn/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuo%20Yi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C%E7%9A%84/", 
+    sourceId: "开源项目Ruo Yi后端学习记录二的",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -245,9 +347,9 @@ setInterval("createtime()",250);
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
