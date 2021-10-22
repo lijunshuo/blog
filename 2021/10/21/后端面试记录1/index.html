@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考 | 李军硕的个人博客</title>
+  <title>hash冲突的解决办法 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="指针和数组，恕我直言，我从17年第一次接触C++语言开始，我就认识这俩玩意儿了。。。。但是我提到指针，就跟见了鬼一样，我记得逼乎上谁说的。。C语言最有特色的部分就是指针了，指针的好处就是灵活。。然而坏处就是太TM灵活了！！用这个东西容易搞出很多莫名其妙的bug和令人非常难懂的语句段来，所以很多高级语言比如C#和Java和前端三大语言虽然都源自于C语言，但是不约而同的没有继承指针这一特性。好的废话不">
+  <meta name="description" content="今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考">
-<meta property="og:url" content="http://www.junshuoli.cn/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:title" content="hash冲突的解决办法">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
-<meta property="og:description" content="指针和数组，恕我直言，我从17年第一次接触C++语言开始，我就认识这俩玩意儿了。。。。但是我提到指针，就跟见了鬼一样，我记得逼乎上谁说的。。C语言最有特色的部分就是指针了，指针的好处就是灵活。。然而坏处就是太TM灵活了！！用这个东西容易搞出很多莫名其妙的bug和令人非常难懂的语句段来，所以很多高级语言比如C#和Java和前端三大语言虽然都源自于C语言，但是不约而同的没有继承指针这一特性。好的废话不">
+<meta property="og:description" content="今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-12T15:01:24.863Z">
+<meta property="article:published_time" content="2021-10-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-22T12:32:50.168Z">
 <meta property="article:author" content="JunshuoLi">
-<meta property="article:tag" content="C语言开源项目">
+<meta property="article:tag" content="后端面试对线记录">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -155,40 +155,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-后端面试记录1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考
+      hash冲突的解决办法
     </h1>
   
 
         
-        <a href="/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" class="archive-article-date">
-  	<time datetime="2020-05-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
+        <a href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/" class="archive-article-date">
+  	<time datetime="2021-10-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>指针和数组，恕我直言，我从17年第一次接触C++语言开始，我就认识这俩玩意儿了。。。。但是我提到指针，就跟见了鬼一样，我记得逼乎上谁说的。。C语言最有特色的部分就是指针了，指针的好处就是灵活。。然而坏处就是太TM灵活了！！用这个东西容易搞出很多莫名其妙的bug和令人非常难懂的语句段来，所以很多高级语言比如C#和Java和前端三大语言虽然都源自于C语言，但是不约而同的没有继承指针这一特性。好的废话不多说，让我们来解析这俩玩意儿吧～～～～<p></p>
+        <p>今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。<br><br>hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输入都在哈希表中可以找到一个位置，一个萝卜一个坑的意思。但是什么算法都会有一些问题，比如有些输入在经过hash算法的处理，发现算出来的那个坑坑有萝卜了，这种现象就叫做hash冲突。也就引出来解决这个问题的三大方法：开放定址法，链地址法，再哈希法。<br></p>
 <ol>
-<li>指针 <br><br>指针是用来表示或者存储一个存储器地址，这个地址的值直接指向存在该地址的对象的值。指针所占内存单元的大小（即其内容）是跟操作系统的地址位数有关，在32位系统中，指针所占的内存单元就是4个字节，在64位系统中，指针所占的内存单元就是8个字节，在16位系统中，指针所占的内存单元就是2个字节。但是指针所占的内存单元的大小与变量类型无关。</li>
-</ol>
-<ul>
-<li>首先事先说明”*”由三个用途，具体如下：<br>1） 表示乘法（喜闻乐见）；<br><br>2） 表示定义一个指针变量，用这个符号和普通变量分开；<br><br>3） 表示获取指针指向的数据，是一种间接的操作。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int a&#x3D;10;</span><br><span class="line">int *p&#x3D;&amp;a;</span><br><span class="line">++*p;&#x2F;&#x2F;将p所指向的内容加上1后赋值给y，这个语段等价于++(*p)</span><br><span class="line">*p++;&#x2F;&#x2F;和楼上的方法是一样的，等价于(*p)++,也就是说++和*的优先级一样的</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">int a&#x3D;0;</span><br><span class="line">int *pa&#x3D;a;</span><br><span class="line">*&amp;a;&#x2F;&#x2F;等价于*(&amp;a)表示先取a的地址，然后再取这个地址上的数据，说白了还是a。。。。</span><br><span class="line">&amp;*pa;&#x2F;&#x2F;等价于&amp;(*pa)表示先取pa指向的数据，也就是a的值嘛，然后再取该数据的地址，说白了还是pa。。。。重要的是分析的过程不是结果哈。。。</span><br></pre></td></tr></table></figure></li>
-<li>关于指针的解析问题(基于32位操作系统)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num&#x3D;97;</span><br><span class="line">int *p1&#x3D;&amp;num;</span><br></pre></td></tr></table></figure>
-假设num的地址为0028FF40，换句话说，p1和p2的值就是0028FF40，都不重要哈，但是指针的类型决定了这个指针指向的内存的字节数并且如何解释这些信息，听起来有点绕口，让我们用这个例子来说吧：<br><br>num的地址如上述所述是0028FF40,所以p1和p2的解析思路如下：<br></li>
-<li>p1:从地址0028FF40开始,p1是int类型的指针，int在上一节说过占四个字节，因此从前往后数上四个字节，将这四个字节的二进制数解析，结果是97；</li>
-<li>p2:从地址0028FF40开始，p2是char类型的指针，char占一个字节，然后解析这一个字节的二进制数。。结果是a；<br><br>从上述可以知道，同样的地址，如果解析的方式不同，得到的数据可是天壤之别，因为就有了一个奇葩的指针：void类型的指针<br><br>void指针只是保存了指针的值，没有类型信息，也就是说，你只知道它的地址，但是你并不知道它的解析方式，换句话说你不知道它指向的数据是什么类型的，所以在使用该指针时严禁解引用！！！！！！！，如果非要用它的话必须要将这种指针进行类型转换才能使用！！！！！<br></li>
-</ul>
-<ol>
-<li>指针和数组（以下叙述基于32位系统）<br><br>数组的定义喜闻乐见，就是一个连续占有一段内存单元的变量集合，它的数组名可以看作是一个指针，代表数组的首地址。例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a[10];</span><br><span class="line">int *p&#x3D;a;&#x2F;&#x2F;和int *p&#x3D;&amp;a[0]等价,p&#x3D;p[0]&#x3D;a[0]&#x3D;*a,p+i&#x3D;p[i]&#x3D;a[i]&#x3D;*(a+i)</span><br><span class="line">p[n]&#x3D;&#x3D;*(p+n);</span><br><span class="line">p[n][m]&#x3D;*(*(p+n)+m);</span><br><span class="line">&#x2F;&#x2F;sizeof(p)在32位系统中为四个字节。</span><br><span class="line">&#x2F;&#x2F;sizeof(a)的值为40个字节。在这里数组名a被看作整个数组的代表。</span><br><span class="line">&#x2F;&#x2F;在上面的p+1并不是指向下一个地址，而是指向下一个元素，在这里要注意哟，这里是有区别的，比如p指向的是int类型的数组首个元素，而p+1大家都知道是指向的是第二个元素，”下一个地址“就是p往后挪了一个字节，“下一个元素”就是p往后挪了四个字节（如果数组是int类型的）或者往后挪了一个字节（如果数组是char类型的）。综上所述，*p是第一个元素的内容，*(p+1)是第二个元素的内容，p+1是第二个元素的地址。</span><br></pre></td></tr></table></figure></li>
-<li>令人恶心的数组指针和指针数组<br>这个东西还是很难记住的。。。。还是多看多记吧。。。贼难受呀～～～～<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nt *p[10];&#x2F;&#x2F;指针数组，数组里有十个元素，每个元素都是int型的指针</span><br><span class="line">&#x2F;&#x2F;[]的优先级比*要搞，p先与[]结合，是一个数组，然后int*修饰数组的内容，所以这是10个指向int类型的指针。</span><br><span class="line">int (*p)[10];&#x2F;&#x2F;数组指针，()的优先级比[]高，*和p构成一个指针的定义，int修饰的是数组的内容，即是每个元素，数组在这里没有名字，是一个匿名数组，所以p是一个指针，指向了一个匿名的包含int类型的数组。可以理解为int(*)[10]p</span><br></pre></td></tr></table></figure></li>
+<li>开放定址法<br>按照我的理解，就是说当发生哈希冲突时，萝卜B被分到一个萝卜A的坑坑了，这个时候就以萝卜A的地址为基准，根据再寻址的方法在找一个萝卜B的位置，如果找到这个地址了，还是冲突了，那就再寻址，一直到找到为止，寻址方法有线性探查(萝卜B就往A的后面位置一个一个数，一直到找到一个空位为止),二次探查(在萝卜B的周围反复横跳，+1，-1，+2，-2, … ,+n,-n),一直到找到一个不冲突的位置为止，伪随机探测(使用一个伪随机数生成器，然后以萝卜B为基准，加上这个产生的随机数产生的位置)当然这个算法的前提就是整个地址空间不是FULL状态。</li>
+<li>链地址法<br>这个就是HashMap的底层实现方法了，就是说在发生哈希冲突的时候，我们在这个坑坑上栽上个竹竿，然后把萝卜按照先后顺序挂在竹竿上。用代码来说就是在发生哈希冲突的哈希地址上建立一个链表（红黑树），哈希地址算出来相同的输入挂在链表(红黑树)上。</li>
+<li>再哈希法<br>这个接着哈希就行了。。。。一直哈到有坑坑为止，有点像递归，这种方法很耗费时间<br></li>
 </ol>
 
       
@@ -203,7 +194,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
         		</li>
       		
 		</ul>
@@ -259,7 +250,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +264,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%BA%8C%E7%AF%87%20%E8%AF%A6%E8%A7%A3sizeof%E5%85%B3%E9%94%AE%E5%AD%97/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          开源项目Tinyhttpd第二篇 详解sizeof关键字
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">桨声灯影里的秦淮河</div>
+    <a href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">后端学习笔记三 RuoYi的log配置分析</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -315,8 +297,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://www.junshuoli.cn/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/", 
-    sourceId: "开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考",
+    url: "http://www.junshuoli.cn/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/", 
+    sourceId: "后端面试记录1",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

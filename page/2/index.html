@@ -152,6 +152,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">开源项目Tinyhttpd第三篇 由上一篇sizeof引出的对指针和数组的思考</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/" class="archive-article-date">
+  	<time datetime="2020-05-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>指针和数组，恕我直言，我从17年第一次接触C++语言开始，我就认识这俩玩意儿了。。。。但是我提到指针，就跟见了鬼一样，我记得逼乎上谁说的。。C语言最有特色的部分就是指针了，指针的好处就是灵活。。然而坏处就是太TM灵活了！！用这个东西容易搞出很多莫名其妙的bug和令人非常难懂的语句段来，所以很多高级语言比如C#和Java和前端三大语言虽然都源自于C语言，但是不约而同的没有继承指针这一特性。好的废话不多说，让我们来解析这俩玩意儿吧～～～～<p></p>
+<ol>
+<li>指针 <br><br>指针是用来表示或者存储一个存储器地址，这个地址的值直接指向存在该地址的对象的值。指针所占内存单元的大小（即其内容）是跟操作系统的地址位数有关，在32位系统中，指针所占的内存单元就是4个字节，在64位系统中，指针所占的内存单元就是8个字节，在16位系统中，指针所占的内存单元就是2个字节。但是指针所占的内存单元的大小与变量类型无关。</li>
+</ol>
+<ul>
+<li>首先事先说明”*”由三个用途，具体如下：<br>1） 表示乘法（喜闻乐见）；<br><br>2） 表示定义一个指针变量，用这个符号和普通变量分开；<br><br>3） 表示获取指针指向的数据，是一种间接的操作。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int a&#x3D;10;</span><br><span class="line">int *p&#x3D;&amp;a;</span><br><span class="line">++*p;&#x2F;&#x2F;将p所指向的内容加上1后赋值给y，这个语段等价于++(*p)</span><br><span class="line">*p++;&#x2F;&#x2F;和楼上的方法是一样的，等价于(*p)++,也就是说++和*的优先级一样的</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</span><br><span class="line">int a&#x3D;0;</span><br><span class="line">int *pa&#x3D;a;</span><br><span class="line">*&amp;a;&#x2F;&#x2F;等价于*(&amp;a)表示先取a的地址，然后再取这个地址上的数据，说白了还是a。。。。</span><br><span class="line">&amp;*pa;&#x2F;&#x2F;等价于&amp;(*pa)表示先取pa指向的数据，也就是a的值嘛，然后再取该数据的地址，说白了还是pa。。。。重要的是分析的过程不是结果哈。。。</span><br></pre></td></tr></table></figure></li>
+<li>关于指针的解析问题(基于32位操作系统)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num&#x3D;97;</span><br><span class="line">int *p1&#x3D;&amp;num;</span><br></pre></td></tr></table></figure>
+假设num的地址为0028FF40，换句话说，p1和p2的值就是0028FF40，都不重要哈，但是指针的类型决定了这个指针指向的内存的字节数并且如何解释这些信息，听起来有点绕口，让我们用这个例子来说吧：<br><br>num的地址如上述所述是0028FF40,所以p1和p2的解析思路如下：<br></li>
+<li>p1:从地址0028FF40开始,p1是int类型的指针，int在上一节说过占四个字节，因此从前往后数上四个字节，将这四个字节的二进制数解析，结果是97；</li>
+<li>p2:从地址0028FF40开始，p2是char类型的指针，char占一个字节，然后解析这一个字节的二进制数。。结果是a；<br><br>从上述可以知道，同样的地址，如果解析的方式不同，得到的数据可是天壤之别，因为就有了一个奇葩的指针：void类型的指针<br><br>void指针只是保存了指针的值，没有类型信息，也就是说，你只知道它的地址，但是你并不知道它的解析方式，换句话说你不知道它指向的数据是什么类型的，所以在使用该指针时严禁解引用！！！！！！！，如果非要用它的话必须要将这种指针进行类型转换才能使用！！！！！<br></li>
+</ul>
+<ol>
+<li>指针和数组（以下叙述基于32位系统）<br><br>数组的定义喜闻乐见，就是一个连续占有一段内存单元的变量集合，它的数组名可以看作是一个指针，代表数组的首地址。例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a[10];</span><br><span class="line">int *p&#x3D;a;&#x2F;&#x2F;和int *p&#x3D;&amp;a[0]等价,p&#x3D;p[0]&#x3D;a[0]&#x3D;*a,p+i&#x3D;p[i]&#x3D;a[i]&#x3D;*(a+i)</span><br><span class="line">p[n]&#x3D;&#x3D;*(p+n);</span><br><span class="line">p[n][m]&#x3D;*(*(p+n)+m);</span><br><span class="line">&#x2F;&#x2F;sizeof(p)在32位系统中为四个字节。</span><br><span class="line">&#x2F;&#x2F;sizeof(a)的值为40个字节。在这里数组名a被看作整个数组的代表。</span><br><span class="line">&#x2F;&#x2F;在上面的p+1并不是指向下一个地址，而是指向下一个元素，在这里要注意哟，这里是有区别的，比如p指向的是int类型的数组首个元素，而p+1大家都知道是指向的是第二个元素，”下一个地址“就是p往后挪了一个字节，“下一个元素”就是p往后挪了四个字节（如果数组是int类型的）或者往后挪了一个字节（如果数组是char类型的）。综上所述，*p是第一个元素的内容，*(p+1)是第二个元素的内容，p+1是第二个元素的地址。</span><br></pre></td></tr></table></figure></li>
+<li>令人恶心的数组指针和指针数组<br>这个东西还是很难记住的。。。。还是多看多记吧。。。贼难受呀～～～～<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nt *p[10];&#x2F;&#x2F;指针数组，数组里有十个元素，每个元素都是int型的指针</span><br><span class="line">&#x2F;&#x2F;[]的优先级比*要搞，p先与[]结合，是一个数组，然后int*修饰数组的内容，所以这是10个指向int类型的指针。</span><br><span class="line">int (*p)[10];&#x2F;&#x2F;数组指针，()的优先级比[]高，*和p构成一个指针的定义，int修饰的是数组的内容，即是每个元素，数组在这里没有名字，是一个匿名数组，所以p是一个指针，指向了一个匿名的包含int类型的数组。可以理解为int(*)[10]p</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/15/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E4%B8%89%E7%AF%87%20%E7%94%B1%E4%B8%8A%E4%B8%80%E7%AF%87sizeof%E5%BC%95%E5%87%BA%E7%9A%84%E5%AF%B9%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E6%80%9D%E8%80%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-桨声灯影里的秦淮河" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -781,19 +869,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">后端面试学习记录</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,11 +893,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
             
             <div class="clearfix"></div>
