@@ -152,6 +152,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开源项目Tinyhttpd第四篇 详解start_up函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">开源项目Tinyhttpd第四篇 详解start_up函数</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-07-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  大周六的无聊的很，不如来继续看这一大段开源代码，这一次我们按照Github上面那位大佬推荐的步骤来看推荐的步骤来看，先看start_up函数。<br><br>说多无益，先上该段代码：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">int startup(u_short *port)</span><br><span class="line">&#123;</span><br><span class="line">    int httpd &#x3D; 0;</span><br><span class="line">    int on &#x3D; 1;</span><br><span class="line">    struct sockaddr_in name;</span><br><span class="line"></span><br><span class="line">    httpd &#x3D; socket(PF_INET, SOCK_STREAM, 0);</span><br><span class="line">    if (httpd &#x3D;&#x3D; -1)</span><br><span class="line">        error_die(&quot;socket&quot;);</span><br><span class="line">    memset(&amp;name, 0, sizeof(name));</span><br><span class="line">    name.sin_family &#x3D; AF_INET;</span><br><span class="line">    name.sin_port &#x3D; htons(*port);</span><br><span class="line">    name.sin_addr.s_addr &#x3D; htonl(INADDR_ANY);</span><br><span class="line">    if ((setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0)  </span><br><span class="line">    &#123;  </span><br><span class="line">        error_die(&quot;setsockopt failed&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (bind(httpd, (struct sockaddr *)&amp;name, sizeof(name)) &lt; 0)</span><br><span class="line">        error_die(&quot;bind&quot;);</span><br><span class="line">    if (*port &#x3D;&#x3D; 0)  &#x2F;* if dynamically allocating a port *&#x2F;</span><br><span class="line">    &#123;</span><br><span class="line">        socklen_t namelen &#x3D; sizeof(name);</span><br><span class="line">        if (getsockname(httpd, (struct sockaddr *)&amp;name, &amp;namelen) &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;getsockname&quot;);</span><br><span class="line">        *port &#x3D; ntohs(name.sin_port);</span><br><span class="line">    &#125;</span><br><span class="line">    if (listen(httpd, 5) &lt; 0)</span><br><span class="line">        error_die(&quot;listen&quot;);</span><br><span class="line">    return(httpd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数的注释。。。。其实我也看不懂，建议谷歌翻译一下。大概意思是说哈，开启一个线程在参数中的端口不为0的情况下监听一个端口，如果端口为0的话，那么就随机分配一个接口来使用。<br><br>接下来就是socket函数，这个函数是在sys/types.h头文件中定义的一个函数，这个函数的参数如下：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int socket(int domain, int type, int protocol);</span><br></pre></td></tr></table></figure>
+<p>这个函数的作用是用来建立一个协议族为domain，协议类型为type，协议编号为protocol的套接字描述符，如果函数调用成功的话，会返回标示这个套接字的文件描述符，如果失败就会返回-1.<br><br>domain这个参数是用来设置网路通信的域，socket函数根据这个参数来选择通信协议的族，通信协议在头文件sys/socket.h中定义。<br><br>type用于设置套接字通信的类型，主要有SOCKET_STREAM(流式套接字)，SOCK_DGRAM(数据包套接字)等。<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM&#x2F;&#x2F;tcp连接，提供序列化的可靠的双向连接的字节流</span><br><span class="line">SOCK_DGRAM&#x2F;&#x2F;支持udp连接</span><br><span class="line">SOCK_SEQPACKET&#x2F;&#x2F;序列化包，提供一个序列化的，可靠的，双向的基本连接的数据连接通道，数据长度定常。</span><br><span class="line">SOCK_RAW&#x2F;&#x2F;提供原始网络协议访问</span><br><span class="line">SOCK-RDM&#x2F;&#x2F;提供可靠的数据报文，不过可能数据会有乱序</span><br><span class="line">SOCK_PACKET&#x2F;&#x2F;这是一个专有类型，不过能够在通用程序中使用</span><br></pre></td></tr></table></figure>
+<p>接下来的一句就是通过httpd的值来判断，如果是-1的话那就认为是套接字建立不成功，然后程序接下来没得玩了，这个还真没有什么好说的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**********************************************************************&#x2F;</span><br><span class="line">&#x2F;* Print out an error message with perror() (for system errors; based</span><br><span class="line"> * on value of errno, which indicates system call errors) and exit the</span><br><span class="line"> * program indicating an error. *&#x2F;</span><br><span class="line">&#x2F;**********************************************************************&#x2F;</span><br><span class="line">void error_die(const char *sc)</span><br><span class="line">&#123;</span><br><span class="line">    perror(sc);</span><br><span class="line">    exit(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来就是memset函数,这个函数定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 将s中的n个字节的内容全部挨个替换成ch，返回s</span><br><span class="line">void *memset(void *s, int ch, size_t n);</span><br></pre></td></tr></table></figure>
+<p>我用过一个带s版本和不带s的版本，这两个版本的函数平时都是用来将动态分配的内存进行清空操作和分配操作的，但是这个函数有意思的一点时，它赋值是逐字节逐字节进行赋值的，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char str[5];</span><br></pre></td></tr></table></figure>
+<p>我们想给这个数组全部赋值为1，那么就可以这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(str,1,5)</span><br></pre></td></tr></table></figure>
+<p>这样子就是”00000“，但是有意思的是，如果给其他数据类型的数组进行赋值时，比如我想通过给int类型，长度为5的数组进行赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(num,1,sizeof(int)*5)</span><br></pre></td></tr></table></figure>
+<p>按照常理来说，我们认为num数组每个元素的值都是0x1,但是实际上来说每个元素的值其实是0x000000001,000000001,000000001,000000001,说白了就是每个字节都赋值了0x1这个值，这里要千万注意，要不然会出现奇怪的bug，毕竟解决bug耗费的时间还是很巨大的。<br>不过看到这里我突然想起了一个很容易出错的点，也是我曾经在哪本书，好像是计算机组成原理上讲的一个点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct&#123;</span><br><span class="line">    char a;</span><br><span class="line">    int b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果给他套上一个sizeof，会return一个什么值呢?<br><br>其实这个问题的等效问题就是有多种数据类型的结构体在分配内存时，是分配多少，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct A&#123;</span><br><span class="line">	char a;</span><br><span class="line">	int b;</span><br><span class="line">	short c;</span><br><span class="line">&#125;;</span><br><span class="line">struct B&#123;</span><br><span class="line">	char a;</span><br><span class="line">	short b;</span><br><span class="line">	int c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这两个结构体的内存占用到底一样不一样；<br><br>在结构体中有两个规则<br><br>1.每个结构体成员的起始地址为该成员大小的整数倍，即int型成员的起始地址只能为0、4、8等;<br><br>2.结构体的大小为其中最大成员大小的整数倍;<br><br>所以我们可以分析一下结构体A，在32位系统中，char类型占用1个字节，下一个就是int类型(4个字节)，根据规则1，int类型的起始地址只能为4<em>n(n=0,1,2,…),所以需要在char类型和int类型之间填充3个字节，这就是8个字节，然后接下来是short（占用2个字节），这个时候就需要考虑规则2，所以结构体A需要占用12个字节，一共空了5个字节；<br><br>接下来分析结构体B，同样在32位系统中，char类型占用1个字节，这没什么好说的，下一个short的话，根据规则1，short类型的起始地址只能为2</em>n(n=0,1,2,…)，这个时候就需要在short和char之间填充1个字节，现在算下来就是4个字节，然后接下来是int，4个字节，这样子算下来B占用8个字节；<br><br>这只是默认情况下的结构体占用情况，如果想节省内存的话，可以使用宏来紧凑数据。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/05/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E7%AC%AC%E5%9B%9B%E7%AF%87%20%E8%AF%A6%E8%A7%A3start_up%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目Tinyhttpd第二篇 详解sizeof关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
