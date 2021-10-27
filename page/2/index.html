@@ -152,6 +152,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开源项目RuoYi前端学习记录一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">Vue学习笔记一 基础学习</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/" class="archive-article-date">
+  	<time datetime="2021-03-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来搞it，还能做出自己的前端框架，简直牛逼！！！<br></p>
+<ol>
+<li><p>虚拟DOM<br><br>按照我的理解，浏览器是先分析html节点，然后构建成，一个DOM树，然后解析CSS文件和html节点上我们写的样式信息，生成一个样式表，最后将DOM树和样式表关联起来构建成一个Render树，每个DOM都有attach方法，接受样式信息，返回一个render对象，根据这些对象构建成一个Render树，然后浏览器根据Render树绘制出页面出来。但是这不是严格的，这三种是一种异步交叉的关系。这个就是整个一个正常流程。<br><br>在很老的开发中，在每次操作DOM树时，每操作一次就会走一遍上一段的流程，如果操作十次就会更新十次，所以这个是很难受的，所以虚拟DOM就是为了解决这个问题而设计出来的，如果在虚拟dom中操作十次，他不会更新十次，而是会将10次的更新保存到一个本地js对象中，然后再一次更新到（attach）到DOM树上。故而页面的更新都会记录在本地的js对象中，操作内存中的js对象明显比更新十次要快得多，更新快结束时直接映射成真实DOM然后再由浏览器绘制。</p>
+</li>
+<li><p>export default作用<br></p>
+</li>
+<li><p>钩子函数</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目RuoYi后端学习记录二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -928,81 +1010,6 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 
 
   
-    <article id="post-对羊哥博客搭建教程的补充" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">对羊哥博客搭建教程的补充</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/" class="archive-article-date">
-  	<time datetime="2019-10-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>链接：<a href="https://www.bilibili.com/video/av44544186?from=search&seid=8260304926588486728/" target="_blank" rel="noopener">羊哥博客搭建教程</a><br><br>实话说，在羊哥搭建博客教学视频中，他的教程已经很详细的了，在mac下都能按照他的情况搭建出来，但是有一个部分值得注意，就是有关于头像图片和其他图片无法显示的问题。我为了解决这个问题，查阅了百度上的很多资料，踩了很多坑，总结出一个方法仅供参考。<br><br>在我的理解中，博客网页上所有的图片等资源都存在source文件夹内，其中source/_posts在创建时就存在，主要是存储md格式的博客文字。所以我们可以在source文件中新建一个文件夹来存储图片，我在这里将其命名为img，在其中添加两个图片，Alipay（支付宝二维码）和Head（头像），接下来在_config.yml文件中配置这两个图片（注意在这里的_config.yml是themes主题中的某个主题的配置文件，而不是hexo框架的配置文件）<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 支付宝二维码图片地址，跟你设置头像的方式一样。比如：&#x2F;assets&#x2F;img&#x2F;alipay.jpg</span><br><span class="line">alipay: &#x2F;img&#x2F;Alipay.jpeg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#你的头像url</span><br><span class="line">avatar: &#x2F;img&#x2F;Head.JPG</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1127,11 +1134,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
