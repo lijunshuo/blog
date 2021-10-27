@@ -152,6 +152,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开源项目RuoYi后端学习记录三" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/">后端学习笔记三 RuoYi的log配置分析</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/" class="archive-article-date">
+  	<time datetime="2021-10-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！<br><br>在SpringBoot中，可以发现在每次idea启动时会发现控制台会输出很多log信息(其实只要是SpringBoot项目在Console窗口都会打印log信息)，正好我在RuoYi的项目中我也看到了logback.xml的文件，这个文件说白了就是控制Console如何打印日志的，我记得刚开始学框架时，看网上的教程感觉Spring框架真恶心，代码没写几行，倒是天天配xml，自从学了SpringBoot框架就发现自己好久没配xml了，log这里就是在配xml。。（满满的回忆～～～）<br><br>RuoYi的logback.xml内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 日志存放路径 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"log.path"</span> <span class="attr">value</span>=<span class="string">"/Users/junshuoli/Projects/Ruoyi-Vue/logs"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 日志输出格式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"log.pattern"</span> <span class="attr">value</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;20&#125; - [%method,%line] - %msg%n"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- 控制台输出 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"console"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 系统日志输出 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"file_info"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;log.path&#125;/sys-info.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 循环政策：基于时间创建日志文件 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志文件名格式 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/sys-info.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 日志最大的历史 60天 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 过滤的级别 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>INFO<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 匹配时的操作：接收（记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 不匹配时的操作：拒绝（不记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"file_error"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;log.path&#125;/sys-error.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 循环政策：基于时间创建日志文件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志文件名格式 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/sys-error.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 日志最大的历史 60天 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 过滤的级别 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 匹配时的操作：接收（记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 不匹配时的操作：拒绝（不记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 用户访问日志输出  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"sys-user"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;log.path&#125;/sys-user.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 按天回滚 daily --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/sys-user.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志最大的历史 60天 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 系统模块日志级别控制  --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.ruoyi"</span> <span class="attr">level</span>=<span class="string">"info"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- Spring日志级别控制  --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework"</span> <span class="attr">level</span>=<span class="string">"warn"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"console"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!--系统操作日志--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"file_info"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"file_error"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!--系统用户操作日志--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"sys-user"</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"sys-user"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>根节点就是configuration,在这里的话里面没有任何属性，其实里面有一个scan的属性，当这个属性设置为true的时候，他就会热部署，这个属性是默认就为true的，所以在RuoYi项目里什么都没配，如果xml文件某个子节点或者属性发生变化时，就会自动热部署；<br><br>还有个属性叫做scanPeriod，说白了就是检测这个xml文件是否修改的程序的扫描周期，默认单位是毫秒，如果给这个属性赋值true的话，扫描周期就是一分钟；debug属性：如果这个为true的话，就会打印logback的内部log，平时如果不管它默认值就为false；<br><br>接下来可以看到一个叫做property的标签，这个标签就是来定义变量值的标签，这个定义的值可以用在xml其他地方，在你定义该变量之后，可以在其他地方使用${}这种套外套的方法来使用定义的变量。<br>比如在这里就是使用log.path这个变量名并给它赋值了一个我的mac电脑上的一个log地址，当然这个地址要能写入，因为我刚开始配置这个项目时就是背坑在了这里，找了半天都找不到bug，后来发现RuoYi大佬定义的位置在我的mac上不能被写入，需要权限才行；然后另一个log.pattern变量定义了一个日志输出格式，在这里这几个标志如下：%d表示日期时间，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %logger{20} 表示logger名字最长20个字符，否则按照句点分割。%method,%line在运行中动态获取包类名、方法名及行号 %msg：日志消息，%n是换行符<br><br>接下来是appender节点，节点的name属性是节点名称，class是用来指定日志输出的策略，总的来说，输出位置有下面这几种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1、FileAppender 　　      普通地输出到本地文件</span><br><span class="line">2、FlumeAppender　　   将几个不同源的日志汇集、集中到一处。</span><br><span class="line">3、JMSQueueAppender &amp; JMSTopicAppender　　与JMS相关的日志输出</span><br><span class="line">4、RewriteAppender 　  对日志事件进行掩码或注入信息</span><br><span class="line">5、RollingFileAppender 对日志文件进行封存（详细）</span><br><span class="line">6、RoutingAppender　  在输出地之间进行筛选路由</span><br><span class="line">7、SMTPAppender　　   将LogEvent发送到指定邮件列表</span><br><span class="line">8、SocketAppender　　 将LogEvent以普通格式发送到远程主机</span><br><span class="line">9、SyslogAppender　　 将LogEvent以RFC 5424格式发送到远程主机</span><br><span class="line">10、AsynchAppender 　将一个LogEvent异步地写入多个不同输出地</span><br><span class="line">11、ConsoleAppender　将LogEvent输出到命令行</span><br><span class="line">12、FailoverAppender　维护一个队列，系统将尝试向队列中的Appender依次输出LogEvent，直到有一个成功为止</span><br></pre></td></tr></table></figure>
+<p>在这里用的是第十一个，也就是输出到命令行(当然就是注释写的意思)<br><br>接下来是encoder节点，主要就是对记录日志进行格式化，然后里面的节点就是pattern节点，意思就是设置日志记录行格式;<br><br>接下来就是指定日志信息输出，这里使用的日志策略就是输出到文件中，(前提就是满足日志文件大小)<br>file节点就是指定被写入的文件名，在这里就用上了上面使用的变量log.path了，也就是说存在该路径下的下一层的sys-info.log文件，当然如果这个路径在路径中不存在的话，那么就会自动创建，接下来就是rollingPolicy设置日志的滚动策略，当达到条件之后自动将条件前的日志生成一个备用的日志文件，条件后的日志文件输出到最新的日志文件中，在这里用的滚动策略是按照时间来滚动(class中现在指定的)，还有一种就是基于索引实现(FixedWindowRollingPolicy),当然这里也没用到。。。。<br><br>接下来就是fileNamePattern，设置生成滚动生成文件的格式，按照天来说的，在这里设置的就是60天。就是在61天，第一天的日志就会被清掉。<br><br>接下来就是指定log级别，比如ruoyi的log就是最低为info级别，spring框架的log就是error级别，然后root节点就是指定最基础的日志输出级别；</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目RuoYi前端学习记录一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -912,104 +990,6 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 
 
   
-    <article id="post-论药水哥的直播艺术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">论药水哥的直播艺术</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" class="archive-article-date">
-  	<time datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  药水哥（药酱，叶圣，笨笨，刘波，刘俊生，小浣熊，中南财经政法大学知名硕士毕业生），当初是社会我鑫哥在大学时推荐给我的一个主播，当时他说熊猫有个铁憨憨，玩游戏贼菜还不认，直播间几十万人都在骂他但是他依旧巍然不动。后来我去看他的时候，镜头昏黄，目光呆滞，手里捏着一根烟，头发凌乱，问在干什么，问就说在和美女聊天。后来就中了他的毒，基本天天看，虽然他现在已经整不出活来了，但是我还是他的狗嗨粉哈哈哈哈哈，如果让我来评价他的话，我觉得他是一个很聪明的人，他看起来傻里傻气的，目光呆滞。。但是他在直播过程中懂得如何去拿捏直播的分寸，什么可以播，什么不能播，然后在这个分寸之间触动我们这些狗嗨粉的G点，抓住我们的眼球。总的来说，根据我这两年多来对药水哥的观察和思考，请允许我斗胆将药水哥的艺术时期分为以下几个阶段:<br></p>
-<ol>
-<li><p>启蒙期（～至2017年10月2日）<br><br>实话说，这段时间的资料简直太少了，我能找到的视频资料也很少，我也只能大概的来说在这段时间，药水哥还很稚嫩，当时他还是个很小的主播，直播的节目怎么说呢，真的太尬了，一点内味都没有！！！当时为了节目效果和涨粉丝发了自己一次最强王者的段位截图（反正我是不信他的技术能上最强王者），后来在直播中一直玩卡牌大师，自喻为国服最强卡牌，被直播间粉丝各种喷。。。也就成为药水哥成名的导火索。<br><br>参考直播选段：<br><a href="https://www.bilibili.com/video/BV1v4411s7Pg/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">1. 药水哥RAP</a><br><a href="https://www.bilibili.com/video/BV114411i7mM?from=search&seid=13075232094843083183" target="_blank" rel="noopener">2. 头发巅峰</a><br></p>
-</li>
-<li><p>转折点（艺术的萌芽）(2017年10月3日)<br><br>这段我还是最熟悉的，这天我看了当时的录播，当天是个很普通的夜晚，当时药水哥按照日常的惯例和水友连麦，当时水友觉得药水哥玩卡牌大师很菜，还把自己的直播间写上熊猫最强卡牌的字，然后水友开始喷他“最强卡牌？？您配吗？？”药水哥：“敢不敢一直说？谁认怂谁认输”“我跟你干到国庆结束”（要不是我现在用的vscode不能加上滑稽的表情，我肯定在这里加上滑稽的表情！！！）所以这俩傻d从晚上八点一直到凌晨三点，期间水友通过变换腔调不断的去挑衅他，药酱巍然不动，还是用一个半死不活的腔调回应他。一直耗到凌晨三点。。水友和药水坚持不住了，药水在这里突然发力，似乎是积蓄了很久的力量，辅以表情，动作和语调不断的回复水友，最后以水友崩溃和药水胜利的微笑以及药水余音绕梁的话语结束。。。再次我们可以得到一个结论：人类的本质是复读机！！！！！！！！！！<br><br>参考直播选段：<a href="https://www.bilibili.com/video/BV1Et411G7dm/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">您配吗？？</a></p></p>
-</li>
-<li><p>青年期（艺术的探索和高峰阶段）(2017年10月4日至2019年1月直播间被封)<br><br>自此以后，药水哥开始了新的直播模式。。也是从这里我每天开始看直播的，在这段时间整活还是最多的最丰富的！！！！！！在这里我还是很有心得的，我们重要分析的是这段时间的直播部分。有的人会说，药水哥的直播方式千变万化，你怎么总结呢，但是话说回来，在世界上，有很多事情万变不离其宗，比如程序就是做事流程的体现，Pascal之父图灵奖大佬Nicklaus Wirth的公式：程序=数据结构+算法，算法就是前文中流程的高度集成，好的，扯远了，废话不多说，用例子来解析，奥利给！！！！！</p></p>
-</li>
-</ol>
-<ul>
-<li>艺术过度模式（药水早期使用，我最喜欢的那种，内味儿十足）<br></li>
-</ul>
-<p>本范例是一个经典的范例，在视频开始，药水哥发现这个妹妹是个有些高冷的女菩萨，所以他采取此模式，开始时药水哥先礼后兵，后来通过土味情话和这个妹妹找突破口看妹妹是个什么样子的人，通过夸张的表情和抽象的动作来证明自己的试探，后来试探成功，然后一不做二不休，继续通过道具。。扩音器来继续艺术触动水友们的g点。。。后来不知为啥艺术过度，信息量过大，妹妹被吓哭了，药水哥怂了，注意，在这里可以看到药水哥的表情变化，妹妹被吓哭了。。。药水慌了，故采用土味的情话手法和夸张的舞蹈成功逗笑妹妹。b站上面的经典视频大多来自这里。。<br><br>总结下来就是：1.先礼后兵 2.试探性艺术 3.加大力度 4.艺术过度<br><br>参考直播选段：<a href="https://www.bilibili.com/video/BV1p4411t7yY?from=search&seid=17399992231071140832" target="_blank" rel="noopener">连麦高冷妹妹</a><br></p>
-<ul>
-<li><p>舔狗模式（药水中期使用，内味不足）<br><br>这两个范例更不用说也是经典范例，在视频开始，药水哥都是先唠家常，试探一下当前妹妹是个什么性格，然后发现妹妹真的是女菩萨，什么都不懂，太tm善良了（药水最吃这一套了md），然后疯狂装可爱，装舔狗，然后艺术性的装可怜，骗取妹妹的菩萨心，（顺便抓住水友g点，被水友骂，这个时候很多水友会骂药水渣男，还有很多喜欢妹妹在公屏上刷女菩萨）然后采取向妹妹借钱，或者编故事比如药妈去世了，药爹残疾了，药爷等着钱来救等诡异操作，辅以跳舞呀，唱歌呀等手段博取妹妹同情心以后，然后求妹妹见面，然后tmd妹妹就答应了。。。<br>总结下来就是：1.唠家常 2.装可爱/可怜型艺术 3.编故事例如全家升天等惨状骗取妹妹信任 4.求妹妹见面做女朋友</li><br>参考直播选段：<br><br><a href="https://www.bilibili.com/video/BV154411E7xT?from=search&seid=837703269792222748" target="_blank" rel="noopener">1.连麦女菩萨1</a><br><a href="https://www.bilibili.com/video/BV1E4411i7FH?from=search&seid=2632915660852195213" target="_blank" rel="noopener">2.连麦女菩萨2</a></p>
-</li>
-<li><p>伪舔狗模式（药水后期使用，这个时候没有啥内味儿了）<br><br>参考视频：<a href="https://www.bilibili.com/video/BV1o441157AD?from=search&seid=6909190987902472959" target="_blank" rel="noopener">连麦拜金妹妹</a> <br><br>经典范例！！！！！！在视频开始，药水哥发现这个妹子很漂亮，疯狂舔她，然后通过交流了解到这个妹子是个纯种拜金女以后，拿出道具。。。。范思哲的衣服伪装成土豪勾引妹妹见面，妹妹同意，完成。<br>从该视频我们可以得出，表面上药水哥通过自己疯狂舔狗等各种非常浮夸的的行为博取妹妹的心，实际上来说从药水哥的动作又反映出生活中拜金的恶臭和舔狗疯狂演绎的无奈！！！就像那句老话说的，好看的皮囊千般一律，有趣的灵魂万里挑一。<br><br>总结下来就是：1.舔 2.跪着舔 3.趴着舔</p></p>
-</li>
-<li><p>被教育模式<br><br>这个。。。属于连麦失误，这种范例真的很少，但是药水好像应付得来，刚开始药水和她聊天之后，发现他是个心思缜密的人，决定先采取一些手段挑衅这个妹子，和妹子发生一些争论，然后药水想通过自己的逻辑想让妹子钻到自己的套里面。。。但是来妹子的心思缜密的不钻他的套哈哈哈哈哈哈哈，进而成为一种新的艺术，其实这八十分钟就像拳击一样，药水和妹子打得有来有回，不分伯仲。最后药水艺术失败，我感觉这是这次直播最精彩的一点了！！！</br><br>参考直播选段：<br><a href="https://www.bilibili.com/video/BV1m4411W71w/?spm_id_from=trigger_reload" target="_blank" rel="noopener">1.逻辑艺术1</a><br><a href="https://www.bilibili.com/video/BV1L4411H7eM/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">2.逻辑艺术2</a></p>
-<p>emmmm这个牛油果可能不属于这一类，但是也很相似，我感觉这个妹子很有原则，长得也很漂亮，哈哈哈哈哈哈哈哈，总结下来就是：1.唠家常等手段互相了解 2.挑衅 3.打擂台 4.药水出必杀技或妹妹出必杀技 5.艺术成功或者失败</p>
-</li>
-<li><p>疯狂嘲讽模式<br><br><a href="https://www.bilibili.com/video/BV1Q7411Z7pV/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">连麦gay佬</a><br>md，不予评论，无法接受这样子诡异的聊天，嘴臭就完事了，正在看这片文章的大佬们自己去看吧！！！！！！<p></p>
-</li>
-</ul>
-<p>4.老年期（在虎牙直播开播以来至今）<br><br>这个怎么说，现在就是说，连麦以后各种ghs，连麦以后，几分钟之内疯狂问吃饭了吗。。。然后让妹妹各种换衣服ghs。。。恶臭，一点内味都没有！！！！&lt;/br<br>写这篇文章的目的是心血来潮，五一期间没有办法出去，只能在宿舍看看书，写写博客一类的，突然感觉最近的药水哥收敛了很多，唏嘘不已，艺术已死，药朗才尽。。。4月底时的直播药水说要在五月份更改直播模式，希望药水能吸取以前直播的经验，多多整活，给我们这些狗嗨粉多一些骂他的理由哈哈哈哈哈～～～学习了学习了！！！！<br>转载请注明出处，谢谢！！！！！！</p></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1134,11 +1114,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">

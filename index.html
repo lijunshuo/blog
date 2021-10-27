@@ -152,6 +152,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/">JVM内存结构</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/" class="archive-article-date">
+  	<time datetime="2021-10-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>程序计数器<br>当前线程所执行的字节码的行号指示器，用于记录正在执行的虚拟机字节指令地址，线程私有；</li>
+<li>Java虚拟栈<br>存放基本数据类型，对象的引用，方法的出口等，线程私有；</li>
+<li>Native方法<br>和虚拟栈差不多，只是他服务于Native方法，线程私有；</li>
+<li>Java堆<br>Java内存中最大的一块，所有的对象实例和数组都存在在Java堆，GC回收的地方，线程共享</li>
+<li>方法区<br>存放已被夹在的类信息，常量，静态变量，即时编译器JIT编译后的代码数据等 (永远代)，回收目标主要是常量池的回收和类型的卸载，各线程共享。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -291,87 +371,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
-  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
-<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
-<ol>
-<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
-<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
-<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
         </p>
       
 
@@ -568,6 +567,87 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
+    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
+  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
+<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
+<ol>
+<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
+<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
+<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -624,80 +704,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%952/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
         </p>
       
 
@@ -801,6 +807,80 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
+    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
+  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -851,84 +931,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目RuoYi后端学习记录三" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/">后端学习笔记三 RuoYi的log配置分析</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/" class="archive-article-date">
-  	<time datetime="2021-10-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！<br><br>在SpringBoot中，可以发现在每次idea启动时会发现控制台会输出很多log信息(其实只要是SpringBoot项目在Console窗口都会打印log信息)，正好我在RuoYi的项目中我也看到了logback.xml的文件，这个文件说白了就是控制Console如何打印日志的，我记得刚开始学框架时，看网上的教程感觉Spring框架真恶心，代码没写几行，倒是天天配xml，自从学了SpringBoot框架就发现自己好久没配xml了，log这里就是在配xml。。（满满的回忆～～～）<br><br>RuoYi的logback.xml内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 日志存放路径 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"log.path"</span> <span class="attr">value</span>=<span class="string">"/Users/junshuoli/Projects/Ruoyi-Vue/logs"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 日志输出格式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"log.pattern"</span> <span class="attr">value</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;20&#125; - [%method,%line] - %msg%n"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- 控制台输出 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"console"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 系统日志输出 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"file_info"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;log.path&#125;/sys-info.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 循环政策：基于时间创建日志文件 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志文件名格式 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/sys-info.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 日志最大的历史 60天 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 过滤的级别 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>INFO<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 匹配时的操作：接收（记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 不匹配时的操作：拒绝（不记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"file_error"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;log.path&#125;/sys-error.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 循环政策：基于时间创建日志文件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志文件名格式 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/sys-error.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 日志最大的历史 60天 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 过滤的级别 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 匹配时的操作：接收（记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 不匹配时的操作：拒绝（不记录） --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 用户访问日志输出  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"sys-user"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;log.path&#125;/sys-user.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 按天回滚 daily --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/sys-user.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志最大的历史 60天 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;log.pattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!-- 系统模块日志级别控制  --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.ruoyi"</span> <span class="attr">level</span>=<span class="string">"info"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- Spring日志级别控制  --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework"</span> <span class="attr">level</span>=<span class="string">"warn"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"console"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!--系统操作日志--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"file_info"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"file_error"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">&lt;!--系统用户操作日志--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"sys-user"</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"sys-user"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>根节点就是configuration,在这里的话里面没有任何属性，其实里面有一个scan的属性，当这个属性设置为true的时候，他就会热部署，这个属性是默认就为true的，所以在RuoYi项目里什么都没配，如果xml文件某个子节点或者属性发生变化时，就会自动热部署；<br><br>还有个属性叫做scanPeriod，说白了就是检测这个xml文件是否修改的程序的扫描周期，默认单位是毫秒，如果给这个属性赋值true的话，扫描周期就是一分钟；debug属性：如果这个为true的话，就会打印logback的内部log，平时如果不管它默认值就为false；<br><br>接下来可以看到一个叫做property的标签，这个标签就是来定义变量值的标签，这个定义的值可以用在xml其他地方，在你定义该变量之后，可以在其他地方使用${}这种套外套的方法来使用定义的变量。<br>比如在这里就是使用log.path这个变量名并给它赋值了一个我的mac电脑上的一个log地址，当然这个地址要能写入，因为我刚开始配置这个项目时就是背坑在了这里，找了半天都找不到bug，后来发现RuoYi大佬定义的位置在我的mac上不能被写入，需要权限才行；然后另一个log.pattern变量定义了一个日志输出格式，在这里这几个标志如下：%d表示日期时间，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %logger{20} 表示logger名字最长20个字符，否则按照句点分割。%method,%line在运行中动态获取包类名、方法名及行号 %msg：日志消息，%n是换行符<br><br>接下来是appender节点，节点的name属性是节点名称，class是用来指定日志输出的策略，总的来说，输出位置有下面这几种：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1、FileAppender 　　      普通地输出到本地文件</span><br><span class="line">2、FlumeAppender　　   将几个不同源的日志汇集、集中到一处。</span><br><span class="line">3、JMSQueueAppender &amp; JMSTopicAppender　　与JMS相关的日志输出</span><br><span class="line">4、RewriteAppender 　  对日志事件进行掩码或注入信息</span><br><span class="line">5、RollingFileAppender 对日志文件进行封存（详细）</span><br><span class="line">6、RoutingAppender　  在输出地之间进行筛选路由</span><br><span class="line">7、SMTPAppender　　   将LogEvent发送到指定邮件列表</span><br><span class="line">8、SocketAppender　　 将LogEvent以普通格式发送到远程主机</span><br><span class="line">9、SyslogAppender　　 将LogEvent以RFC 5424格式发送到远程主机</span><br><span class="line">10、AsynchAppender 　将一个LogEvent异步地写入多个不同输出地</span><br><span class="line">11、ConsoleAppender　将LogEvent输出到命令行</span><br><span class="line">12、FailoverAppender　维护一个队列，系统将尝试向队列中的Appender依次输出LogEvent，直到有一个成功为止</span><br></pre></td></tr></table></figure>
-<p>在这里用的是第十一个，也就是输出到命令行(当然就是注释写的意思)<br><br>接下来是encoder节点，主要就是对记录日志进行格式化，然后里面的节点就是pattern节点，意思就是设置日志记录行格式;<br><br>接下来就是指定日志信息输出，这里使用的日志策略就是输出到文件中，(前提就是满足日志文件大小)<br>file节点就是指定被写入的文件名，在这里就用上了上面使用的变量log.path了，也就是说存在该路径下的下一层的sys-info.log文件，当然如果这个路径在路径中不存在的话，那么就会自动创建，接下来就是rollingPolicy设置日志的滚动策略，当达到条件之后自动将条件前的日志生成一个备用的日志文件，条件后的日志文件输出到最新的日志文件中，在这里用的滚动策略是按照时间来滚动(class中现在指定的)，还有一种就是基于索引实现(FixedWindowRollingPolicy),当然这里也没用到。。。。<br><br>接下来就是fileNamePattern，设置生成滚动生成文件的格式，按照天来说的，在这里设置的就是60天。就是在61天，第一天的日志就会被清掉。<br><br>接下来就是指定log级别，比如ruoyi的log就是最低为info级别，spring框架的log就是error级别，然后root节点就是指定最基础的日志输出级别；</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/">展开全文 >></a>
         </p>
       
 
@@ -1082,11 +1084,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
