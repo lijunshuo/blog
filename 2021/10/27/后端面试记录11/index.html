@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>如何理解重载和重写 | 李军硕的个人博客</title>
+  <title>反射 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数">
+  <meta name="description" content="首先在了解反射之前，需要了解一个静态编译和动态编译的概念，静态编译就是在编译时确定好类型绑定好对象，动态编译就是在运行时确定好类型，绑定对象。反射机制就可以实现动态编译，因为我们在开发很大的那种软件的时候，程序我们都知道，需要编译以后才能进行发布，如果没有反射，我们就需要把整个程序重新编译一份才可以实现功能的更新，如果采用反射的话我们就可以直接在运行时进行动态的创建和编译，没有原来那么麻烦，但是这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何理解重载和重写">
-<meta property="og:url" content="http://www.junshuoli.cn/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/index.html">
+<meta property="og:title" content="反射">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
-<meta property="og:description" content="这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数">
+<meta property="og:description" content="首先在了解反射之前，需要了解一个静态编译和动态编译的概念，静态编译就是在编译时确定好类型绑定好对象，动态编译就是在运行时确定好类型，绑定对象。反射机制就可以实现动态编译，因为我们在开发很大的那种软件的时候，程序我们都知道，需要编译以后才能进行发布，如果没有反射，我们就需要把整个程序重新编译一份才可以实现功能的更新，如果采用反射的话我们就可以直接在运行时进行动态的创建和编译，没有原来那么麻烦，但是这">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-22T12:42:41.006Z">
+<meta property="article:published_time" content="2021-10-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-29T12:57:53.195Z">
 <meta property="article:author" content="JunshuoLi">
 <meta property="article:tag" content="后端面试对线记录">
 <meta name="twitter:card" content="summary">
@@ -155,27 +155,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-后端面试记录3" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-后端面试记录11" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何理解重载和重写
+      反射
     </h1>
   
 
         
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+        <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/" class="archive-article-date">
+  	<time datetime="2021-10-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+        <p>首先在了解反射之前，需要了解一个静态编译和动态编译的概念，静态编译就是在编译时确定好类型绑定好对象，动态编译就是在运行时确定好类型，绑定对象。反射机制就可以实现动态编译，因为我们在开发很大的那种软件的时候，程序我们都知道，需要编译以后才能进行发布，如果没有反射，我们就需要把整个程序重新编译一份才可以实现功能的更新，如果采用反射的话我们就可以直接在运行时进行动态的创建和编译，没有原来那么麻烦，但是这毫无疑问。。。肯定对性能有影响。<br>首先要知道在Java中有个东西是Class类，这个玩意在Java中是最nb的一个类，怎么讲呢，如果稍微知道一点JVM就可以知道，在类加载的时候总共有五步，加载，验证，准备，解析和初始化，在加载阶段主要是将字节码加载到方法区还生成了这个类的java.lang.Class对象，这个对象就是用来记录被加载类的类型信息的对象，在Class类中存储了对应类的所有的信息，也是未初始化的信息（所有的方法，所有的构造函数，所有的字段或者说属性）。所以说这个玩意非常强大，可以从官方文档中知道，这个类是在JVM中的。而且这个Class类的构造器是私有的，也是说不能new一个，他是由JVM调用方法来创建该类的对象。<br>所以说通过反射，我们可以在运行时通过Class类，获得程序或者程序集中每个类型的成员和成员信息，在Java中反射可以在运行时判断任一对象所属类，构造一个类的对象，判断任意一个类所具有的成员变量和方法，通过反射甚至可以调用private方法。通过反射这个特性可以开发各种通用框架，比如Spring框架，通过配置xml文件动态加载所需要记载的对象。<br>在反射中有以下几种方法  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过静态方法加载数据库驱动</span></span><br><span class="line">Class.forName()</span><br><span class="line"><span class="comment">//直接获取某一个对象的class</span></span><br><span class="line">Class&lt;?&gt;klass=<span class="keyword">int</span><span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class">//调用某个对象的<span class="title">getClass</span>()方法</span></span><br><span class="line"><span class="class"><span class="title">Class</span>&lt;?&gt;<span class="title">klass</span></span>=str.getClass()</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是否为某个类的实例 native方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">isInstance</span><span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
+<p>最后反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全性问题。</p>
 
       
 
@@ -245,7 +247,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -259,18 +261,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          String详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何理解抽象类和接口</div>
+    <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM内存结构</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -301,8 +294,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://www.junshuoli.cn/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/", 
-    sourceId: "后端面试记录3",
+    url: "http://www.junshuoli.cn/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/", 
+    sourceId: "后端面试记录11",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

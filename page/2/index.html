@@ -152,6 +152,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/">hash冲突的解决办法</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/" class="archive-article-date">
+  	<time datetime="2021-10-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。<br><br>hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输入都在哈希表中可以找到一个位置，一个萝卜一个坑的意思。但是什么算法都会有一些问题，比如有些输入在经过hash算法的处理，发现算出来的那个坑坑有萝卜了，这种现象就叫做hash冲突。也就引出来解决这个问题的三大方法：开放定址法，链地址法，再哈希法。<br></p>
+<ol>
+<li>开放定址法<br>按照我的理解，就是说当发生哈希冲突时，萝卜B被分到一个萝卜A的坑坑了，这个时候就以萝卜A的地址为基准，根据再寻址的方法在找一个萝卜B的位置，如果找到这个地址了，还是冲突了，那就再寻址，一直到找到为止，寻址方法有线性探查(萝卜B就往A的后面位置一个一个数，一直到找到一个空位为止),二次探查(在萝卜B的周围反复横跳，+1，-1，+2，-2, … ,+n,-n),一直到找到一个不冲突的位置为止，伪随机探测(使用一个伪随机数生成器，然后以萝卜B为基准，加上这个产生的随机数产生的位置)当然这个算法的前提就是整个地址空间不是FULL状态。</li>
+<li>链地址法<br>这个就是HashMap的底层实现方法了，就是说在发生哈希冲突的时候，我们在这个坑坑上栽上个竹竿，然后把萝卜按照先后顺序挂在竹竿上。用代码来说就是在发生哈希冲突的哈希地址上建立一个链表（红黑树），哈希地址算出来相同的输入挂在链表(红黑树)上。</li>
+<li>再哈希法<br>这个接着哈希就行了。。。。一直哈到有坑坑为止，有点像递归，这种方法很耗费时间<br></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目RuoYi后端学习记录三" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -866,101 +945,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/03/01/%E6%A1%A8%E5%A3%B0%E7%81%AF%E5%BD%B1%E9%87%8C%E7%9A%84%E7%A7%A6%E6%B7%AE%E6%B2%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">开源项目Tinyhttpd详解第一篇 详解sockaddr_in，socklen_t，pthread_t</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/" class="archive-article-date">
-  	<time datetime="2020-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <br>
-[Tinyhttpd](https://github.com/ezlippi/tinyhttpd)<br>
-这个项目是我最近在论坛发现的写的很优秀的一个学习C和Linux方面知识的一个开源代码，大概只有五百多行，但是麻雀虽小,五脏俱全嘛～通过这个程序可以了解服务器程序的本质，何乐不为呢！！！！！<br>
-首先要说明socket是个什么东西呀（主要是担心有些兄弟看不懂。。比如我哈哈哈哈）<br>
-socket，在中国翻译过来叫做套接字，主要是用来进行应用程序间通信的一个数据结构，当初是Unix传承下来的一种重要的信息传递方式，在服务方和客户方进行通信的之前，双方必须知道ip地址和端口号，服务方收到客户方发来的连接请求，故首先向系统申请一个socket，然后服务方以一种emmmmmm类似死循环的方式等待客户方的连接，当客户方在发出连接请求并且服务方收到以后，服务方会选择接受连接或者拒绝连接，如果接受连接，服务方就会自动申请一个新的socket与客户端进行连接，而服务方原来的socket继续在那里死循环（这个意思并不准确呀～心里大概懂那个意思就好啦！！）。<br>
-用我当年追小学姐的事情来举例，我（客户方）知道小学姐的地址和宿舍号，我（客户方）就去西华香馨园宿管大妈那里（申请一个连接请求）进行emmmmmmm亲切友好的交流。。。。，然后宿管大妈（服务方）找到小学姐（申请一个新的socket），我和小学姐一起去恰饭～～～（连接成功）。<br>
-废话不多说，看C程序就要先看main函数啦，具体代码如下：<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    int server_sock &#x3D; -1;</span><br><span class="line">    u_short port &#x3D; 4000;</span><br><span class="line">    int client_sock &#x3D; -1;</span><br><span class="line">    struct sockaddr_in client_name;</span><br><span class="line">    socklen_t  client_name_len &#x3D; sizeof(client_name);</span><br><span class="line">    pthread_t newthread;</span><br><span class="line"></span><br><span class="line">    server_sock &#x3D; startup(&amp;port);</span><br><span class="line">    printf(&quot;httpd running on port %d\n&quot;, port);</span><br><span class="line"></span><br><span class="line">    while (1)</span><br><span class="line">    &#123;</span><br><span class="line">        client_sock &#x3D; accept(server_sock,</span><br><span class="line">                (struct sockaddr *)&amp;client_name,</span><br><span class="line">                &amp;client_name_len);</span><br><span class="line">        if (client_sock &#x3D;&#x3D; -1)</span><br><span class="line">            error_die(&quot;accept&quot;);</span><br><span class="line">        &#x2F;* accept_request(&amp;client_sock); *&#x2F;</span><br><span class="line">        if (pthread_create(&amp;newthread , NULL, (void *)accept_request, (void *)(intptr_t)client_sock) !&#x3D; 0)</span><br><span class="line">            perror(&quot;pthread_create&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    close(server_sock);</span><br><span class="line"></span><br><span class="line">    return(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这里面有很多个函数和字段很不常见，具体如下：<br>
-1.sockaddr_in
-这个结构体是用来用来处理网路通信的地址，它主要是在头文件<netinet/in.h>或<arpa/inet.h>定义的，这个结构体的内部数据结构主要如下:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct sockaddr_in</span><br><span class="line">&#123;</span><br><span class="line">    sa_family sin_family;</span><br><span class="line">    uint16_t sin_port;</span><br><span class="line">    struct in_addr sin_addr;</span><br><span class="line">    char sin_zero[8];</span><br><span class="line">&#125;</span><br><span class="line">struct in_addr</span><br><span class="line">&#123;</span><br><span class="line">    In_addr_t s_addr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-* in_family: 地址家族，可以理解为一系列相似的通信协议的族群，占用2字节，一般它的值主要为AF_INET，AF_INET6和AF_UNSPE。其中AF_INET不能返回任何任何IPV6相关的地址信息，AF_INET6不能返回任何IPV4地址信息，AF_UNSPEC则意味着函数返回的是适用于指定主机名和服务名且适合任何协议族的地址。
-* sin_port: 端口号
-* sin_addr：IPv4／IPv6地址
-* sin_zero[8]:这个奇怪的东西。。。。。我们其实是不用管的，但是说到这个东西必须提到下面这个sockaddr结构，下面这个结构是程序员无法编辑的，即在操作系统中使用的一种socket数据结构，sa_family和上面的定义是一样的，而sa_data则包括上面的端口号和ip地址。sockaddr_in的用处本来是便于程序员进行端口和ip地址的编辑，在系统中会被强行转换成sockaddr，他们两个都是占有16个字节，所以。。。sin_zero[8]就是为了让他们两个保持大小相同而保留的空字节。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct sockaddr</span><br><span class="line">&#123;</span><br><span class="line">    unsigned short sa_family;</span><br><span class="line">    char sa_data[14];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-1. socklen_t <br>
-这个数据结构在网络上资料很乱，总的来说是哈指的是现在socket数据结构的长度，在当初的时候它并不叫这个名字，而是叫做size_t，而size_t类型在64位的系统上并不能和BSD套接字接口所要求的保持一致，故他们改了个名字叫做socklen_t，然而不管怎么变，他们都是int数据类型的马甲罢了。。。。。。。<br>
-2.pthread_t <br>
-用来声明Linux中的线程ID，数据结构为：unsigned long int。。。。。
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AETinyhttpd%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AF%87%20%E8%AF%A6%E8%A7%A3sockaddr_in%EF%BC%8Csocklen/">展开全文 >></a>
         </p>
       
 
