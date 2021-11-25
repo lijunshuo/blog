@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>Archives: 2019/12 | 李军硕的个人博客</title>
+  <title>后端学习笔记四 Map的几个实现类杂谈 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="李军硕的个人博客">
-<meta property="og:url" content="http://www.junshuoli.cn/archives/2019/12/index.html">
+  <meta name="description" content="Ruoyi-Vue首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！说到Map，不得不提的就是Java中的HashMap了，这个东西平时在写代码的时候是经常被使用的，这个东西的底层是由数组加上链表实现的，但是大家都知道的是HashMap是线程不安全的，因为多个线程对同一个HashMap做put操作的话，可能在某些情况下会有两个或者多个线程同时进行rehash操作，故而导">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后端学习笔记四 Map的几个实现类杂谈">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/11/25/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%9B%9B/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
+<meta property="og:description" content="Ruoyi-Vue首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！说到Map，不得不提的就是Java中的HashMap了，这个东西平时在写代码的时候是经常被使用的，这个东西的底层是由数组加上链表实现的，但是大家都知道的是HashMap是线程不安全的，因为多个线程对同一个HashMap做put操作的话，可能在某些情况下会有两个或者多个线程同时进行rehash操作，故而导">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-25T13:21:41.540Z">
 <meta property="article:author" content="JunshuoLi">
+<meta property="article:tag" content="开源项目RuoYi-Vue学习笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -150,60 +155,157 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-开源项目RuoYi后端学习记录四" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/" class="archive-article-date">
-  	<time datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/18/%E8%AE%BA%E8%8D%AF%E6%B0%B4%E5%93%A5%E7%9A%84%E7%9B%B4%E6%92%AD%E8%89%BA%E6%9C%AF/">论药水哥的直播艺术</a>
+    <h1 class="article-title" itemprop="name">
+      后端学习笔记四 Map的几个实现类杂谈
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/11/25/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%9B%9B/" class="archive-article-date">
+  	<time datetime="2021-11-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！<br><br>说到Map，不得不提的就是Java中的HashMap了，这个东西平时在写代码的时候是经常被使用的，这个东西的底层是由数组加上链表实现的，但是大家都知道的是HashMap是线程不安全的，因为多个线程对同一个HashMap做put操作的话，可能在某些情况下会有两个或者多个线程同时进行rehash操作，故而导致循环链表的出现，一旦出现就会死循环，cpu使用率会逐渐到达100%。<br>所以为了使用线程安全，又有了一个新的Map实现类：HashTable，说到多线程，肯定就会有锁的概念，为了实现HashTable的多线程同步，HashTable的底层实现了synchronized的锁结构，但是它效率比HashMap的效率要低一些，因为在多线程的情况下，HashTable会把整个结构全部锁住，为了解决遮盖1问题，在Jdk5中提出了ConcurrentHashMap这个新的数据结构。<br>这个ConcurrentHashMap提出的目的就是为了解决HashTable的低效率问题，使用了分段锁这个比较细粒度的锁，ConcurrentHashMap底层实现还是数组和链表，但是底层存储数据是一段一段的，每个段都有类似数组加上链表的结构，在进行get，put和remove操作时只锁住要用的段，但是以后每个段越来越大以后，分段锁的性能还是会下降的，但是在Jdk1.8以后，ConcurrentHashMap的底层实现变成了数组，链表/红黑树的形式。在链表中的元素个数超过默认的8个，数组的大小超过64后链表就变成红黑树了（想起这个树就脑壳痛），而且弃用分段锁，并且使用synchronized+CAS操作，目的就是为了降低锁的力度，因为synchronized是JVM支持的，在运行时会进行锁粗化，锁消除，锁自选等等操作。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/11/25/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%9B%9B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/11/10/%E3%80%8Aredis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">简单动态字符串</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://www.junshuoli.cn/2021/11/25/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%9B%9B/", 
+    sourceId: "开源项目RuoYi后端学习记录四",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -245,8 +347,8 @@ setInterval("createtime()",250);
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
