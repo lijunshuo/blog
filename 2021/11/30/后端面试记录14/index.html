@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>如何理解重载和重写 | 李军硕的个人博客</title>
+  <title>多线程基础 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数">
+  <meta name="description" content="前几天面了两个面试官，有一些基础的东西还是记得不太清楚，在这里记录一下  线程和进程线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。进程是计算机重的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。   创建线程的方式继承Thread重写run方法；实现Runnable接口或者Callable接口；这两个接口的区别，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何理解重载和重写">
-<meta property="og:url" content="http://www.junshuoli.cn/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/index.html">
+<meta property="og:title" content="多线程基础">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
-<meta property="og:description" content="这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数">
+<meta property="og:description" content="前几天面了两个面试官，有一些基础的东西还是记得不太清楚，在这里记录一下  线程和进程线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。进程是计算机重的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。   创建线程的方式继承Thread重写run方法；实现Runnable接口或者Callable接口；这两个接口的区别，">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-22T12:42:41.006Z">
+<meta property="article:published_time" content="2021-11-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-30T14:15:36.001Z">
 <meta property="article:author" content="JunshuoLi">
 <meta property="article:tag" content="后端面试对线记录">
 <meta name="twitter:card" content="summary">
@@ -155,27 +155,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-后端面试记录3" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-后端面试记录14" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何理解重载和重写
+      多线程基础
     </h1>
   
 
         
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+        <a href="/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/" class="archive-article-date">
+  	<time datetime="2021-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+        <p>前几天面了两个面试官，有一些基础的东西还是记得不太清楚，在这里记录一下</p>
+<ol>
+<li>线程和进程<br>线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。<br>进程是计算机重的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。  </li>
+<li>创建线程的方式<br>继承Thread重写run方法；实现Runnable接口或者Callable接口；这两个接口的区别，就是Runable没有返回值，而callable有返回值。</li>
+<li>sleep和wait的区别<br>sleep()继承自Thread，wait()继承自Object；sleep不会释放锁，wait()会释放锁，sleep()函数时间到的时候会自动恢复；而wait()函数可以使用notify()或者noitfyAll()函数直接唤醒；</li>
+<li>notify()和notifyAll()有什么区别<br>notifyAll()调用后会将全部线程由等待池移动到锁池，然后参与锁的竞争，竞争成功就会继续执行，如果不成功就会留在锁池等待锁被释放后再次参与竞争，而notify()只会唤醒一个线程，具体唤醒哪个就需要看虚拟机了。</li>
+<li>run()和start()有什么区别<br>start()方法用于启动线程，run()方法用于执行线程的运行时代吗，run()可以重复调用，而start()只能调用一次。</li>
+<li>什么是死锁<br>如果线程A持有独占锁a，并尝试去获取独占锁b的同时，线程B持有独占锁b，并尝试获取独占锁a的情况下，就会发生AB两个线程由于2互相持有对方需要的锁，而发生的阻塞现象。</li>
+<li>如何避免思索</li>
+</ol>
+<ul>
+<li>尽量使用tryLock方法，设置超时时间，超时可以退出死锁；</li>
+<li>尽量使用java.util.concurrent并发累代替自己手写锁；</li>
+<li>尽量降低锁的使用粒度，尽量不要几个功能使用同一把锁；</li>
+<li>尽量减少同步的代码块；</li>
+</ul>
+<ol start="8">
+<li>synchronized底层实现<br>synchronized是由monitorenter和monitorexit实现的。monitor对象是对象同步的基本单元，在Java6之前的话monitor主要是依靠操作系统内部的互斥锁实现的，因为需要进行用户态和内核态的切换，所以同步操作是一个无差别的重量级操作，性能很低；在Java6之后，Java虚拟机优化了moitor的实现，提供了三种不同的锁：偏向锁，轻量级锁和重量级锁，大大改进了它的性能。</li>
+<li>synchronized和volatile的区别<br>volatile是变量修饰符，synchronized是修饰类，方法和代码段；<br>volatile仅能实现变量的修改可见性，不能保证原子性；synchronized可是保证变量修改的可见性和原子性；<br>volatile不会造成线程的阻塞，synchronized可能会造成线程的阻塞；</li>
+<li>synchronized和ReentrantLock的区别<br>ReentrantLock使用起来比较灵活，但是需要手动释放锁；<br>synchronzied 不需要手动释放和开启锁，但是他比ReentrantLock大多数场景都性能相差很大，但是Java6对synchronized进行了很多的改进；<br>ReentrantLock只适用于代码块锁，而synchronized可用于修饰方法和代码块等等。</li>
+<li></li>
+</ol>
 
       
 
@@ -245,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -259,18 +280,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%952/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          如何理解面向对象
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何理解抽象类和接口</div>
+    <a href="/2021/11/25/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%9B%9B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">后端学习笔记四 Map的几个实现类杂谈</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -301,8 +313,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://www.junshuoli.cn/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/", 
-    sourceId: "后端面试记录3",
+    url: "http://www.junshuoli.cn/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/", 
+    sourceId: "后端面试记录14",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

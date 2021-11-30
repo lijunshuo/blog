@@ -152,6 +152,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录14" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/">多线程基础</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/" class="archive-article-date">
+  	<time datetime="2021-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天面了两个面试官，有一些基础的东西还是记得不太清楚，在这里记录一下</p>
+<ol>
+<li>线程和进程<br>线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。<br>进程是计算机重的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。  </li>
+<li>创建线程的方式<br>继承Thread重写run方法；实现Runnable接口或者Callable接口；这两个接口的区别，就是Runable没有返回值，而callable有返回值。</li>
+<li>sleep和wait的区别<br>sleep()继承自Thread，wait()继承自Object；sleep不会释放锁，wait()会释放锁，sleep()函数时间到的时候会自动恢复；而wait()函数可以使用notify()或者noitfyAll()函数直接唤醒；</li>
+<li>notify()和notifyAll()有什么区别<br>notifyAll()调用后会将全部线程由等待池移动到锁池，然后参与锁的竞争，竞争成功就会继续执行，如果不成功就会留在锁池等待锁被释放后再次参与竞争，而notify()只会唤醒一个线程，具体唤醒哪个就需要看虚拟机了。</li>
+<li>run()和start()有什么区别<br>start()方法用于启动线程，run()方法用于执行线程的运行时代吗，run()可以重复调用，而start()只能调用一次。</li>
+<li>什么是死锁<br>如果线程A持有独占锁a，并尝试去获取独占锁b的同时，线程B持有独占锁b，并尝试获取独占锁a的情况下，就会发生AB两个线程由于2互相持有对方需要的锁，而发生的阻塞现象。</li>
+<li>如何避免思索</li>
+</ol>
+<ul>
+<li>尽量使用tryLock方法，设置超时时间，超时可以退出死锁；</li>
+<li>尽量使用java.util.concurrent并发累代替自己手写锁；</li>
+<li>尽量降低锁的使用粒度，尽量不要几个功能使用同一把锁；</li>
+<li>尽量减少同步的代码块；</li>
+</ul>
+<ol start="8">
+<li>synchronized底层实现<br>synchronized是由monitorenter和monitorexit实现的。monitor对象是对象同步的基本单元，在Java6之前的话monitor主要是依靠操作系统内部的互斥锁实现的，因为需要进行用户态和内核态的切换，所以同步操作是一个无差别的重量级操作，性能很低；在Java6之后，Java虚拟机优化了moitor的实现，提供了三种不同的锁：偏向锁，轻量级锁和重量级锁，大大改进了它的性能。</li>
+<li>synchronized和volatile的区别<br>volatile是变量修饰符，synchronized是修饰类，方法和代码段；<br>volatile仅能实现变量的修改可见性，不能保证原子性；synchronized可是保证变量修改的可见性和原子性；<br>volatile不会造成线程的阻塞，synchronized可能会造成线程的阻塞；</li>
+<li>synchronized和ReentrantLock的区别<br>ReentrantLock使用起来比较灵活，但是需要手动释放锁；<br>synchronzied 不需要手动释放和开启锁，但是他比ReentrantLock大多数场景都性能相差很大，但是Java6对synchronized进行了很多的改进；<br>ReentrantLock只适用于代码块锁，而synchronized可用于修饰方法和代码块等等。</li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/30/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9514/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开源项目RuoYi后端学习记录四" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -893,99 +988,6 @@
 
 
   
-    <article id="post-后端面试记录6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/">数据库索引</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/" class="archive-article-date">
-  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天和面试官对线时，发现自己虽然平时用到的数据库索引，but还是对索引的总体了解很少，所以我在这里好好记录一下以供学习和后面的面试官对线时使用，哈哈哈哈哈<br>在数据库里面，这里说的都是关系型数据库，如果这个库的数据非常爆炸，有上万条或者上亿条，我们就可以用到索引这个工具来提高查询速度；索引可以对一个数据列或者几个数据列一起进行预排序，这样子在查询的时候不用扫描整个表，直接定位到位置，快如闪电,大概意思是算法上说的空间换时间。<br>当然建立索引时，也不是随便哪个列都适合建的，比如某一列的数据不相同的很多，那么建索引的话，查询的速度相比原来就提升的很快，如果某一列的数据比如性别，只有男和女，那这列的数据建立索引的话也可以建，但是建了以后的速度提升不会很明显，，，所以索引这个东西。。还是在该用的时候来用。<br><br>不过有一点要注意的是，一般每个表的主键，数据库会自动给他建索引，因为主键本来就是互不相同的嘛。<br><br>接下来要说的就是mysql的索引种类，mysql索引主要分成普通索引，唯一索引，主键索引，组合索引，以及全文索引。</p>
-<ol>
-<li>普通索引(key)<br>举个例子，下面的这个key就是普通索引，key在数据库中是一个物理结构，他包含两层意思，一层是约束作用，一层是索引作用；<br></li>
-</ol>
-<pre><code class="sql"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`phpcolor_ad`</span> (  
-<span class="string">`id`</span> mediumint(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,  
-<span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  
-<span class="string">`type`</span> mediumint(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  
-<span class="string">`code`</span> <span class="built_in">text</span>,  
-PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),  
-<span class="keyword">KEY</span> <span class="string">`type`</span> (<span class="string">`type`</span>)  
-);
-2. 唯一索引 unique key
-和主键索引其实也是差不多的，也是要求不能有重复，不过主键索引只能有一个，但是唯一索引可以有很多个，而且，唯一索引可以有一条内容为空。主键就不允许有空值。
-3. 主键索引 primary key 
-就是上面说的建立在主键上的索引，这种索引每张表只能有一个，而且有主键索引的这个列不允许有空值。
-4. 组合索引 
-
-
-</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1130,11 +1132,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
