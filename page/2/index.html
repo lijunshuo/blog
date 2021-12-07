@@ -152,6 +152,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/">如何设计一个秒杀系统</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/" class="archive-article-date">
+  	<time datetime="2021-10-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天和面试官二轮对线时碰到了这个问题，害，我是个菜狗，Java实在是太小白了，当时只是说出了几个点，但是应该说的都不对，所以开个帖子仔细整理一下。<br><br>不管是完成一个系统还是完成一个功能，肯定要提前做好分析，然后罗列出所有开发和设计中可能遇到的的问题点，然后根据问题点找到解决方案，接下来设计架构，根据架构进行开发和检测，我认为一个开发应该是这样子的。<br><br>so经过我网上遍寻资料以及整理，我觉得一个秒杀系统遇到的问题有以下几点：</p>
+<ol>
+<li><p>高并发：既然是秒杀系统，那肯定是千军万马在一秒间过独木桥，所以系统如何扛得住高并发的请求；</p>
+</li>
+<li><p>超卖：怎么防止某个商品卖超了；</p>
+</li>
+<li><p>接口防刷：这个就涉及安全了，现在网上到处都是各种连点器，秒杀脚本等等各种奇怪的软件，目的就是为了代替人来抢某个商品，所以遇到这种刷单问题怎么解决；</p>
+</li>
+<li><p>秒杀url可见<br><br>这是目前我能想到的一些问题，首先在这之前，我觉得要考虑一个问题，我们现在考虑的是如何把一个秒杀系统维持住的问题，换句话说就是如何实现一个秒杀系统业务的问题，but我们没有考虑一个问题，如果秒杀系统被玩的不好，出现缓存雪崩，缓存击穿，缓存穿透等等情况，巨量的流量直接打在数据库上，数据库服务器boom了，所有的后台服务一起挂掉了。。。我们肯定不能连带其他业务一起挂，所以以上考虑的前提就是先提前分库分表，gg也不能大家一起gg。<br></p>
+</li>
+<li><p>接口防刷</p>
+</li>
+</ol>
+<ul>
+<li>面对可见url的问题，因为有些稍微懂一点点技术的老铁都知道在chorme中可以看到前端的接口，所以我们在设计秒杀接口的时候一定要注意秒杀接口的可见性，不能在秒杀系统开始之前就有一堆人用程序来刷接口，所以在秒杀时间开始前，不能拿到秒杀接口，只有秒杀开始时，才返回秒杀地址和验证MD5，用户拿到这两个数据才可以进行秒杀；   </li>
+<li>如果多个账号在一个ip地址发出多个请求，我们可以在设计系统时检测ip请求频率，如果超过某个阈值，那么就弹出验证码或者其他东西进行验证；   </li>
+<li>当然最多的情况是一个账号发出多个请求，我们可以限定这个用户在发起一次秒杀后，需要等待才可以发起另一次请求，从而减少多个请求的压力，或者使用redis标志位，每个用户的请求都尝试在Redis中插入一个secondKill的标志位，成功插入的才可以执行后续的秒杀逻辑，其他的就被过滤掉。</li>
+<li>当然还有多个账号不同ip发起不同请求，我们可以采用检测账号等级的或者检测性别的骚操作来减少操作。。。</li>
+<li>前端进行优化的话，可以采用验证码，降低用户的请求速度，或者采用限购的策略，抢到一个商品后，不能再抢第二个，或者说将前端静态数据缓存在离用户最近的地方，比如用户浏览器，CDN或者服务器的缓存中。</li>
+</ul>
+<p>2.超卖问题</p>
+<ul>
+<li></li>
+</ul>
+<ol start="3">
+<li>缓存预热<br>在秒杀之前，需要将秒杀商品信息提前缓存到Redis中，这么秒杀开始时就直接从Redis读取，也就是缓存预热。</li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -411,80 +512,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
-    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-后端面试记录4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -530,6 +557,80 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
+  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
         </p>
       
 
@@ -872,88 +973,9 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
-    <article id="post-Java面试记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">hash冲突的解决办法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/19/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2021-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。<br><br>hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输入都在哈希表中可以找到一个位置，一个萝卜一个坑的意思。但是什么算法都会有一些问题，比如有些输入在经过hash算法的处理，发现算出来的那个坑坑有萝卜了，这种现象就叫做hash冲突。也就引出来解决这个问题的三大方法：开放定址法，链地址法，再哈希法。<br></p>
-<ol>
-<li>开放定址法<br>按照我的理解，就是说当发生哈希冲突时，萝卜B被分到一个萝卜A的坑坑了，这个时候就以萝卜A的地址为基准，根据再寻址的方法在找一个萝卜B的位置，如果找到这个地址了，还是冲突了，那就再寻址，一直到找到为止，寻址方法有线性探查(萝卜B就往A的后面位置一个一个数，一直到找到一个空位为止),二次探查(在萝卜B的周围反复横跳，+1，-1，+2，-2, … ,+n,-n),一直到找到一个不冲突的位置为止，伪随机探测(使用一个伪随机数生成器，然后以萝卜B为基准，加上这个产生的随机数产生的位置)当然这个算法的前提就是整个地址空间不是FULL状态。</li>
-<li>链地址法<br>这个就是HashMap的底层实现方法了，就是说在发生哈希冲突的时候，我们在这个坑坑上栽上个竹竿，然后把萝卜按照先后顺序挂在竹竿上。用代码来说就是在发生哈希冲突的哈希地址上建立一个链表（红黑树），哈希地址算出来相同的输入挂在链表(红黑树)上。</li>
-<li>再哈希法<br>这个接着哈希就行了。。。。一直哈到有坑坑为止，有点像递归，这种方法很耗费时间<br></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试学习记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/19/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+      <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
     </nav>
   
 
@@ -1079,11 +1101,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
               </li>
              
               <li class="article-tag-list-item">
