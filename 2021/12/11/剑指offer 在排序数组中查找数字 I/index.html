@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>详解Excel读取方式 | 李军硕的个人博客</title>
+  <title>剑指 Offer 53 - I. 在排序数组中查找数字 I | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="因为最近特别忙，所以最近更新博客也很慢，主要是最近工作上的事情太多了，很少有时间来总结和梳理自己学习的东西，正好今天时间很充裕，所以今天来搞一下这个东西。  最近主要还是被c#上的东西纠缠的不清，而且今天正好用到了好久不用的数据库的增删查改，主要是对excel文件的增删查改，上次用这个东西我记得还是在去年这个时候，当时曹老师让我做的空间插值算法，我记得当时需要读取一个csv文件，然后我当时对c">
+  <meta name="description" content="这道题的链接: 剑指 Offer 53 - I. 在排序数组中查找数字 I这道题我们在和面试官对线时要注意，这个数据是排好序的，所以我们不能用最土的for循环遍历方法，写出来估计面试官就和你说拜拜了，我们应该使用二分法，我们可以用一个left索引和right索引来找数字target左右边界，然后一减就得到target的数量了。具体代码如下： 123456789101112131415161718c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="详解Excel读取方式">
-<meta property="og:url" content="http://www.junshuoli.cn/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:title" content="剑指 Offer 53 - I. 在排序数组中查找数字 I">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/12/11/%E5%89%91%E6%8C%87offer%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%95%B0%E5%AD%97%20I/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
-<meta property="og:description" content="因为最近特别忙，所以最近更新博客也很慢，主要是最近工作上的事情太多了，很少有时间来总结和梳理自己学习的东西，正好今天时间很充裕，所以今天来搞一下这个东西。  最近主要还是被c#上的东西纠缠的不清，而且今天正好用到了好久不用的数据库的增删查改，主要是对excel文件的增删查改，上次用这个东西我记得还是在去年这个时候，当时曹老师让我做的空间插值算法，我记得当时需要读取一个csv文件，然后我当时对c">
+<meta property="og:description" content="这道题的链接: 剑指 Offer 53 - I. 在排序数组中查找数字 I这道题我们在和面试官对线时要注意，这个数据是排好序的，所以我们不能用最土的for循环遍历方法，写出来估计面试官就和你说拜拜了，我们应该使用二分法，我们可以用一个left索引和right索引来找数字target左右边界，然后一减就得到target的数量了。具体代码如下： 123456789101112131415161718c">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-06-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-11T12:34:14.800Z">
+<meta property="article:published_time" content="2021-12-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-11T13:20:52.089Z">
 <meta property="article:author" content="JunshuoLi">
-<meta property="article:tag" content="C#开源项目">
+<meta property="article:tag" content="剑指offer">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -155,41 +155,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-详解Excel读取方式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-剑指offer 在排序数组中查找数字 I" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      详解Excel读取方式
+      剑指 Offer 53 - I. 在排序数组中查找数字 I
     </h1>
   
 
         
-        <a href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-06-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
+        <a href="/2021/12/11/%E5%89%91%E6%8C%87offer%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%95%B0%E5%AD%97%20I/" class="archive-article-date">
+  	<time datetime="2021-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-          <p>因为最近特别忙，所以最近更新博客也很慢，主要是最近工作上的事情太多了，很少有时间来总结和梳理自己学习的东西，正好今天时间很充裕，所以今天来搞一下这个东西。</p>
-
-<p>最近主要还是被c#上的东西纠缠的不清，而且今天正好用到了好久不用的数据库的增删查改，主要是对excel文件的增删查改，上次用这个东西我记得还是在去年这个时候，当时曹老师让我做的空间插值算法，我记得当时需要读取一个csv文件，然后我当时对c#还是个菜鸟，所以我搞了半天，才搞定这个东西。时间过的好快呀，一年都过去了。。。废话不多说，直接上代码！！！！奥利给！！！！</p>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">string path&#x3D;&quot;&quot;&#x2F;&#x2F;这里定义了excel文件的文件位置</span><br><span class="line">string key&#x3D; &quot;Provider&#x3D;Microsoft.ACE.OLEDB.12.0;Data Source&#x3D;&quot; + path + &quot;;Extended Properties&#x3D;&#39;Excel 8.0;HDR&#x3D;NO;IMEX&#x3D;1&#39;;&quot;; </span><br><span class="line">OledbConnection connection &#x3D;new OledbConnection(key);</span><br><span class="line">connection.Open();</span><br><span class="line">string sql&#x3D;&quot;select * from [sheet1$]&quot;;</span><br><span class="line">OledbDataAdapter adapter&#x3D;new OledbDataAdapter(sql,connection);</span><br><span class="line">DataSet tempDataSet&#x3D;new DataSet();</span><br><span class="line">adapter.Fill(tempDataSet);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>首先，在c#中数据表是这样子的，c#中有DataSet和DataTable两个关键字，然后我们可以理解DataSet是一类数据表的集合，他是在内存中的虚拟表的集合；DataTable是一种在内存中的虚拟表，他可以存储任何表的数据。。。这么说好抽象，其实可以这样子理解，DataTable是一张a4纸，然后a4纸上画着表格存着很多数据，DataSet就是一沓a4纸啦！！！！<p></p>
-</li>
-<li><p>前情已经讲述完成，oledb，是一种数据库的方式，其实oledb是早期odbc连接方式的加强版，微软设计出这种应用程序接口是为了连接关系型数据库和非关系型数据库还有其他的奇怪的数据库，说白了是为了隔离每种数据库操作的差异，在我用过的连接比如说sql server和access数据库来说，都是先通过一串字符串来定义一个连接，就是我上面写的那个string类型的key，具体如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;连接Sql Server</span><br><span class="line">string key&#x3D;&quot;PROVIDER&#x3D;SQLOLEDB;DATA SOURCE&#x3D;servername;UID&#x3D;xyz;PWD&#x3D;xxx;DATABASE&#x3D;dbname&quot;</span><br><span class="line">&#x2F;&#x2F;连接 Microsoft Access</span><br><span class="line">string key&#x3D; &quot;PROVIDER&#x3D;MICROSOFT.JET.OLEDB.4.0;DATA SOURCE&#x3D;d:\abc\defg.mdb&quot;</span><br><span class="line">&#x2F;&#x2F;连接 Microsoft Excel 07版本及老版本</span><br><span class="line">string key&#x3D;&quot;Provider&#x3D;Microsoft.ACE.OLEDB.12.0;Data Source&#x3D;&quot; + Path + &quot;;&quot; + &quot;Extended Properties&#x3D;\&quot;Excel 12.0;HDR&#x3D;NO;IMEX&#x3D;1;\&quot;&quot;</span><br><span class="line">&#x2F;&#x2F;连接 Microsoft Excel 07版本及新版本</span><br><span class="line">string key&#x3D;&quot;Provider&#x3D;Microsoft.Jet.OLEDB.4.0;Data Source&#x3D;&quot; + strExcelPath + &quot;;&quot; + &quot;Extended Properties&#x3D;\&quot;Excel 8.0;HDR&#x3D;NO;IMEX&#x3D;1;\&quot;&quot;</span><br></pre></td></tr></table></figure></li>
-<li><p>这些key中间一个空格都不能乱加的！！！！！，要不然根本读不出来！！！！！</p>
-</li>
-<li><p>接下来就是正常套路啦，首先通过OledbConnection声明一个基于key的链接connection,然后打开连接，定义一个sql，把操作放进去，然后通过适配器（OledbAdapter）进行操作，然后通过adapter的fill方法，将得到的数据放到内存中的DataSet就行了，完美！！！内存中就好操作了！！<br>其实这个东西可以理解为电脑电源，不一样的key就好像国标220v和港版110v，我们通过适配器的电源头怼上插座，然后通过sql语言也就是整流线圈把交流电整成直流电，然后再把直流电输出主板等等地方也就是dataset！！！</p>
-</li>
-</ul>
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 53 - I. 在排序数组中查找数字 I</a><br>这道题我们在和面试官对线时要注意，这个数据是排好序的，所以我们不能用最土的for循环遍历方法，写出来估计面试官就和你说拜拜了，我们应该使用二分法，我们可以用一个left索引和right索引来找数字target左右边界，然后一减就得到target的数量了。具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> binarySearch(nums, taget + <span class="number">1</span>) - binarySearch(nums, target);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; target)&#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = mid; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -203,7 +190,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C#开源项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
         		</li>
       		
 		</ul>
@@ -259,7 +246,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/12/11/%E5%89%91%E6%8C%87offer%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%95%B0%E5%AD%97%20I/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,15 +260,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98%20copy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          详解算法 最长连续子序列系列问题
-        
-      </div>
-    </a>
   
+    <a href="/2021/12/11/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hash冲突的解决办法</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -310,8 +293,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://www.junshuoli.cn/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/", 
-    sourceId: "详解Excel读取方式",
+    url: "http://www.junshuoli.cn/2021/12/11/%E5%89%91%E6%8C%87offer%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%95%B0%E5%AD%97%20I/", 
+    sourceId: "剑指offer 在排序数组中查找数字 I",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
