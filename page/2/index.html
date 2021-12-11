@@ -679,80 +679,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
-    <article id="post-后端面试记录4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/">如何理解抽象类和接口</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>抽象类的话，他肯定符合Java中类的定义，他不能多继承，只能单继承，而接口可以多实现，抽象类可以被任意权限修饰符public，private，protected以及默认，abstract等属性修饰，并且抽象类中可以有抽象方法，也可以有非抽象方法。but接口的修饰符只能被Public 或者friendly和abstracted修饰，而且接口中的成员变量的话只能是public static final的，其他类型的会报错，，并且成员变量必须赋初值，不然通不过编译；方法必须是public abstracted<br><br>从另一个方面来说，抽象类的抽象形式是对属性和行为进行抽象，而接口是对行为进行抽象<br><br>再从设计的角度来说的话，抽象类设计的目的就是自下而上，子类需要所以我设计抽象类，继承抽象类就是为了实现这个类属性和行为，或者说从子类中发现公共的部分，然后泛化为抽象类，子类继承父类即可；接口的设计就是自上而下，接口的目的就是规范了一类行为，某个类需要这类行为我就继承这个接口，或者说抽象类体现的是一种继承关系，比如男人女人可以抽象成一个感情抽象类，因为男女都有感情嘛；而接口只是定义了一类规则，but他不要求接口的实现和接口本质上一致，男人和狗子都会有求偶的行为，我们不能把男人和狗算成一个父类。(单身狗不算哈，，，，呜呜呜)<br><br>还有个经常问的进阶问题，抽象类中必须要有抽象方法才行嘛，答案肯定是不一定要有抽象方法，比如只有一个静态方法，也不会报错的；而且抽象类不能被final修饰，因为被final修饰的类就不能被继承了，那就没啥意义了，所以在idea中会报错。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -798,6 +724,80 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-后端面试记录4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/">如何理解抽象类和接口</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/" class="archive-article-date">
+  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>抽象类的话，他肯定符合Java中类的定义，他不能多继承，只能单继承，而接口可以多实现，抽象类可以被任意权限修饰符public，private，protected以及默认，abstract等属性修饰，并且抽象类中可以有抽象方法，也可以有非抽象方法。but接口的修饰符只能被Public 或者friendly和abstracted修饰，而且接口中的成员变量的话只能是public static final的，其他类型的会报错，，并且成员变量必须赋初值，不然通不过编译；方法必须是public abstracted<br><br>从另一个方面来说，抽象类的抽象形式是对属性和行为进行抽象，而接口是对行为进行抽象<br><br>再从设计的角度来说的话，抽象类设计的目的就是自下而上，子类需要所以我设计抽象类，继承抽象类就是为了实现这个类属性和行为，或者说从子类中发现公共的部分，然后泛化为抽象类，子类继承父类即可；接口的设计就是自上而下，接口的目的就是规范了一类行为，某个类需要这类行为我就继承这个接口，或者说抽象类体现的是一种继承关系，比如男人女人可以抽象成一个感情抽象类，因为男女都有感情嘛；而接口只是定义了一类规则，but他不要求接口的实现和接口本质上一致，男人和狗子都会有求偶的行为，我们不能把男人和狗算成一个父类。(单身狗不算哈，，，，呜呜呜)<br><br>还有个经常问的进阶问题，抽象类中必须要有抽象方法才行嘛，答案肯定是不一定要有抽象方法，比如只有一个静态方法，也不会报错的；而且抽象类不能被final修饰，因为被final修饰的类就不能被继承了，那就没啥意义了，所以在idea中会报错。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/">展开全文 >></a>
         </p>
       
 
@@ -1100,19 +1100,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试学习记录</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">《Redis设计与实现》读书笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1129,6 +1125,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
