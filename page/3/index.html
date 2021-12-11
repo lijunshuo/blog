@@ -152,32 +152,27 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java面试记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-开源项目RuoYi后端学习记录二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">hash冲突的解决办法</a>
+      <a class="article-title" href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C/">后段学习笔记二 理解IOC</a>
     </h1>
   
 
         
-        <a href="/2021/01/19/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2021-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
+        <a href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C/" class="archive-article-date">
+  	<time datetime="2021-01-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。<br><br>hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输入都在哈希表中可以找到一个位置，一个萝卜一个坑的意思。但是什么算法都会有一些问题，比如有些输入在经过hash算法的处理，发现算出来的那个坑坑有萝卜了，这种现象就叫做hash冲突。也就引出来解决这个问题的三大方法：开放定址法，链地址法，再哈希法。<br></p>
-<ol>
-<li>开放定址法<br>按照我的理解，就是说当发生哈希冲突时，萝卜B被分到一个萝卜A的坑坑了，这个时候就以萝卜A的地址为基准，根据再寻址的方法在找一个萝卜B的位置，如果找到这个地址了，还是冲突了，那就再寻址，一直到找到为止，寻址方法有线性探查(萝卜B就往A的后面位置一个一个数，一直到找到一个空位为止),二次探查(在萝卜B的周围反复横跳，+1，-1，+2，-2, … ,+n,-n),一直到找到一个不冲突的位置为止，伪随机探测(使用一个伪随机数生成器，然后以萝卜B为基准，加上这个产生的随机数产生的位置)当然这个算法的前提就是整个地址空间不是FULL状态。</li>
-<li>链地址法<br>这个就是HashMap的底层实现方法了，就是说在发生哈希冲突的时候，我们在这个坑坑上栽上个竹竿，然后把萝卜按照先后顺序挂在竹竿上。用代码来说就是在发生哈希冲突的哈希地址上建立一个链表（红黑树），哈希地址算出来相同的输入挂在链表(红黑树)上。</li>
-<li>再哈希法<br>这个接着哈希就行了。。。。一直哈到有坑坑为止，有点像递归，这种方法很耗费时间<br></li>
-</ol>
+        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！<br><br>IOC中文又被称为控制反转(依赖注入)，用文邹邹的话来说就是组件之间的依赖关系在运行期确定，或者说容器动态的将依赖关系注入到组件之中，总的来说比如很早之前声明对象的时候，我们想要创建一个类的对象都是手写new一个，而使用IOC之后我们可以通过IOC，然后IOC会给我们一个对象，不用自己来声明。<br><br>从底层来说的话，如果通过IOC的方式来创建对象，就可以进入容器IOC的bean缓存池，从而降低程序的创建开销，等到以后再用时直接从bean缓存池中拿，比创建的方式要快得多。<br><br>所以来控制反转的控制就是说，原有的每次程序员控制创建对象的方式交给IOC容器来控制，反转就是以前是我们主动创建对象，现在是IOC容器创建后被动注入到被注入的对象中。动作人不一样了。</p>
 
       
 
@@ -191,7 +186,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试学习记录</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java开源项目</a>
         		</li>
       		
 		</ul>
@@ -201,7 +196,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/19/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C/">展开全文 >></a>
         </p>
       
 
@@ -272,7 +267,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java开源项目</a>
         		</li>
       		
 		</ul>
@@ -621,7 +616,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
         		</li>
       		
 		</ul>
@@ -814,7 +809,7 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
         		</li>
       		
 		</ul>
@@ -889,7 +884,7 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
         		</li>
       		
 		</ul>
@@ -972,7 +967,7 @@ socket，在中国翻译过来叫做套接字，主要是用来进行应用程�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
         		</li>
       		
 		</ul>
@@ -1128,7 +1123,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试学习记录</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,15 +1131,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试学习记录</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1152,15 +1147,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
               </li>
             
             <div class="clearfix"></div>

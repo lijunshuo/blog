@@ -152,6 +152,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/">事务</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/" class="archive-article-date">
+  	<time datetime="2021-10-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天面试时碰到了面试官问我事务的问题，我确实不会呀，所以我在这里好好整理一下这个东西。<br>事务说白了就是一组数据操作，事务内的操作的话要么全部成功，如果某个操作挂壁了，那么内部全部操作都要回滚，要么搞定，要么就不搞的意思。<br>事务必须符合四个原则：原子性，一致性，隔离性，持久性。  </p>
+<ol>
+<li>原子性<br>就是说事务的执行过程中，如果事务中的任何一个事件或者说语句发生失败，那么整个修改就会回滚，整个修改全部失效，或者说，要不就全部执行成功，要不就全部不执行；</li>
+<li>隔离性<br>一个事务的执行不受其他事务的影响；</li>
+<li>持久性<br>一个事务一旦提交，那么事务的操作就会持久化到db中，就算是db Boom了，也不会丢失事务的操作；  </li>
+<li>一致性<br>说白了就是事务按照预期生效，最后数据的状态就是预期的状态；</li>
+</ol>
+<p>Mysql数据库会存在四种事务隔离级别，具体如下：</p>
+<ol>
+<li>读未提交<br>在这个隔离级别，所有事务可以看到其他事务未提交的数据，这个级别很少用，读取未提交的数据也就是脏读的意思</li>
+<li>读提交<br>这个是ORACLE数据库的默认级别，在这个级别，事务只能读到其他事务以及提交的数据，这个级别可以解决脏读的问题，但是会带来不可重复读的问题，比如一个事物A把一个数据由1改成2，但是事务B在A事务提交前读到的这个数据是1，事务A提交之后，事务B再读的话，就是2了，也就是说同一个select可能会存在数据不一样的效果。</li>
+<li>可重复读<br>这个是MYSQL的默认级别，在这个级别，保证了同一个事务的多个实例在并发读取数据时数据都是一致的，但是如果一个事务A在读取一个范围的数据时，另一个事务B在该范围内添加或者删除了数据行，当事务A在读取时该范围的数据时发现与前一次的数据行数不一致，多了一行或者少了一行，这种可能发生的现象就是幻读。</li>
+<li>串行化<br>解决上上面的所有问题，但是事务现在的执行变成串行执行了，效率是最差的。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -777,7 +864,7 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java开源项目</a>
         		</li>
       		
 		</ul>
@@ -859,7 +946,7 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java开源项目</a>
         		</li>
       		
 		</ul>
@@ -870,80 +957,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目RuoYi后端学习记录二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C/">后段学习笔记二 理解IOC</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C/" class="archive-article-date">
-  	<time datetime="2021-01-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来跨行搞IT，还做出来自己的前端框架，简直牛逼！！！<br><br>IOC中文又被称为控制反转(依赖注入)，用文邹邹的话来说就是组件之间的依赖关系在运行期确定，或者说容器动态的将依赖关系注入到组件之中，总的来说比如很早之前声明对象的时候，我们想要创建一个类的对象都是手写new一个，而使用IOC之后我们可以通过IOC，然后IOC会给我们一个对象，不用自己来声明。<br><br>从底层来说的话，如果通过IOC的方式来创建对象，就可以进入容器IOC的bean缓存池，从而降低程序的创建开销，等到以后再用时直接从bean缓存池中拿，比创建的方式要快得多。<br><br>所以来控制反转的控制就是说，原有的每次程序员控制创建对象的方式交给IOC容器来控制，反转就是以前是我们主动创建对象，现在是IOC容器创建后被动注入到被注入的对象中。动作人不一样了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开源项目RuoYi-Vue学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C/">展开全文 >></a>
         </p>
       
 
@@ -1089,7 +1102,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试学习记录</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1097,15 +1110,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试学习记录</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开源项目RuoYi-Vue学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1113,15 +1126,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
               </li>
             
             <div class="clearfix"></div>
