@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>如何设计一个秒杀系统 | 李军硕的个人博客</title>
+  <title>剑指 Offer 27. 二叉树的镜像 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天和面试官二轮对线时碰到了这个问题，害，我是个菜狗，Java实在是太小白了，当时只是说出了几个点，但是应该说的都不对，所以开个帖子仔细整理一下。不管是完成一个系统还是完成一个功能，肯定要提前做好分析，然后罗列出所有开发和设计中可能遇到的的问题点，然后根据问题点找到解决方案，接下来设计架构，根据架构进行开发和检测，我认为一个开发应该是这样子的。so经过我网上遍寻资料以及整理，我觉得一个秒杀系统遇到">
+  <meta name="description" content="这道题的链接: 剑指 Offer 27. 二叉树的镜像这道题我们要注意哟，好多二叉树的问题解决方法都递归的方法，但是对我来说，我对递归理解的不深，讲真我一般只习惯迭代，接下来的代码就是递归方法，从根到底交换左右子树。 123456789101112class Solution&amp;#123;   public  TreeNode mirrorTree(TreeNode root) &amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何设计一个秒杀系统">
-<meta property="og:url" content="http://www.junshuoli.cn/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/index.html">
+<meta property="og:title" content="剑指 Offer 27. 二叉树的镜像">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2027.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
-<meta property="og:description" content="今天和面试官二轮对线时碰到了这个问题，害，我是个菜狗，Java实在是太小白了，当时只是说出了几个点，但是应该说的都不对，所以开个帖子仔细整理一下。不管是完成一个系统还是完成一个功能，肯定要提前做好分析，然后罗列出所有开发和设计中可能遇到的的问题点，然后根据问题点找到解决方案，接下来设计架构，根据架构进行开发和检测，我认为一个开发应该是这样子的。so经过我网上遍寻资料以及整理，我觉得一个秒杀系统遇到">
+<meta property="og:description" content="这道题的链接: 剑指 Offer 27. 二叉树的镜像这道题我们要注意哟，好多二叉树的问题解决方法都递归的方法，但是对我来说，我对递归理解的不深，讲真我一般只习惯迭代，接下来的代码就是递归方法，从根到底交换左右子树。 123456789101112class Solution&amp;#123;   public  TreeNode mirrorTree(TreeNode root) &amp;#123;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-31T08:38:15.121Z">
+<meta property="article:published_time" content="2021-12-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-12T13:47:50.595Z">
 <meta property="article:author" content="JunshuoLi">
-<meta property="article:tag" content="后端面试对线记录">
+<meta property="article:tag" content="剑指offer">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
@@ -155,55 +155,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-后端面试记录8" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-剑指 Offer 27. 二叉树的镜像" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何设计一个秒杀系统
+      剑指 Offer 27. 二叉树的镜像
     </h1>
   
 
         
-        <a href="/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/" class="archive-article-date">
-  	<time datetime="2021-10-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
+        <a href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2027.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/" class="archive-article-date">
+  	<time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天和面试官二轮对线时碰到了这个问题，害，我是个菜狗，Java实在是太小白了，当时只是说出了几个点，但是应该说的都不对，所以开个帖子仔细整理一下。<br><br>不管是完成一个系统还是完成一个功能，肯定要提前做好分析，然后罗列出所有开发和设计中可能遇到的的问题点，然后根据问题点找到解决方案，接下来设计架构，根据架构进行开发和检测，我认为一个开发应该是这样子的。<br><br>so经过我网上遍寻资料以及整理，我觉得一个秒杀系统遇到的问题有以下几点：</p>
-<ol>
-<li><p>高并发：既然是秒杀系统，那肯定是千军万马在一秒间过独木桥，所以系统如何扛得住高并发的请求；</p>
-</li>
-<li><p>超卖：怎么防止某个商品卖超了；</p>
-</li>
-<li><p>接口防刷：这个就涉及安全了，现在网上到处都是各种连点器，秒杀脚本等等各种奇怪的软件，目的就是为了代替人来抢某个商品，所以遇到这种刷单问题怎么解决；</p>
-</li>
-<li><p>秒杀url可见<br><br>这是目前我能想到的一些问题，首先在这之前，我觉得要考虑一个问题，我们现在考虑的是如何把一个秒杀系统维持住的问题，换句话说就是如何实现一个秒杀系统业务的问题，but我们没有考虑一个问题，如果秒杀系统被玩的不好，出现缓存雪崩，缓存击穿，缓存穿透等等情况，巨量的流量直接打在数据库上，数据库服务器boom了，所有的后台服务一起挂掉了。。。我们肯定不能连带其他业务一起挂，所以以上考虑的前提就是先提前分库分表，gg也不能大家一起gg。<br></p>
-</li>
-<li><p>接口防刷</p>
-</li>
-</ol>
-<ul>
-<li>面对可见url的问题，因为有些稍微懂一点点技术的老铁都知道在chorme中可以看到前端的接口，所以我们在设计秒杀接口的时候一定要注意秒杀接口的可见性，不能在秒杀系统开始之前就有一堆人用程序来刷接口，所以在秒杀时间开始前，不能拿到秒杀接口，只有秒杀开始时，才返回秒杀地址和验证MD5，用户拿到这两个数据才可以进行秒杀；   </li>
-<li>如果多个账号在一个ip地址发出多个请求，我们可以在设计系统时检测ip请求频率，如果超过某个阈值，那么就弹出验证码或者其他东西进行验证；   </li>
-<li>当然最多的情况是一个账号发出多个请求，我们可以限定这个用户在发起一次秒杀后，需要等待才可以发起另一次请求，从而减少多个请求的压力，或者使用redis标志位，每个用户的请求都尝试在Redis中插入一个secondKill的标志位，成功插入的才可以执行后续的秒杀逻辑，其他的就被过滤掉。</li>
-<li>当然还有多个账号不同ip发起不同请求，我们可以采用检测账号等级的或者检测性别的骚操作来减少操作。。。</li>
-<li>前端进行优化的话，可以采用验证码，降低用户的请求速度，或者采用限购的策略，抢到一个商品后，不能再抢第二个，或者说将前端静态数据缓存在离用户最近的地方，比如用户浏览器，CDN或者服务器的缓存中。</li>
-</ul>
-<p>2.超卖问题</p>
-<ul>
-<li></li>
-</ul>
-<ol start="3">
-<li>缓存预热<br>在秒杀之前，需要将秒杀商品信息提前缓存到Redis中，这么秒杀开始时就直接从Redis读取，也就是缓存预热。</li>
-<li></li>
-</ol>
-
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/" target="_blank" rel="noopener">剑指 Offer 27. 二叉树的镜像</a><br>这道题我们要注意哟，好多二叉树的问题解决方法都递归的方法，但是对我来说，我对递归理解的不深，讲真我一般只习惯迭代，接下来的代码就是递归方法，从根到底交换左右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span>  TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       TreeNode left = mirrorTree(root.left);</span><br><span class="line">       TreeNode right= mirrorTree(root.right);</span><br><span class="line">       root.left = right;</span><br><span class="line">       root.right = left;</span><br><span class="line">       <span class="keyword">return</span> root;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用栈和队列遍历树的所有节点node，并交换每个node的左右子节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;()&#123;&#123;add(root);&#125;&#125;;</span><br><span class="line">       <span class="keyword">while</span>(!stack.isEmpty())&#123;</span><br><span class="line">           TreeNode node = stack.pop();</span><br><span class="line">           <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)&#123;</span><br><span class="line">               stack.add(node.left);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)&#123;</span><br><span class="line">               stack.add(node.right);</span><br><span class="line">           &#125;</span><br><span class="line">           TreeNode tmp = node.left;</span><br><span class="line">           node.left = node.right;</span><br><span class="line">           node.right = tmp;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -216,7 +191,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
         		</li>
       		
 		</ul>
@@ -272,7 +247,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2027.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -286,18 +261,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          事务
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据库索引</div>
+    <a href="/2021/12/11/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hash冲突的解决办法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -328,8 +294,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://www.junshuoli.cn/2021/10/26/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%958/", 
-    sourceId: "后端面试记录8",
+    url: "http://www.junshuoli.cn/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2027.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/", 
+    sourceId: "剑指 Offer 27. 二叉树的镜像",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

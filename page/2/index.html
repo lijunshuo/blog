@@ -152,6 +152,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/">反射</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/" class="archive-article-date">
+  	<time datetime="2021-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先在了解反射之前，需要了解一个静态编译和动态编译的概念，静态编译就是在编译时确定好类型绑定好对象，动态编译就是在运行时确定好类型，绑定对象。反射机制就可以实现动态编译，因为我们在开发很大的那种软件的时候，程序我们都知道，需要编译以后才能进行发布，如果没有反射，我们就需要把整个程序重新编译一份才可以实现功能的更新，如果采用反射的话我们就可以直接在运行时进行动态的创建和编译，没有原来那么麻烦，但是这毫无疑问。。。肯定对性能有影响。<br>首先要知道在Java中有个东西是Class类，这个玩意在Java中是最nb的一个类，怎么讲呢，如果稍微知道一点JVM就可以知道，在类加载的时候总共有五步，加载，验证，准备，解析和初始化，在加载阶段主要是将字节码加载到方法区还生成了这个类的java.lang.Class对象，这个对象就是用来记录被加载类的类型信息的对象，在Class类中存储了对应类的所有的信息，也是未初始化的信息（所有的方法，所有的构造函数，所有的字段或者说属性）。所以说这个玩意非常强大，可以从官方文档中知道，这个类是在JVM中的。而且这个Class类的构造器是私有的，也是说不能new一个，他是由JVM调用方法来创建该类的对象。<br>所以说通过反射，我们可以在运行时通过Class类，获得程序或者程序集中每个类型的成员和成员信息，在Java中反射可以在运行时判断任一对象所属类，构造一个类的对象，判断任意一个类所具有的成员变量和方法，通过反射甚至可以调用private方法。通过反射这个特性可以开发各种通用框架，比如Spring框架，通过配置xml文件动态加载所需要记载的对象。<br>在反射中有以下几种方法  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过静态方法加载数据库驱动</span></span><br><span class="line">Class.forName()</span><br><span class="line"><span class="comment">//直接获取某一个对象的class</span></span><br><span class="line">Class&lt;?&gt;klass=<span class="keyword">int</span><span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class">//调用某个对象的<span class="title">getClass</span>()方法</span></span><br><span class="line"><span class="class"><span class="title">Class</span>&lt;?&gt;<span class="title">klass</span></span>=str.getClass()</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是否为某个类的实例 native方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">isInstance</span><span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
+<p>最后反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全性问题。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -496,87 +572,6 @@
 
 
   
-    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
-  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
-<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
-<ol>
-<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
-<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
-<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-后端面试记录6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -670,27 +665,34 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
-    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
+      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
     </h1>
   
 
         
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
+  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
+<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
+<ol>
+<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
+<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
+<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
+</ol>
 
       
 
@@ -714,7 +716,7 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
         </p>
       
 
@@ -829,6 +831,80 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
+    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
+  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -874,85 +950,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%954/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-后端面试记录1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/">hash冲突的解决办法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/" class="archive-article-date">
-  	<time datetime="2021-10-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。<br><br>hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输入都在哈希表中可以找到一个位置，一个萝卜一个坑的意思。但是什么算法都会有一些问题，比如有些输入在经过hash算法的处理，发现算出来的那个坑坑有萝卜了，这种现象就叫做hash冲突。也就引出来解决这个问题的三大方法：开放定址法，链地址法，再哈希法。<br></p>
-<ol>
-<li>开放定址法<br>按照我的理解，就是说当发生哈希冲突时，萝卜B被分到一个萝卜A的坑坑了，这个时候就以萝卜A的地址为基准，根据再寻址的方法在找一个萝卜B的位置，如果找到这个地址了，还是冲突了，那就再寻址，一直到找到为止，寻址方法有线性探查(萝卜B就往A的后面位置一个一个数，一直到找到一个空位为止),二次探查(在萝卜B的周围反复横跳，+1，-1，+2，-2, … ,+n,-n),一直到找到一个不冲突的位置为止，伪随机探测(使用一个伪随机数生成器，然后以萝卜B为基准，加上这个产生的随机数产生的位置)当然这个算法的前提就是整个地址空间不是FULL状态。</li>
-<li>链地址法<br>这个就是HashMap的底层实现方法了，就是说在发生哈希冲突的时候，我们在这个坑坑上栽上个竹竿，然后把萝卜按照先后顺序挂在竹竿上。用代码来说就是在发生哈希冲突的哈希地址上建立一个链表（红黑树），哈希地址算出来相同的输入挂在链表(红黑树)上。</li>
-<li>再哈希法<br>这个接着哈希就行了。。。。一直哈到有坑坑为止，有点像递归，这种方法很耗费时间<br></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/21/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%951/">展开全文 >></a>
         </p>
       
 
@@ -1102,19 +1099,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
