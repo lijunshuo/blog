@@ -228,6 +228,84 @@
 
 
   
+    <article id="post-剑指 Offer 58 - I. 翻转单词顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">剑指 Offer 58 - I. 翻转单词顺序</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/" target="_blank" rel="noopener">剑指 Offer 58 - I. 翻转单词顺序</a><br>这道题我们刚开始审题，我感觉可以使用双指针来解决，具体思路就是从尾到头便利字符串树，然后将i，j两个变量定位在此，然后把i往前定位到倒数第一个单词的位置，新建一个StringBuilder接收单词加上空格，具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">       s = s.trim();</span><br><span class="line">       <span class="keyword">int</span> j = s.length() - <span class="number">1</span>, i=j;</span><br><span class="line">       StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">       <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp;  s.charAt(i) != <span class="string">' '</span>)&#123;</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line">           res.append(s.substring(i + <span class="number">1</span>, j + <span class="number">1</span>) + <span class="string">" "</span>);</span><br><span class="line">           <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; s.charAt(i)  == <span class="string">' '</span>) i--;</span><br><span class="line">           j = i;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> res.toString().trim();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二种方法就是很土的方法，因为这句话是用空格分割的，我们就用空格分割成数组，然后从后向前遍历数组，存到新的StringBuilder中，转化成数组就成了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        String[] strs = s.trim().split(<span class="string">" "</span>);</span><br><span class="line">        StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = strs.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strs[i].equals(<span class="string">""</span>)) &#123; </span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res.append(strs[i] + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.ToString().trim();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在面试的时候。。。千万别这么写，很土，写出来面试官就认为你是api工程师。。凉凉！！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-剑指 Offer 50. 第一个只出现一次的字符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -879,84 +957,6 @@
 
 
   
-    <article id="post-后端面试记录12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/01/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9512/">线程实现和创建方式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/11/01/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9512/" class="archive-article-date">
-  	<time datetime="2021-10-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这段我也被问到过，我觉得还是要自己学习一下比较好，而且讲真，自己在使用过程中对这部分掌握的不是很熟，所以在这里学习记录一下</p>
-<ol>
-<li>继承Thread类<br>在Java中有个类就叫做Thread类，这个类其实从根上来说也是继承了Runnable接口的一个实例，在这个类中启动线程的方法，就是通过Thread的start方法，但是要在这里注意一下，start方法其实是个native方法。还记得前面帖子中JVM中关于navite方法的东西吗，好吧其实我也忘了，，，<br>在JVM中 其实有个东西叫做本地方法栈 本地方法就是JVM为了运行Native方法的空间，因为Native方法很多的话都是用c实现的，所以他又被称为C栈，他跟Java虚拟机栈差不多，只不过本地方法栈是描述本地方法运行过程的内存模型。<br>在本地方法被执行时，在本地方法栈会创建一个栈帧，用于存放该方法的局部变量表，操作数栈，动态链接，方法出口信息等。<br>方法执行结束后，相应的栈帧也会出栈，并且释放内存空间，也会抛出StackOberFlowError和OutOfMemoryError异常。<br>注意，在HotSpot VM中就直接把本地方法栈和虚拟机栈直接合二为一了。<br>如果Java虚拟机本身不支持Native方法或者本身不依赖于传统栈，那么就可以不提供本地方法栈，如果支持本地方法栈，那么这个栈一般会在线程创建的时候按线程分配。<br>在这里的话啥是本地方法（Native Method）呢，其实简单来说Native Method方法就是一个java调用非Java语言实现方法的接口，这个方法的方法体其实大部分都是非Java实现的，比如C或者其他语言实现，很多语言中其实都有，比如C++中调用C函数的话一般会在文件头那里写上 extern “c”告知GCC编译器去处理C函数时按照C函数去处理。<br>比如哈    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IHaveNatives</span> </span></span><br><span class="line"><span class="class"></span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">native</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Native1</span><span class="params">( <span class="keyword">int</span> x )</span> </span>; </span><br><span class="line">    <span class="function"><span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">long</span> <span class="title">Native2</span><span class="params">()</span> </span>; </span><br><span class="line">    <span class="function"><span class="keyword">native</span> <span class="keyword">synchronized</span> <span class="keyword">private</span> <span class="keyword">float</span> <span class="title">Native3</span><span class="params">( Object o )</span> </span>; </span><br><span class="line">    <span class="function"><span class="keyword">native</span> <span class="keyword">void</span> <span class="title">Native4</span><span class="params">( <span class="keyword">int</span>[] ary )</span> <span class="keyword">throws</span> Exception </span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这些方法的声明就是一些非Java方法在Java中的签名状态。<br>其实natvie这个关键字也可以与其他Java关键字连用，但是肯定不能和abstract一起连用，因为abstract在修饰方法的时候说明该方法没有方法体，但是native修饰的方法肯定是有方法体的，只是这个方法的方法体是由非Java方法实现的</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/01/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9512/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1073,11 +1073,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
              
               <li class="article-tag-list-item">
