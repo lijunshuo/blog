@@ -893,19 +893,19 @@
 
 
   
-    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-后端面试记录6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
+      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/">数据库索引</a>
     </h1>
   
 
         
-        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
+        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/" class="archive-article-date">
   	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
 </a>
         
@@ -913,14 +913,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
-<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
+        <p>前几天和面试官对线时，发现自己虽然平时用到的数据库索引，but还是对索引的总体了解很少，所以我在这里好好记录一下以供学习和后面的面试官对线时使用，哈哈哈哈哈<br>在数据库里面，这里说的都是关系型数据库，如果这个库的数据非常爆炸，有上万条或者上亿条，我们就可以用到索引这个工具来提高查询速度；索引可以对一个数据列或者几个数据列一起进行预排序，这样子在查询的时候不用扫描整个表，直接定位到位置，快如闪电,大概意思是算法上说的空间换时间。<br>当然建立索引时，也不是随便哪个列都适合建的，比如某一列的数据不相同的很多，那么建索引的话，查询的速度相比原来就提升的很快，如果某一列的数据比如性别，只有男和女，那这列的数据建立索引的话也可以建，但是建了以后的速度提升不会很明显，，，所以索引这个东西。。还是在该用的时候来用。<br><br>不过有一点要注意的是，一般每个表的主键，数据库会自动给他建索引，因为主键本来就是互不相同的嘛。<br><br>接下来要说的就是mysql的索引种类，mysql索引主要分成普通索引，唯一索引，主键索引，组合索引，以及全文索引。</p>
 <ol>
-<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
-<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
-<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
+<li>普通索引(key)<br>举个例子，下面的这个key就是普通索引，key在数据库中是一个物理结构，他包含两层意思，一层是约束作用，一层是索引作用；<br></li>
 </ol>
+<pre><code class="sql"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`phpcolor_ad`</span> (  
+<span class="string">`id`</span> mediumint(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,  
+<span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  
+<span class="string">`type`</span> mediumint(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  
+<span class="string">`code`</span> <span class="built_in">text</span>,  
+PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),  
+<span class="keyword">KEY</span> <span class="string">`type`</span> (<span class="string">`type`</span>)  
+);
+2. 唯一索引 unique key
+和主键索引其实也是差不多的，也是要求不能有重复，不过主键索引只能有一个，但是唯一索引可以有很多个，而且，唯一索引可以有一条内容为空。主键就不允许有空值。
+3. 主键索引 primary key 
+就是上面说的建立在主键上的索引，这种索引每张表只能有一个，而且有主键索引的这个列不允许有空值。
+4. 组合索引 
+
+
+</code></pre>
 
       
 
@@ -944,7 +956,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/">展开全文 >></a>
         </p>
       
 
