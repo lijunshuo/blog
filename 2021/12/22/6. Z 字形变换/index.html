@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>详解算法 最长连续子序列系列问题 | 李军硕的个人博客</title>
+  <title>6. Z 字形变换 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常规最长连续子序列问题通常这个算法的问题主要形式主要是给定一个无序的整数数组，然后找出最长连续子序列的长度,以下代码全部基于C++语言进行演示   常规解法这种解法是正常人刚开始看到这个问题时，头脑中冒出的第一种解法，这个解法认为这个数组开始的每个数字都是一个连续数组的开头，然后从这个起点开始遍历知道剩下的数字有没有相对上一个数字连续的数字，一直迭代到不存在的某个数字，顺便记录最大的连续子序列长">
+  <meta name="description" content="这道题的链接: 6. Z 字形变换今天搞到微软苏州一位小姐姐的内推，感觉很开心，微软小姐姐说话和交流素质很高，没有很多公司HR那么豪横，经过初筛以后简历过了，不过人家建议我刷够300道力扣中等题再来试试，会一直保留我的HC，那还说什么，整吧那就，刷就完事了。一般我刚开始碰到这种故事题，我总是感觉一脸懵逼，这讲的是啥玩意，我看了半天我总感觉这个Z字形变换的话，我感觉这个不是Z，应该是N。。。妈个鸡，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="详解算法 最长连续子序列系列问题">
-<meta property="og:url" content="http://www.junshuoli.cn/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="6. Z 字形变换">
+<meta property="og:url" content="http://www.junshuoli.cn/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
-<meta property="og:description" content="常规最长连续子序列问题通常这个算法的问题主要形式主要是给定一个无序的整数数组，然后找出最长连续子序列的长度,以下代码全部基于C++语言进行演示   常规解法这种解法是正常人刚开始看到这个问题时，头脑中冒出的第一种解法，这个解法认为这个数组开始的每个数字都是一个连续数组的开头，然后从这个起点开始遍历知道剩下的数字有没有相对上一个数字连续的数字，一直迭代到不存在的某个数字，顺便记录最大的连续子序列长">
+<meta property="og:description" content="这道题的链接: 6. Z 字形变换今天搞到微软苏州一位小姐姐的内推，感觉很开心，微软小姐姐说话和交流素质很高，没有很多公司HR那么豪横，经过初筛以后简历过了，不过人家建议我刷够300道力扣中等题再来试试，会一直保留我的HC，那还说什么，整吧那就，刷就完事了。一般我刚开始碰到这种故事题，我总是感觉一脸懵逼，这讲的是啥玩意，我看了半天我总感觉这个Z字形变换的话，我感觉这个不是Z，应该是N。。。妈个鸡，">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-09-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-19T08:07:39.049Z">
+<meta property="article:published_time" content="2021-12-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-22T09:23:11.509Z">
 <meta property="article:author" content="JunshuoLi">
 <meta property="article:tag" content="Leetcode">
 <meta name="twitter:card" content="summary">
@@ -155,36 +155,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-详解算法 最长连续子序列系列问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-6. Z 字形变换" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      详解算法 最长连续子序列系列问题
+      6. Z 字形变换
     </h1>
   
 
         
-        <a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
+        <a href="/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" class="archive-article-date">
+  	<time datetime="2021-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>常规最长连续子序列问题<br>通常这个算法的问题主要形式主要是给定一个无序的整数数组，然后找出最长连续子序列的长度,以下代码全部基于C++语言进行演示</li>
-</ol>
-<ul>
-<li>常规解法<br>这种解法是正常人刚开始看到这个问题时，头脑中冒出的第一种解法，这个解法认为这个数组开始的每个数字都是一个连续数组的开头，然后从这个起点开始遍历知道剩下的数字有没有相对上一个数字连续的数字，一直迭代到不存在的某个数字，顺便记录最大的连续子序列长度。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isContain</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> arrLength,<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arrLength;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]==num)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> arrLenth=arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> num:arr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> currentNum=num;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span>(isContain(arr,arrLength,currentNum))</span><br><span class="line">   &#123;</span><br><span class="line">       currentNum+=<span class="number">1</span>;</span><br><span class="line">       currentStreak+=<span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这种算法的话时间复杂度是非常糟糕的（因为一般来说刚开始解决问题时的头一个方法永远是一个最复杂的方法。。。最简单的一般都是最复杂的），因为他的时间复杂度大概为O(n^3)。所以我们现在考虑如何优化这个算法，首先因为我们要找的是个连续序列，所以可以先进行排序和去重，这样子可以省掉n个时间复杂度的查找时间；然后我们必须考虑程序中提供的数组是不是为空，如果为空或者为null的话我们应该考虑以下如何处理这种错误情况；最后我们发现我们在遍历过程中出现了大量的重复过程比如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,2,7,3,4,5</span><br></pre></td></tr></table></figure>
-比如上面这个数组的最长连续子序列肯定是5，然后我们根据上面那个算法可以发现，当for循环中的num为1时，能够查到的最长序列为5，当num为2时，我们发现我们的现在查到的以前已经查过了，想办法不查这一部分可以大大优化整个算法的时间复杂度：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> []arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr==null||arr.length==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Array.sort(arr);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">if</span>(i+<span class="number">1</span>&lt;arr.length&amp;&amp;arr[i]+<span class="number">1</span>==arr[i+<span class="number">1</span>])</span><br><span class="line">       currentStreak++;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">       &#123;</span><br><span class="line">           longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">           currentStreak=<span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-以上代码解决了以上的问题，但是时间复杂度最优为nlogn, 最差为n^2,其实我们完全可以用c++一些提供的特定结构来进一步简化整体算法的时间复杂度。比如我们可以使用C++中的set，自动去重且查询为O(1)<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;numSet=<span class="keyword">new</span> <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:arr)numSet.add(num);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:numSet)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!numSet.contains(num<span class="number">-1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> currentNum=num;</span><br><span class="line">            <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(numSet.contains(currentNum+<span class="number">1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                currentNum+=<span class="number">1</span>;</span><br><span class="line">                currentStreak+=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-2.最长连续公共子序列<br>先占个坑，未完待续。。。。</li>
-</ul>
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">6. Z 字形变换</a><br>今天搞到微软苏州一位小姐姐的内推，感觉很开心，微软小姐姐说话和交流素质很高，没有很多公司HR那么豪横，经过初筛以后简历过了，不过人家建议我刷够300道力扣中等题再来试试，会一直保留我的HC，那还说什么，整吧那就，刷就完事了。<br>一般我刚开始碰到这种故事题，我总是感觉一脸懵逼，这讲的是啥玩意，我看了半天我总感觉这个Z字形变换的话，我感觉这个不是Z，应该是N。。。妈个鸡，说白了就是下面这个样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     6      12        18</span><br><span class="line">1   5 7   11 13    17</span><br><span class="line">2 4   8 10   14 16</span><br><span class="line">3     9      15</span><br></pre></td></tr></table></figure>
+<p>这才明显嘛。要不一下子真的看不出来，我去…<br>这道题的话，我们可以用最土的方法，借用一个正反变量，因为我们要拐弯，我们通过遍历字符串，然后按照字符串长度根据numRows和正反变量不断调整，进而实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">convert</span><span class="params">(String s, <span class="keyword">int</span> numRows)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(numRows == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;StringBuilder&gt;rows = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">0</span>; i &lt; Math.min(numRows.s.length()); i++)&#123;</span><br><span class="line">            rows.add(<span class="keyword">new</span> StringBuilder());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> curRow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span> goingDown = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">char</span> c : s.toCharArray())&#123;</span><br><span class="line">            row.get(curRow).append(c);</span><br><span class="line">            <span class="keyword">if</span> (curRow == <span class="number">0</span> || curRow == numRows - <span class="number">1</span>)&#123;</span><br><span class="line">                goingDown = !goingDown;</span><br><span class="line">            &#125;</span><br><span class="line">            curRow += goingDown ? <span class="number">1</span>: -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        StringBuilder ret = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(StringBuilder row : rows)&#123;</span><br><span class="line">            ret.append(row);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -254,7 +248,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.junshuoli.cn/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -268,18 +262,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/02/%E5%AF%B9%E7%BE%8A%E5%93%A5%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E7%9A%84%E8%A1%A5%E5%85%85/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          对羊哥博客搭建教程的补充
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">详解Excel读取方式</div>
+    <a href="/2021/12/20/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9517/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CORS</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -310,8 +295,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://www.junshuoli.cn/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/", 
-    sourceId: "详解算法 最长连续子序列系列问题",
+    url: "http://www.junshuoli.cn/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/", 
+    sourceId: "6. Z 字形变换",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

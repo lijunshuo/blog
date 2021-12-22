@@ -152,6 +152,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-6. Z 字形变换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/">6. Z 字形变换</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" class="archive-article-date">
+  	<time datetime="2021-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">6. Z 字形变换</a><br>今天搞到微软苏州一位小姐姐的内推，感觉很开心，微软小姐姐说话和交流素质很高，没有很多公司HR那么豪横，经过初筛以后简历过了，不过人家建议我刷够300道力扣中等题再来试试，会一直保留我的HC，那还说什么，整吧那就，刷就完事了。<br>一般我刚开始碰到这种故事题，我总是感觉一脸懵逼，这讲的是啥玩意，我看了半天我总感觉这个Z字形变换的话，我感觉这个不是Z，应该是N。。。妈个鸡，说白了就是下面这个样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     6      12        18</span><br><span class="line">1   5 7   11 13    17</span><br><span class="line">2 4   8 10   14 16</span><br><span class="line">3     9      15</span><br></pre></td></tr></table></figure>
+<p>这才明显嘛。要不一下子真的看不出来，我去…<br>这道题的话，我们可以用最土的方法，借用一个正反变量，因为我们要拐弯，我们通过遍历字符串，然后按照字符串长度根据numRows和正反变量不断调整，进而实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">convert</span><span class="params">(String s, <span class="keyword">int</span> numRows)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(numRows == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;StringBuilder&gt;rows = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">0</span>; i &lt; Math.min(numRows.s.length()); i++)&#123;</span><br><span class="line">            rows.add(<span class="keyword">new</span> StringBuilder());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> curRow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span> goingDown = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">char</span> c : s.toCharArray())&#123;</span><br><span class="line">            row.get(curRow).append(c);</span><br><span class="line">            <span class="keyword">if</span> (curRow == <span class="number">0</span> || curRow == numRows - <span class="number">1</span>)&#123;</span><br><span class="line">                goingDown = !goingDown;</span><br><span class="line">            &#125;</span><br><span class="line">            curRow += goingDown ? <span class="number">1</span>: -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        StringBuilder ret = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(StringBuilder row : rows)&#123;</span><br><span class="line">            ret.append(row);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/22/6.%20Z%20%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java面试记录17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -459,6 +536,81 @@
 
 
   
+    <article id="post-剑指 Offer 53 - II. 0～n-1中缺失的数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">剑指 Offer 53 - II. 0～n-1中缺失的数字</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 53 - II. 0～n-1中缺失的数字</a>  </p>
+<p>这道题的思路很简单，你想，如果一个从0开始的数组缺少一个数组，那么从缺少的部门开始，数字和下标肯定是不一致的，所以我们可以采用二分法，根据下标和数字的一致和不一致性找到不一致的开头，这就找到这个数字的位置。<br>所以就像一个力扣的大佬所说，排序数组中的搜索数组就可以用二分法解决。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">int</span> m = (i + j) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[m] == m) &#123;</span><br><span class="line">                i = m + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              j = m - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-剑指 Offer 58 - I. 翻转单词顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -508,81 +660,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-剑指 Offer 53 - II. 0～n-1中缺失的数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">剑指 Offer 53 - II. 0～n-1中缺失的数字</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 53 - II. 0～n-1中缺失的数字</a>  </p>
-<p>这道题的思路很简单，你想，如果一个从0开始的数组缺少一个数组，那么从缺少的部门开始，数字和下标肯定是不一致的，所以我们可以采用二分法，根据下标和数字的一致和不一致性找到不一致的开头，这就找到这个数字的位置。<br>所以就像一个力扣的大佬所说，排序数组中的搜索数组就可以用二分法解决。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">int</span> m = (i + j) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[m] == m) &#123;</span><br><span class="line">                i = m + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              j = m - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">展开全文 >></a>
         </p>
       
 
@@ -846,85 +923,6 @@
 
 
   
-    <article id="post-Java面试记录16" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/01/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/">hash冲突的解决办法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/01/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/" class="archive-article-date">
-  	<time datetime="2021-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在和一位面试官对线时，这位面试官问的好多都是基础题，讲真，，，，学了这么久，好多都不会了，但是面试就是在不断的对线中越来越nb的嘛，所以开个小版块来记录一下。<br><br>hash算法按照我的理解，可以视为一个黑盒，把一个任意长的输入，通过Hash算法来变换成固定长度的输出，这个没什么好说的，Java中的HashMap底层原理粗略就是这样子。由此就可以引出一个叫做哈希表也可以叫做散列表的概念，就是说每一个输入都在哈希表中可以找到一个位置，一个萝卜一个坑的意思。但是什么算法都会有一些问题，比如有些输入在经过hash算法的处理，发现算出来的那个坑坑有萝卜了，这种现象就叫做hash冲突。也就引出来解决这个问题的三大方法：开放定址法，链地址法，再哈希法。<br></p>
-<ol>
-<li>开放定址法<br>按照我的理解，就是说当发生哈希冲突时，萝卜B被分到一个萝卜A的坑坑了，这个时候就以萝卜A的地址为基准，根据再寻址的方法在找一个萝卜B的位置，如果找到这个地址了，还是冲突了，那就再寻址，一直到找到为止，寻址方法有线性探查(萝卜B就往A的后面位置一个一个数，一直到找到一个空位为止),二次探查(在萝卜B的周围反复横跳，+1，-1，+2，-2, … ,+n,-n),一直到找到一个不冲突的位置为止，伪随机探测(使用一个伪随机数生成器，然后以萝卜B为基准，加上这个产生的随机数产生的位置)当然这个算法的前提就是整个地址空间不是FULL状态。</li>
-<li>链地址法<br>这个就是HashMap的底层实现方法了，就是说在发生哈希冲突的时候，我们在这个坑坑上栽上个竹竿，然后把萝卜按照先后顺序挂在竹竿上。用代码来说就是在发生哈希冲突的哈希地址上建立一个链表（红黑树），哈希地址算出来相同的输入挂在链表(红黑树)上。</li>
-<li>再哈希法<br>这个接着哈希就行了。。。。一直哈到有坑坑为止，有点像递归，这种方法很耗费时间<br></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/01/Java%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1053,11 +1051,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1065,11 +1063,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
               </li>
             
             <div class="clearfix"></div>
