@@ -172,7 +172,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">6. Z 字形变换</a><br>今天搞到微软苏州一位小姐姐的内推，感觉很开心，微软小姐姐说话和交流素质很高，没有很多公司HR那么豪横，经过初筛以后简历过了，不过人家建议我刷够300道力扣中等题再来试试，会一直保留我的HC，那还说什么，整吧那就，刷就完事了。<br>一般我刚开始碰到这种故事题，我总是感觉一脸懵逼，这讲的是啥玩意，我看了半天我总感觉这个Z字形变换的话，我感觉这个不是Z，应该是N。。。妈个鸡，说白了就是下面这个样子</p>
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">6. Z 字形变换</a><br>今天搞到微软苏州一位小姐姐的内推，感觉好开心哈哈哈哈哈哈，和微软小姐姐交流感觉小姐姐素质很高，没有我遇到过的大多公司HR那么豪横，经过初筛以后简历过了，不过人家建议我刷够300道力扣中等题再来试试，会一直保留我的HC，那还说什么，整吧那就，刷就完事了。<br>一般我刚开始碰到这种故事题，我总是感觉一脸懵逼，这讲的是啥玩意，我看了半天我总感觉这个Z字形变换的话，我感觉这个不是Z，应该是N。。。妈个鸡，说白了就是下面这个样子</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     6      12        18ar</span><br><span class="line">1   5 7   11 13    17</span><br><span class="line">2 4   8 10   14 16</span><br><span class="line">3     9      15</span><br></pre></td></tr></table></figure>
 <p>这才明显嘛。要不一下子真的看不出来，我去…<br>这道题的话，我们可以用最土的方法，借用一个正反变量，因为我们要拐弯，我们通过遍历字符串，然后按照字符串长度根据numRows和正反变量不断调整，进而实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">convert</span><span class="params">(String s, <span class="keyword">int</span> numRows)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(numRows == <span class="number">1</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> s;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">boolean</span> direction = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">int</span> curRow = <span class="number">0</span>;</span><br><span class="line">      List&lt;StringBuilder&gt; rowList = <span class="keyword">new</span> ArrayList&lt;&gt;(); </span><br><span class="line">      StringBuilder result = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numRows; i++)&#123;</span><br><span class="line">          rowList.add(<span class="keyword">new</span> StringBuilder());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">char</span> temp : s.toCharArray()) &#123;</span><br><span class="line">          rowList.get(curRow).append(temp);</span><br><span class="line">          <span class="keyword">if</span>(curRow == <span class="number">0</span> || curRow == numRows - <span class="number">1</span>)&#123;</span><br><span class="line">              direction = !direction;</span><br><span class="line">          &#125;</span><br><span class="line">          curRow += direction ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span>(StringBuilder temp : rowList) &#123;</span><br><span class="line">          result.append(temp);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -536,84 +536,6 @@
 
 
   
-    <article id="post-剑指 Offer 58 - I. 翻转单词顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">剑指 Offer 58 - I. 翻转单词顺序</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/" target="_blank" rel="noopener">剑指 Offer 58 - I. 翻转单词顺序</a><br>这道题我们刚开始审题，我感觉可以使用双指针来解决，具体思路就是从尾到头便利字符串树，然后将i，j两个变量定位在此，然后把i往前定位到倒数第一个单词的位置，新建一个StringBuilder接收单词加上空格，具体代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">       s = s.trim();</span><br><span class="line">       <span class="keyword">int</span> j = s.length() - <span class="number">1</span>, i=j;</span><br><span class="line">       StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">       <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp;  s.charAt(i) != <span class="string">' '</span>)&#123;</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line">           res.append(s.substring(i + <span class="number">1</span>, j + <span class="number">1</span>) + <span class="string">" "</span>);</span><br><span class="line">           <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; s.charAt(i)  == <span class="string">' '</span>) i--;</span><br><span class="line">           j = i;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> res.toString().trim();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第二种方法就是很土的方法，因为这句话是用空格分割的，我们就用空格分割成数组，然后从后向前遍历数组，存到新的StringBuilder中，转化成数组就成了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        String[] strs = s.trim().split(<span class="string">" "</span>);</span><br><span class="line">        StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = strs.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strs[i].equals(<span class="string">""</span>)) &#123; </span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res.append(strs[i] + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.ToString().trim();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在面试的时候。。。千万别这么写，很土，写出来面试官就认为你是api工程师。。凉凉！！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-剑指 Offer 53 - II. 0～n-1中缺失的数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -689,30 +611,31 @@
 
 
   
-    <article id="post-剑指 Offer 50. 第一个只出现一次的字符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-剑指 Offer 58 - I. 翻转单词顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2050.%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/">剑指 Offer 50. 第一个只出现一次的字符</a>
+      <a class="article-title" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">剑指 Offer 58 - I. 翻转单词顺序</a>
     </h1>
   
 
         
-        <a href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2050.%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/" class="archive-article-date">
-  	<time datetime="2021-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-11</time>
+        <a href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/" target="_blank" rel="noopener">剑指 Offer 50. 第一个只出现一次的字符</a><br>这道题的意思很好理解，说白了就是找到第一个只出现一次的字符。我的思路的话，可以使用Java中的Map记录所有出现的字符，然后第二遍遍历找到第一个只出现一次的字符</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; frequency = <span class="keyword">new</span> HashMap&lt;Character, Integer&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">             <span class="keyword">char</span> temp = s.charAt(i);</span><br><span class="line">             frequency.push(ch, frequency.getOrDefault(ch,<span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(frequency.get(s.charAt(i) == <span class="number">1</span>))&#123;</span><br><span class="line">                <span class="keyword">return</span> s.charAt(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果用C语言的话，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    UT_hash_handle hh;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(<span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span>* <span class="title">position</span> = <span class="title">NULL</span>;</span></span><br><span class="line">    <span class="keyword">int</span> n= <span class="built_in">strlen</span>(s);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> ikey = s[i];</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span>* <span class="title">tmp</span>;</span></span><br><span class="line">        HASH_FIND_INT(position, &amp;ikey, tmp);</span><br><span class="line">        <span class="keyword">if</span> ( tmp != null)&#123;</span><br><span class="line">            tmp-&gt;val = <span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tmp = <span class="built_in">malloc</span> (<span class="keyword">sizeof</span>(struct hashTable));</span><br><span class="line"></span><br><span class="line">            tmp-&gt;key = ikey;</span><br><span class="line">            tmp-&gt;val = i;</span><br><span class="line">            HASH_ADD_INT(positon, key, tmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> first = n;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span> *<span class="title">iter</span>, *<span class="title">tmp</span>;</span></span><br><span class="line">    HAS_ITER(hh, position, i)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/" target="_blank" rel="noopener">剑指 Offer 58 - I. 翻转单词顺序</a><br>这道题我们刚开始审题，我感觉可以使用双指针来解决，具体思路就是从尾到头便利字符串树，然后将i，j两个变量定位在此，然后把i往前定位到倒数第一个单词的位置，新建一个StringBuilder接收单词加上空格，具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">       s = s.trim();</span><br><span class="line">       <span class="keyword">int</span> j = s.length() - <span class="number">1</span>, i=j;</span><br><span class="line">       StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">       <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp;  s.charAt(i) != <span class="string">' '</span>)&#123;</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line">           res.append(s.substring(i + <span class="number">1</span>, j + <span class="number">1</span>) + <span class="string">" "</span>);</span><br><span class="line">           <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; s.charAt(i)  == <span class="string">' '</span>) i--;</span><br><span class="line">           j = i;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> res.toString().trim();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二种方法就是很土的方法，因为这句话是用空格分割的，我们就用空格分割成数组，然后从后向前遍历数组，存到新的StringBuilder中，转化成数组就成了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        String[] strs = s.trim().split(<span class="string">" "</span>);</span><br><span class="line">        StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = strs.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strs[i].equals(<span class="string">""</span>)) &#123; </span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res.append(strs[i] + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.ToString().trim();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在面试的时候。。。千万别这么写，很土，写出来面试官就认为你是api工程师。。凉凉！！</p>
 
       
 
@@ -736,7 +659,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2050.%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%2058%20-%20I.%20%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F/">展开全文 >></a>
         </p>
       
 
@@ -816,6 +739,83 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2053%20-%20I.%20%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%95%B0%E5%AD%97%20I/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-剑指 Offer 50. 第一个只出现一次的字符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2050.%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/">剑指 Offer 50. 第一个只出现一次的字符</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2050.%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/" class="archive-article-date">
+  	<time datetime="2021-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这道题的链接: <a href="https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/" target="_blank" rel="noopener">剑指 Offer 50. 第一个只出现一次的字符</a><br>这道题的意思很好理解，说白了就是找到第一个只出现一次的字符。我的思路的话，可以使用Java中的Map记录所有出现的字符，然后第二遍遍历找到第一个只出现一次的字符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; frequency = <span class="keyword">new</span> HashMap&lt;Character, Integer&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">             <span class="keyword">char</span> temp = s.charAt(i);</span><br><span class="line">             frequency.push(ch, frequency.getOrDefault(ch,<span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(frequency.get(s.charAt(i) == <span class="number">1</span>))&#123;</span><br><span class="line">                <span class="keyword">return</span> s.charAt(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果用C语言的话，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    UT_hash_handle hh;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(<span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span>* <span class="title">position</span> = <span class="title">NULL</span>;</span></span><br><span class="line">    <span class="keyword">int</span> n= <span class="built_in">strlen</span>(s);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> ikey = s[i];</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span>* <span class="title">tmp</span>;</span></span><br><span class="line">        HASH_FIND_INT(position, &amp;ikey, tmp);</span><br><span class="line">        <span class="keyword">if</span> ( tmp != null)&#123;</span><br><span class="line">            tmp-&gt;val = <span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tmp = <span class="built_in">malloc</span> (<span class="keyword">sizeof</span>(struct hashTable));</span><br><span class="line"></span><br><span class="line">            tmp-&gt;key = ikey;</span><br><span class="line">            tmp-&gt;val = i;</span><br><span class="line">            HASH_ADD_INT(positon, key, tmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> first = n;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hashTable</span> *<span class="title">iter</span>, *<span class="title">tmp</span>;</span></span><br><span class="line">    HAS_ITER(hh, position, i)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/11/%E5%89%91%E6%8C%87%20Offer%2050.%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/">展开全文 >></a>
         </p>
       
 
@@ -1039,11 +1039,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color4">后端面试对线记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1051,11 +1051,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
