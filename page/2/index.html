@@ -877,19 +877,19 @@
 
 
   
-    <article id="post-后端面试记录9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-后端面试记录10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/">事务</a>
+      <a class="article-title" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/">JVM内存结构</a>
     </h1>
   
 
         
-        <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/" class="archive-article-date">
+        <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/" class="archive-article-date">
   	<time datetime="2021-10-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
 </a>
         
@@ -897,19 +897,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天面试时碰到了面试官问我事务的问题，我确实不会呀，所以我在这里好好整理一下这个东西。<br>事务说白了就是一组数据操作，事务内的操作的话要么全部成功，如果某个操作挂壁了，那么内部全部操作都要回滚，要么搞定，要么就不搞的意思。<br>事务必须符合四个原则：原子性，一致性，隔离性，持久性。  </p>
-<ol>
-<li>原子性<br>就是说事务的执行过程中，如果事务中的任何一个事件或者说语句发生失败，那么整个修改就会回滚，整个修改全部失效，或者说，要不就全部执行成功，要不就全部不执行；</li>
-<li>隔离性<br>一个事务的执行不受其他事务的影响；</li>
-<li>持久性<br>一个事务一旦提交，那么事务的操作就会持久化到db中，就算是db Boom了，也不会丢失事务的操作；  </li>
-<li>一致性<br>说白了就是事务按照预期生效，最后数据的状态就是预期的状态；</li>
-</ol>
-<p>Mysql数据库会存在四种事务隔离级别，具体如下：</p>
-<ol>
-<li>读未提交<br>在这个隔离级别，所有事务可以看到其他事务未提交的数据，这个级别很少用，读取未提交的数据也就是脏读的意思</li>
-<li>读提交<br>这个是ORACLE数据库的默认级别，在这个级别，事务只能读到其他事务以及提交的数据，这个级别可以解决脏读的问题，但是会带来不可重复读的问题，比如一个事物A把一个数据由1改成2，但是事务B在A事务提交前读到的这个数据是1，事务A提交之后，事务B再读的话，就是2了，也就是说同一个select可能会存在数据不一样的效果。</li>
-<li>可重复读<br>这个是MYSQL的默认级别，在这个级别，保证了同一个事务的多个实例在并发读取数据时数据都是一致的，但是如果一个事务A在读取一个范围的数据时，另一个事务B在该范围内添加或者删除了数据行，当事务A在读取时该范围的数据时发现与前一次的数据行数不一致，多了一行或者少了一行，这种可能发生的现象就是幻读。</li>
-<li>串行化<br>解决上上面的所有问题，但是事务现在的执行变成串行执行了，效率是最差的。</li>
+        <ol>
+<li>程序计数器<br>当前线程所执行的字节码的行号指示器，用于记录正在执行的虚拟机字节指令地址，线程私有；</li>
+<li>Java虚拟栈<br>存放基本数据类型，对象的引用，方法的出口等，线程私有；</li>
+<li>Native方法<br>和虚拟栈差不多，只是他服务于Native方法，线程私有；</li>
+<li>Java堆<br>Java内存中最大的一块，所有的对象实例和数组都存在在Java堆，GC回收的地方，线程共享</li>
+<li>方法区<br>存放已被夹在的类信息，常量，静态变量，即时编译器JIT编译后的代码数据等 (永远代)，回收目标主要是常量池的回收和类型的卸载，各线程共享。</li>
 </ol>
 
       
@@ -934,7 +927,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%959/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/">展开全文 >></a>
         </p>
       
 
@@ -1092,11 +1085,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1104,11 +1097,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
               </li>
             
             <div class="clearfix"></div>
