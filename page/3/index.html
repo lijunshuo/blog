@@ -79,7 +79,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/JunshuoLi97" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/lijunshuo" title="github"><i class="icon-github"></i></a>
 		        
 					<a class="bilibili" target="_blank" href="https://space.bilibili.com/33270933" title="bilibili"><i class="icon-bilibili"></i></a>
 		        
@@ -120,7 +120,7 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/JunshuoLi97" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/lijunshuo" title="github"><i class="icon-github"></i></a>
 			        
 						<a class="bilibili" target="_blank" href="https://space.bilibili.com/33270933" title="bilibili"><i class="icon-bilibili"></i></a>
 			        
@@ -340,6 +340,87 @@
 
 
   
+    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
+  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
+<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
+<ol>
+<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
+<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
+<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -404,87 +485,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%956/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-后端面试记录5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">String详解</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/" class="archive-article-date">
-  	<time datetime="2021-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天和面试官对线时，面试官问了我一个问题，String类型常用方法有哪些，讲真哈，我平时用idea习惯了，早就不记得这些方法了，，，，丢人呀，所以在这里记录一下<br>String类型常用方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indexOf()：返回指定字符的索引。</span><br><span class="line">charAt()：返回指定索引处的字符。</span><br><span class="line">replace()：字符串替换。</span><br><span class="line">trim()：去除字符串两端空白。</span><br><span class="line">split()：分割字符串，返回一个分割后的字符串数组。</span><br><span class="line">getBytes()：返回字符串的 <span class="keyword">byte</span> 类型数组。</span><br><span class="line">length()：返回字符串长度。</span><br><span class="line">toLowerCase()：将字符串转成小写字母。</span><br><span class="line">toUpperCase()：将字符串转成大写字符。</span><br><span class="line">substring()：截取字符串。</span><br><span class="line">equals()：字符串比较。</span><br></pre></td></tr></table></figure>
-<p>这些函数中我基本都用过，这些意思大概都知道，也没什么好说的，下面我就扩展一下，讲一讲String这个类型。<br><br>在这里要说是的，String这个类型是不可变的。因为在idea中看源码的话，我们可以看到String继承了Serializable, Comparable<String>, CharSequence，被final修饰，被final修饰的话说明该类不能被继承，内部的核心是一个被final修饰的char数组，被final修饰后的字段创建后不可变，but这是个数组奥（数组的老巢都在堆区中），只是说明地址不会变，但是地址上对应的数据还是会变的，所以这个数组被sun公司的程序员铁铁用private修饰，使得不向外暴露这个数组，并且用final严禁继承，简直是天衣无缝。。。。<br><br>我在网上查了很多种原因，总的说来大概就是由结果推断的原因。。。按照我的理解吧，这几种原因有以下几种：<br></p>
-<ol>
-<li>避免安全问题<br>简单的来说，主要是String类型的数据在很多场景下用的很多，比如网络地址url，文件地址path以及Java很强大的反射机制的String参数等等，如果这些参数可变的话，那就会引起很重的安全问题。进而来说的话，我们储存密码的时候，非常不建议用String类型接收，因为String类型的所有对象会一直留在字符串缓冲池中，一直到gc把它给清除掉。这样子会有很大的安全隐患。</li>
-<li>加快字符串处理速度<br>因为String类型时不可变的，所以也就保证了hashcode的唯一性，所以我们在创建String类型时不用重新计算hashcode，这样子速度就很快，比如Map中就很喜欢用String当作key。</li>
-<li>便于实现字符串池<br>因为在Java中设计了一个字符串池，会在堆空间中开辟一块存储空间来做字符串池，如果不创建这个池子的话，那么我们每声明一个就会创建一个String对象，这样子很是浪费空间和降低速度，有了字符串池以后，我们就可以在创建对象之间在池子中找找是否之前创建过这个对象，这样子就加快速度，节省cpu时间，这一切都建立在字符串不可变的情况下，如果可变了，那池子就失效了。。。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/23/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%955/">展开全文 >></a>
         </p>
       
 
@@ -1114,10 +1114,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java开源项目</a>
               </li>
              
@@ -1126,11 +1122,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂记</a>
               </li>
             
             <div class="clearfix"></div>
