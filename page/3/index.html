@@ -152,6 +152,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-后端面试记录10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/">JVM内存结构</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/" class="archive-article-date">
+  	<time datetime="2021-10-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>程序计数器<br>当前线程所执行的字节码的行号指示器，用于记录正在执行的虚拟机字节指令地址，线程私有；</li>
+<li>Java虚拟栈<br>存放基本数据类型，对象的引用，方法的出口等，线程私有；</li>
+<li>Native方法<br>和虚拟栈差不多，只是他服务于Native方法，线程私有；</li>
+<li>Java堆<br>Java内存中最大的一块，所有的对象实例和数组都存在在Java堆，GC回收的地方，线程共享</li>
+<li>方法区<br>存放已被夹在的类信息，常量，静态变量，即时编译器JIT编译后的代码数据等 (永远代)，回收目标主要是常量池的回收和类型的卸载，各线程共享。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/27/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9510/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -514,6 +594,80 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
 
 
   
+    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
+  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后端面试记录2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -570,80 +724,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%952/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-后端面试记录3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">如何理解重载和重写</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/" class="archive-article-date">
-  	<time datetime="2021-10-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个问题真的是离谱，我自己清楚，但是总是说不清楚，有一位我的领导说过我，如果你感觉自己知道但是说不出来，那就说明你还是没掌握，那我就在博客里在记录一遍。<br><br>重写就是字面意思，就是在子类中把父类中的方法重写一遍，说详细点就是子类继承父类的方法，也就是在保持方法名，参数类标和返回类型相同的情况下对这个函数进行重写，再说详细点，就是serices层，我对一个接口中的函数进行具体的实现，实现这个接口中某个函数的具体功能。。。。再具体点，，，，我也说不明白了，打扰了<br><br>重载这个就很有意思了，就是说两个函数可以在参数类型或者参数个数甚至是参数顺序不同的情况下同名，这两个函数就形成互相重载，but如果仅仅是返回值类型不同，那抱歉不是重载。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/22/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%953/">展开全文 >></a>
         </p>
       
 
@@ -875,88 +955,6 @@ PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开源项目RuoYi前端学习记录一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">Vue学习笔记一 基础学习</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2021-03-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://github.com/yangzongzhuan/RuoYi-Vue" target="_blank" rel="noopener">Ruoyi-Vue</a><br>首先在此膜拜尤大，学艺术的来搞it，还能做出自己的前端框架，简直牛逼！！！<br></p>
-<ol>
-<li><p>虚拟DOM<br><br>按照我的理解，浏览器是先分析html节点，然后构建成，一个DOM树，然后解析CSS文件和html节点上我们写的样式信息，生成一个样式表，最后将DOM树和样式表关联起来构建成一个Render树，每个DOM都有attach方法，接受样式信息，返回一个render对象，根据这些对象构建成一个Render树，然后浏览器根据Render树绘制出页面出来。但是这不是严格的，这三种是一种异步交叉的关系。这个就是整个一个正常流程。<br><br>在很老的开发中，在每次操作DOM树时，每操作一次就会走一遍上一段的流程，如果操作十次就会更新十次，所以这个是很难受的，所以虚拟DOM就是为了解决这个问题而设计出来的，如果在虚拟dom中操作十次，他不会更新十次，而是会将10次的更新保存到一个本地js对象中，然后再一次更新到（attach）到DOM树上。故而页面的更新都会记录在本地的js对象中，操作内存中的js对象明显比更新十次要快得多，更新快结束时直接映射成真实DOM然后再由浏览器绘制。</p>
-</li>
-<li><p>export default作用<br></p>
-</li>
-<li><p>钩子函数</p>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/19/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AERuoYi%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80/">展开全文 >></a>
         </p>
       
 

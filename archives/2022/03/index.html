@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.junshuoli.cn">
-  <title>李军硕的个人博客</title>
+  <title>Archives: 2022/3 | 李军硕的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="李军硕的个人博客">
-<meta property="og:url" content="http://www.junshuoli.cn/page/5/index.html">
+<meta property="og:url" content="http://www.junshuoli.cn/archives/2022/03/index.html">
 <meta property="og:site_name" content="李军硕的个人博客">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="JunshuoLi">
@@ -152,182 +152,58 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-详解算法 最长连续子序列系列问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2022/03/12/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/" class="archive-article-date">
+  	<time datetime="2022-03-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-12</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">详解算法 最长连续子序列系列问题</a>
+      <a class="archive-article-title" href="/2022/03/12/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9516/">30G数据只有一个2G的内存应该怎么排序</a>
     </h1>
   
 
-        
-        <a href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>常规最长连续子序列问题<br>通常这个算法的问题主要形式主要是给定一个无序的整数数组，然后找出最长连续子序列的长度,以下代码全部基于C++语言进行演示</li>
-</ol>
-<ul>
-<li>常规解法<br>这种解法是正常人刚开始看到这个问题时，头脑中冒出的第一种解法，这个解法认为这个数组开始的每个数字都是一个连续数组的开头，然后从这个起点开始遍历知道剩下的数字有没有相对上一个数字连续的数字，一直迭代到不存在的某个数字，顺便记录最大的连续子序列长度。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isContain</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> arrLength,<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arrLength;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]==num)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> arrLenth=arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> num:arr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> currentNum=num;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span>(isContain(arr,arrLength,currentNum))</span><br><span class="line">   &#123;</span><br><span class="line">       currentNum+=<span class="number">1</span>;</span><br><span class="line">       currentStreak+=<span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这种算法的话时间复杂度是非常糟糕的（因为一般来说刚开始解决问题时的头一个方法永远是一个最复杂的方法。。。最简单的一般都是最复杂的），因为他的时间复杂度大概为O(n^3)。所以我们现在考虑如何优化这个算法，首先因为我们要找的是个连续序列，所以可以先进行排序和去重，这样子可以省掉n个时间复杂度的查找时间；然后我们必须考虑程序中提供的数组是不是为空，如果为空或者为null的话我们应该考虑以下如何处理这种错误情况；最后我们发现我们在遍历过程中出现了大量的重复过程比如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,2,7,3,4,5</span><br></pre></td></tr></table></figure>
-比如上面这个数组的最长连续子序列肯定是5，然后我们根据上面那个算法可以发现，当for循环中的num为1时，能够查到的最长序列为5，当num为2时，我们发现我们的现在查到的以前已经查过了，想办法不查这一部分可以大大优化整个算法的时间复杂度：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> []arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr==null||arr.length==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Array.sort(arr);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">if</span>(i+<span class="number">1</span>&lt;arr.length&amp;&amp;arr[i]+<span class="number">1</span>==arr[i+<span class="number">1</span>])</span><br><span class="line">       currentStreak++;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">       &#123;</span><br><span class="line">           longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">           currentStreak=<span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-以上代码解决了以上的问题，但是时间复杂度最优为nlogn, 最差为n^2,其实我们完全可以用c++一些提供的特定结构来进一步简化整体算法的时间复杂度。比如我们可以使用C++中的set，自动去重且查询为O(1)<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestContinueArray</span><span class="params">(<span class="keyword">int</span> arr[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;numSet=<span class="keyword">new</span> <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:arr)numSet.add(num);</span><br><span class="line">    <span class="keyword">int</span> longestStreak=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num:numSet)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!numSet.contains(num<span class="number">-1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> currentNum=num;</span><br><span class="line">            <span class="keyword">int</span> currentStreak=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(numSet.contains(currentNum+<span class="number">1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                currentNum+=<span class="number">1</span>;</span><br><span class="line">                currentStreak+=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            longestStreak=Math.<span class="built_in">max</span>(longestStreak,currentStreak);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestStreak;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-2.最长连续公共子序列<br>先占个坑，未完待续。。。。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/02/%E8%AF%A6%E8%A7%A3%E7%AE%97%E6%B3%95%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-详解Excel读取方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">详解Excel读取方式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-06-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <p>因为最近特别忙，所以最近更新博客也很慢，主要是最近工作上的事情太多了，很少有时间来总结和梳理自己学习的东西，正好今天时间很充裕，所以今天来搞一下这个东西。</p>
-
-<p>最近主要还是被c#上的东西纠缠的不清，而且今天正好用到了好久不用的数据库的增删查改，主要是对excel文件的增删查改，上次用这个东西我记得还是在去年这个时候，当时曹老师让我做的空间插值算法，我记得当时需要读取一个csv文件，然后我当时对c#还是个菜鸟，所以我搞了半天，才搞定这个东西。时间过的好快呀，一年都过去了。。。废话不多说，直接上代码！！！！奥利给！！！！</p>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">string path&#x3D;&quot;&quot;&#x2F;&#x2F;这里定义了excel文件的文件位置</span><br><span class="line">string key&#x3D; &quot;Provider&#x3D;Microsoft.ACE.OLEDB.12.0;Data Source&#x3D;&quot; + path + &quot;;Extended Properties&#x3D;&#39;Excel 8.0;HDR&#x3D;NO;IMEX&#x3D;1&#39;;&quot;; </span><br><span class="line">OledbConnection connection &#x3D;new OledbConnection(key);</span><br><span class="line">connection.Open();</span><br><span class="line">string sql&#x3D;&quot;select * from [sheet1$]&quot;;</span><br><span class="line">OledbDataAdapter adapter&#x3D;new OledbDataAdapter(sql,connection);</span><br><span class="line">DataSet tempDataSet&#x3D;new DataSet();</span><br><span class="line">adapter.Fill(tempDataSet);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>首先，在c#中数据表是这样子的，c#中有DataSet和DataTable两个关键字，然后我们可以理解DataSet是一类数据表的集合，他是在内存中的虚拟表的集合；DataTable是一种在内存中的虚拟表，他可以存储任何表的数据。。。这么说好抽象，其实可以这样子理解，DataTable是一张a4纸，然后a4纸上画着表格存着很多数据，DataSet就是一沓a4纸啦！！！！<p></p>
-</li>
-<li><p>前情已经讲述完成，oledb，是一种数据库的方式，其实oledb是早期odbc连接方式的加强版，微软设计出这种应用程序接口是为了连接关系型数据库和非关系型数据库还有其他的奇怪的数据库，说白了是为了隔离每种数据库操作的差异，在我用过的连接比如说sql server和access数据库来说，都是先通过一串字符串来定义一个连接，就是我上面写的那个string类型的key，具体如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;连接Sql Server</span><br><span class="line">string key&#x3D;&quot;PROVIDER&#x3D;SQLOLEDB;DATA SOURCE&#x3D;servername;UID&#x3D;xyz;PWD&#x3D;xxx;DATABASE&#x3D;dbname&quot;</span><br><span class="line">&#x2F;&#x2F;连接 Microsoft Access</span><br><span class="line">string key&#x3D; &quot;PROVIDER&#x3D;MICROSOFT.JET.OLEDB.4.0;DATA SOURCE&#x3D;d:\abc\defg.mdb&quot;</span><br><span class="line">&#x2F;&#x2F;连接 Microsoft Excel 07版本及老版本</span><br><span class="line">string key&#x3D;&quot;Provider&#x3D;Microsoft.ACE.OLEDB.12.0;Data Source&#x3D;&quot; + Path + &quot;;&quot; + &quot;Extended Properties&#x3D;\&quot;Excel 12.0;HDR&#x3D;NO;IMEX&#x3D;1;\&quot;&quot;</span><br><span class="line">&#x2F;&#x2F;连接 Microsoft Excel 07版本及新版本</span><br><span class="line">string key&#x3D;&quot;Provider&#x3D;Microsoft.Jet.OLEDB.4.0;Data Source&#x3D;&quot; + strExcelPath + &quot;;&quot; + &quot;Extended Properties&#x3D;\&quot;Excel 8.0;HDR&#x3D;NO;IMEX&#x3D;1;\&quot;&quot;</span><br></pre></td></tr></table></figure></li>
-<li><p>这些key中间一个空格都不能乱加的！！！！！，要不然根本读不出来！！！！！</p>
-</li>
-<li><p>接下来就是正常套路啦，首先通过OledbConnection声明一个基于key的链接connection,然后打开连接，定义一个sql，把操作放进去，然后通过适配器（OledbAdapter）进行操作，然后通过adapter的fill方法，将得到的数据放到内存中的DataSet就行了，完美！！！内存中就好操作了！！<br>其实这个东西可以理解为电脑电源，不一样的key就好像国标220v和港版110v，我们通过适配器的电源头怼上插座，然后通过sql语言也就是整流线圈把交流电整成直流电，然后再把直流电输出主板等等地方也就是dataset！！！</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C#开源项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/08/%E8%AF%A6%E8%A7%A3Excel%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
-    </nav>
-  
 
 
           </div>
@@ -368,9 +244,9 @@ setInterval("createtime()",250);
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
