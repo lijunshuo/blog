@@ -19,7 +19,7 @@
     <link rel="alternative" href="/atom.xml" title="李军硕的个人博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -804,82 +804,6 @@
 
 
   
-    <article id="post-后端面试记录11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/">反射</a>
-    </h1>
-  
-
-        
-        <a href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/" class="archive-article-date">
-  	<time datetime="2021-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先在了解反射之前，需要了解一个静态编译和动态编译的概念，静态编译就是在编译时确定好类型绑定好对象，动态编译就是在运行时确定好类型，绑定对象。反射机制就可以实现动态编译，因为我们在开发很大的那种软件的时候，程序我们都知道，需要编译以后才能进行发布，如果没有反射，我们就需要把整个程序重新编译一份才可以实现功能的更新，如果采用反射的话我们就可以直接在运行时进行动态的创建和编译，没有原来那么麻烦，但是这毫无疑问。。。肯定对性能有影响。<br>首先要知道在Java中有个东西是Class类，这个玩意在Java中是最nb的一个类，怎么讲呢，如果稍微知道一点JVM就可以知道，在类加载的时候总共有五步，加载，验证，准备，解析和初始化，在加载阶段主要是将字节码加载到方法区还生成了这个类的java.lang.Class对象，这个对象就是用来记录被加载类的类型信息的对象，在Class类中存储了对应类的所有的信息，也是未初始化的信息（所有的方法，所有的构造函数，所有的字段或者说属性）。所以说这个玩意非常强大，可以从官方文档中知道，这个类是在JVM中的。而且这个Class类的构造器是私有的，也是说不能new一个，他是由JVM调用方法来创建该类的对象。<br>所以说通过反射，我们可以在运行时通过Class类，获得程序或者程序集中每个类型的成员和成员信息，在Java中反射可以在运行时判断任一对象所属类，构造一个类的对象，判断任意一个类所具有的成员变量和方法，通过反射甚至可以调用private方法。通过反射这个特性可以开发各种通用框架，比如Spring框架，通过配置xml文件动态加载所需要记载的对象。<br>在反射中有以下几种方法  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过静态方法加载数据库驱动</span></span><br><span class="line">Class.forName()</span><br><span class="line"><span class="comment">//直接获取某一个对象的class</span></span><br><span class="line">Class&lt;?&gt;klass=<span class="keyword">int</span><span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class">//调用某个对象的<span class="title">getClass</span>()方法</span></span><br><span class="line"><span class="class"><span class="title">Class</span>&lt;?&gt;<span class="title">klass</span></span>=str.getClass()</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是否为某个类的实例 native方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">isInstance</span><span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
-<p>最后反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全性问题。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-后端面试记录7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -927,6 +851,82 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%957/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-后端面试记录11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/">反射</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/" class="archive-article-date">
+  	<time datetime="2021-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先在了解反射之前，需要了解一个静态编译和动态编译的概念，静态编译就是在编译时确定好类型绑定好对象，动态编译就是在运行时确定好类型，绑定对象。反射机制就可以实现动态编译，因为我们在开发很大的那种软件的时候，程序我们都知道，需要编译以后才能进行发布，如果没有反射，我们就需要把整个程序重新编译一份才可以实现功能的更新，如果采用反射的话我们就可以直接在运行时进行动态的创建和编译，没有原来那么麻烦，但是这毫无疑问。。。肯定对性能有影响。<br>首先要知道在Java中有个东西是Class类，这个玩意在Java中是最nb的一个类，怎么讲呢，如果稍微知道一点JVM就可以知道，在类加载的时候总共有五步，加载，验证，准备，解析和初始化，在加载阶段主要是将字节码加载到方法区还生成了这个类的java.lang.Class对象，这个对象就是用来记录被加载类的类型信息的对象，在Class类中存储了对应类的所有的信息，也是未初始化的信息（所有的方法，所有的构造函数，所有的字段或者说属性）。所以说这个玩意非常强大，可以从官方文档中知道，这个类是在JVM中的。而且这个Class类的构造器是私有的，也是说不能new一个，他是由JVM调用方法来创建该类的对象。<br>所以说通过反射，我们可以在运行时通过Class类，获得程序或者程序集中每个类型的成员和成员信息，在Java中反射可以在运行时判断任一对象所属类，构造一个类的对象，判断任意一个类所具有的成员变量和方法，通过反射甚至可以调用private方法。通过反射这个特性可以开发各种通用框架，比如Spring框架，通过配置xml文件动态加载所需要记载的对象。<br>在反射中有以下几种方法  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过静态方法加载数据库驱动</span></span><br><span class="line">Class.forName()</span><br><span class="line"><span class="comment">//直接获取某一个对象的class</span></span><br><span class="line">Class&lt;?&gt;klass=<span class="keyword">int</span><span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class">//调用某个对象的<span class="title">getClass</span>()方法</span></span><br><span class="line"><span class="class"><span class="title">Class</span>&lt;?&gt;<span class="title">klass</span></span>=str.getClass()</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是否为某个类的实例 native方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">isInstance</span><span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
+<p>最后反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全性问题。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">后端面试对线记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/29/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%9511/">展开全文 >></a>
         </p>
       
 
@@ -1096,11 +1096,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">C#开源项目</a>
               </li>
             
             <div class="clearfix"></div>
